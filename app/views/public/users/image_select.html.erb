@@ -1,1 +1,51 @@
-<h1>Image Select</h1>
+<h1>画像登録</h1>
+<%= form_with model: @user do |f| %>
+<%= image_tag @user.image_id.url, id: :img_prev if @user.image_id? %>
+<%= f.file_field :image_id, id: :user_img %>
+<p><%= f.check_box :remove_img %>画像を削除する</p>
+
+<div id="user_info">
+  <div class="user_name">
+    <%= @user.name %>
+  </div>
+  <div id="user_email">
+    <%= @user.email %>
+  </div>
+  <div class="user_confirm_message">
+    <p>こちらの内容で登録しますがよろしいですか？</p>
+  </div>
+  <%= f.submit '登録' %>
+  <% end %>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+$(function() {
+ function readURL(input) {
+   if (input.files && input.files[0]) {
+     var reader = new FileReader();
+     reader.onload = function (e) {
+       $('#img_prev').attr('src', e.target.result);
+     }
+     reader.readAsDataURL(input.files[0]);
+   }
+ }
+ $("#user_img").change(function(){
+   readURL(this);
+   $('#user_info').toggle(true);
+ });
+});
+</script>
