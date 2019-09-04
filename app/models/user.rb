@@ -3,7 +3,6 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  # refile
-  attachment :image
-
+  # carrierwave
+  mount_uploader :image_id, ImageUploader
 end
