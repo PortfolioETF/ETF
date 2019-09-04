@@ -1,1 +1,13 @@
 <h1>User Edit</h1>
+<%= form_with model: @user do |f| %>
+  <%= image_tag @user.image_id.url, id: :img_prev if @user.image_id? %>
+  <%= f.file_field :image_id, id: :user_img %>
+  <p>
+    <%= f.check_box :remove_img %>画像を削除する
+  </p>
+  <%= f.text_field :name, value: @user.name %>
+  <%= f.email_field :email, value: @user.email %>
+  <%= f.submit 'この内容で保存' %>
+<% end %>
+
+<%= link_to '退会手続きに進む', unsubscribe_path %>

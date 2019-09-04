@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   scope module: :public do
     resources :users, only: %i(show edit update destroy)
     get 'users/:id/image_select' => 'users#image_select',as: 'image_select'
+    get 'users/:id/unsubscribe' => 'users#unsubscribe',as: 'unsubscribe'
   end
 end

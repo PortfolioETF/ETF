@@ -1,5 +1,6 @@
 class Public::UsersController < Public::ApplicationController
     def show
+        @user = User.find(params[:id])
     end
 
     def edit
@@ -16,10 +17,16 @@ class Public::UsersController < Public::ApplicationController
     end
 
     def destroy
+        user = User.find(params[:id])
+        user.destroy!
+        redirect_to root_path
     end
 
     def image_select
         @user = User.find(params[:id ])
+    end
+
+    def unsubscribe
     end
 
     private
