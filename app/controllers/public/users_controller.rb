@@ -4,7 +4,7 @@ class Public::UsersController < Public::ApplicationController
     end
 
     def edit
-
+        @user = User.find(params[:id ])
     end
 
     def update
@@ -15,6 +15,7 @@ class Public::UsersController < Public::ApplicationController
     end
 
     def image_select
+        @user = User.find(params[:id ])
     end
 
     private

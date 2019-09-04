@@ -1,1 +1,43 @@
-<h1>Image Select</h1>
+<h1>画像登録</h1>
+<%= form_with model: @user do |f| %>
+<% end %>
+
+<!-- 1. jqueryで画像をプレビュー表示させて、その時のプレビューで出てきた画像そのものをフックとしてuser_infoを表示 -->
+<!-- refile => carrie waveに変更して、jqueryでアップロードの検知、プレビュー表示 -->
+
+<!-- 2. Ajaxのform_withを二つ用意(確認用、保存用)して、選択する前は保存用のformはdisplay:noneで非表示、確認用のformで送信して、非同期でアクションから帰ってき他のを表示し、それをフックとしてuser_infoと、保存用のformを表示(そして、確認用はdisplay:none) -->
+
+<div id="user_info">
+  <div class="user_name">
+    <%= @user.name %>
+  </div>
+  <div id="user_email">
+    <%= @user.email %>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%# <script>
+　　var  imageSelect = document.getElementById('image_select').innerHTML;
+　　var userInfo = document.getElementById('user_info');
+   imageSelect.addEventListener('change',(event) => {
+       if (userInfo.style.display = 'block'){
+           userInfo.style.display = 'none';
+       }else{
+           userInfo.style.display = 'block';
+       }
+   });
+</script> %>
