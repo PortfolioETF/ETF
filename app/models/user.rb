@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   # carrierwave
   mount_uploader :image_id, ImageUploader
+  # paranoia
+  acts_as_paranoid
 end
