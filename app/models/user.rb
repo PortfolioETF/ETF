@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
   # associations
   has_many :opinions
+  has_many :locations
 
   # carrierwave
   mount_uploader :image_id, ImageUploader
