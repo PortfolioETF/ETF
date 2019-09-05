@@ -5,9 +5,12 @@ Rails.application.routes.draw do
   }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'home#top'
+  get '/withdraw_complete' => 'home#withdraw_complete',as: 'withdraw_complete'
   scope module: :public do
-    resources :users, only: %i(show edit update destroy)
     get 'users/:id/image_select' => 'users#image_select',as: 'image_select'
-    get 'users/:id/withdraw' => 'users#withdraw',as: 'unsubscribe'
+    resources :users, only: %i(show edit update destroy) do
+      resources :opinions, only: %i(new create)
+      resource :withdraws, only: %i(show create)
+    end
   end
 end

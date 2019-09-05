@@ -1,7 +1,7 @@
 <h1>画像登録</h1>
 <%= form_with model: @user do |f| %>
-<%= image_tag @user.image_id.url, id: :img_prev if @user.image_id? %>
-<%= f.file_field :image_id, id: :user_img %>
+<%= image_tag '/assets/no_image.jpg', id: :img_prev %>
+<%= f.file_field :image_id, id: :user_img, input_html: {accept: @user.set_extension} %>
 <p><%= f.check_box :remove_img %>画像を削除する</p>
 
 <div id="user_info">
@@ -17,19 +17,7 @@
   <%= f.submit '登録' %>
   <% end %>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
+<%= link_to '画像を登録せずに進む', user_path(@user) %>
 
 
 <script>

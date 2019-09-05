@@ -8,25 +8,15 @@ class Public::UsersController < Public::ApplicationController
     end
 
     def update
-        user = User.find(params[:id])
-        if user.update(user_params)
+        if current_user.update(user_params)
             redirect_to user_path(user), notice: "更新が完了しました"
         else
             render 'edit'
         end
     end
 
-    def destroy
-        user = User.find(params[:id])
-        user.destroy!
-        redirect_to root_path
-    end
-
     def image_select
         @user = User.find(params[:id ])
-    end
-
-    def withdraw
     end
 
     private
