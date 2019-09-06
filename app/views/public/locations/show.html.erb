@@ -30,14 +30,6 @@ window.onload = function(){
         position: new google.maps.LatLng(location.latitude, location.longitude),
       });
     });
-    function getMyplace(){
-      $.ajax({
-        url: "/users/<%= current_user.id %>/locations",
-        type: "POST",
-        data: {longitude: longitude, latitude: latitude},
-        datatype: "html"
-      });
-    };
   };
   function error(){
     output.innerHTML = "現在地を取得できません";
