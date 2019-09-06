@@ -1,0 +1,69 @@
+
+
+
+<p><button onclick="postForm()">現在位置を保存して投稿する</button></p>
+  <div id="postform">
+  </div>
+<p><button onclick="getMyPlace()">現在位置を保存</button></p>
+<div id="map" style="width:100%;height:300px;"></div>
+
+<script>
+window.onload = function(){
+  if(!navigator.geolocation){
+    output.innerHTML = "<p>EasyToFindはあなたのブラウザーでサポートされていない可能性があります</p>";
+    return;
+  }
+  function success(position) {
+    var locations = JSON.parse('<%= raw @locations%>');
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    var latlng = new google.maps.LatLng(latitude, longitude);
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 15, center: latlng,
+    });
+    new google.maps.Marker({
+      map: map, position: latlng,
+    });
+    locations.forEach(function(location){
+      new google.maps.Marker({
+        map: map,
+        position: new google.maps.LatLng(location.latitude, location.longitude),
+      });
+    });
+    function getMyplace(){
+      $.ajax({
+        url: "/users/<%= current_user.id %>/locations",
+        type: "POST",
+        data: {longitude: longitude, latitude: latitude},
+        datatype: "html"
+      });
+    };
+  };
+  function error(){
+    output.innerHTML = "現在地を取得できません";
+  };
+  navigator.geolocation.getCurrentPosition(success, error);
+}
+
+function getMyPlace() {
+  if (!navigator.geolocation){//Geolocation apiがサポートされていない場合
+    output.innerHTML = "<p>Geolocationはあなたのブラウザーでサポートされておりません</p>";
+    return;
+  }
+  function success(position) {
+    var latitude  = position.coords.latitude;//緯度
+    var longitude = position.coords.longitude;//経度
+    $.ajax({
+      url: "/users/<%= current_user.id %>/locations",
+      type: "POST",
+      data: {longitude: longitude, latitude: latitude},
+      datatype: "html"
+    });
+  };
+  function error() {
+    //エラーの場合
+    output.innerHTML = "座標位置を取得できません";
+  };
+  navigator.geolocation.getCurrentPosition(success, error);//成功と失敗を判断
+}
+</script>

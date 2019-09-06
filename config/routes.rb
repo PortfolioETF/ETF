@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :users, only: %i(show edit update destroy) do
       resources :opinions, only: %i(new create)
       resource :withdraws, only: %i(show create)
+      resources :locations, only: %i(show create)
     end
   end
 end
