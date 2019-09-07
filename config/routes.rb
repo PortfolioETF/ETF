@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       resources :opinions, only: %i(new create)
       resource :withdraws, only: %i(show create)
     end
-    resources :locations, only: %i(show create)
-    resources :posts, only: %i(show update destroy)
+    resources :locations, only: %i(new create)
+    resources :smoking_posts, except: %i(new)
   end
 end
