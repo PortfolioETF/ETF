@@ -13,6 +13,6 @@ Rails.application.routes.draw do
       resource :withdraws, only: %i(show create)
     end
     resources :locations, only: %i(show create)
-    resources :posts, only: %i(show update destroy)
+    resources :posts, except: %i(new)
   end
 end

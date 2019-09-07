@@ -17,3 +17,8 @@
 //= require turbolinks
 //= require underscore
 //= require_tree .
+
+function postForm() {
+    var postForm = document.getElementById('post-form');
+    postForm.style.display = 'block';
+}

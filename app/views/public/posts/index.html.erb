@@ -1,0 +1,67 @@
+<div id="output"></div>
+<p><button onclick="postForm()">現在位置を保存して投稿する</button></p>
+  <div id="post-form">
+    <%= form_with model: @post url: post_path |f| do%>
+    <%= f.file_field :image_id, id: :post_img, input_html: {accept: @post.set_extension} %>
+    <%= f.text_field :title %>
+    <%= f.text_area :body %>
+    <%= f.submit 'この内容で投稿する' %>
+  </div>
+  <%# type="button"指定がないとparams二つ飛ぶ %>
+<p><button onclick="saveMyLocation()" type="button">現在位置を保存</button></p>
+<div id="map" style="width:100%;height:300px;"></div>
+
+<script>
+window.onload = function(){
+  confirmBrowser();
+  function success(position) {
+    var locations = JSON.parse('<%= raw @locations%>');
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    var latlng = new google.maps.LatLng(latitude, longitude);
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 15, center: latlng,
+    });
+    new google.maps.Marker({
+      map: map, position: latlng,
+    });
+    locations.forEach(function(location){
+      new google.maps.Marker({
+        map: map,
+        position: new google.maps.LatLng(location.latitude, location.longitude),
+      });
+    });
+  };
+  function error(){
+    output.innerHTML = "現在地を取得できません";
+  };
+  navigator.geolocation.getCurrentPosition(success, error);
+};
+
+function saveMyLocation() {
+  confirmBrowser();
+  function saveSuccess(position) {
+    var saveLatitude  = position.coords.latitude;//緯度
+    var saveLongitude = position.coords.longitude;//経度
+    $.ajax({
+      url: "/posts",
+      type: "POST",
+      data: {longitude: saveLongitude, latitude: saveLatitude},
+    })
+  };
+  function saveError() {
+    //エラーの場合
+    output.innerHTML = "現在地を取得できません";
+  };
+  navigator.geolocation.getCurrentPosition(saveSuccess, saveError);//成功と失敗を判断
+};
+
+function confirmBrowser(){
+    var output = document.getElementById('output');
+    if(!navigator.geolocation){
+    output.innerHTML = "<p>EasyToFindはあなたのブラウザーでサポートされていない可能性があります</p>";
+    return;
+  };
+};
+
+</script>
