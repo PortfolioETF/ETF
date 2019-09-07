@@ -10,7 +10,7 @@ class User < ApplicationRecord
   # associations
   has_many :opinions
   has_many :locations
-  has_many :posts
+  has_many :smoking_posts, through: :locations
 
   # carrierwave
   mount_uploader :image_id, ImageUploader

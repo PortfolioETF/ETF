@@ -1,5 +1,6 @@
 class Public::LocationsController < Public::ApplicationController
-    def show
+    def new
+        render json: params[:latlong]
     end
 
     def create
