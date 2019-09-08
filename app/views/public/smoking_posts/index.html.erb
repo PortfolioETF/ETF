@@ -14,15 +14,22 @@ window.onload = function(){
     var longitude = position.coords.longitude;
     var latlng = new google.maps.LatLng(latitude, longitude);
     var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 15, center: latlng,
+      zoom: 17, center: latlng,
     });
     new google.maps.Marker({
       map: map, position: latlng,
     });
+
     locations.forEach(function(location){
-      new google.maps.Marker({
+      var markers = new google.maps.Marker({
         map: map,
         position: new google.maps.LatLng(location.latitude, location.longitude),
+      });
+      var infoWindow = new google.maps.InfoWindow({ // 吹き出しの追加
+        content: location.address
+      });
+      markers.addListener('click', function() { // マーカーをクリ
+        infoWindow.open(map, markers); // 吹き出しの表示
       });
     });
   };
@@ -56,7 +63,7 @@ function saveMyLocation() {
       data: {latlong: {longitude: longitude, latitude: latitude}},
     }).done(function(data){
       $("#location-latitude").val(data.latitude);
-      $("#locatin-longitude").val(data.longitude);
+      $("#location-longitude").val(data.longitude);
     })
   };
 
