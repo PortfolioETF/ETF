@@ -10,7 +10,15 @@ class Public::SmokingPostsController < Public::ApplicationController
     end
 
     def create
-        current_user.locations.create!(location_smoking_post_params)
+        latitude = location_smoking_post_params[:latitude]
+        longitude = location_smoking_post_params[:longitude]
+        if duplicate_location = current_user.locations.find_by(latitude: latitude, longitude: longitude)
+            title = location_smoking_post_params[:smoking_posts_attributes][:'0'][:title]
+            body = location_smoking_post_params[:smoking_posts_attributes][:'0'][:body]
+            duplicate_location.smoking_posts.create(title: title, body: body)
+        else
+          current_user.locations.create!(location_smoking_post_params)
+        end
     end
 
     def update

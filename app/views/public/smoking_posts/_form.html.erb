@@ -1,5 +1,5 @@
 <div id="form-post">
-    <%= form_with model: @location, local: true, url: smoking_posts_path do |f| %>
+    <%= form_with model: @location, url: smoking_posts_path do |f| %>
       <%= f.hidden_field :latitude, id: "location-latitude"%>
       <%= f.hidden_field :longitude, id: "location-longitude" %>
       <%= f.text_field :address, id: "location-address" %>
