@@ -21,6 +21,6 @@ class Public::SmokingPostsController < Public::ApplicationController
 
     private
     def location_smoking_post_params
-        params.require(:location).permit(:latitude, :longitude, smoking_posts_attributes: [:title, :body, :image_id])
+        params.require(:location).permit(:latitude, :longitude, :address, smoking_posts_attributes: [:title, :body, :image_id])
     end
 end
