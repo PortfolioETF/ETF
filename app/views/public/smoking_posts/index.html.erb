@@ -1,25 +1,6 @@
 <div id="output"></div>
-  <p><button onclick="saveMyLocation()" type="button" >投稿する</button></p>
-  <div id="form-post">
-    <%= form_with model: @location, local: true, url: smoking_posts_path do |f| %>
-      <%= f.hidden_field :latitude, id: "smoking-post-latitude"%>
-      <%= f.hidden_field :longitude, id: "smoking-post-longitude" %>
-    <%= f.fields_for :smoking_posts do |smoking_post| %>
-      <%= image_tag '', id: "post-img" %>
-      <div>
-        <%= smoking_post.file_field :image_id, id: "smoking-post-img", input_html: {accept: @smoking_post.set_extension} %>
-      </div>
-      <div>
-        <%= smoking_post.text_field :title, id: "smoking-post-title" %>
-      </div>
-      <div>
-        <%= smoking_post.text_area :body, id: "smoking-post-body" %>
-      </div>
-    <% end %>
-      <%= f.submit '投稿を作成' %>
-      <%# type="button"指定がないとparams二つ飛ぶ %>
-    <% end %>
-  </div>
+  <p><button id="save-my-location-button" onclick="saveMyLocation()" type="button" >投稿する</button></p>
+<%= render partial: 'public/smoking_posts/form',locals: {location: @location, smoking_post: @smoking_post} %>
 <div id="map" style="width:100%;height:300px;"></div>
 
 
@@ -52,25 +33,37 @@ window.onload = function(){
 };
 
 function saveMyLocation() {
+
   confirmBrowser();
+
   function saveSuccess(position) {
     postFormDisplay();
     var latitude  = position.coords.latitude;//緯度
     var longitude = position.coords.longitude;//経度
     var title = $("#smoking-post-title").val();
     var body = $("#smoking-post-body").val();
+    const url = "http://geoapi.heartrails.com/api/json?method=searchByGeoLocation&x=" + longitude + "&y=" + latitude + "&jsonp=?";
+
+    $.getJSON(url, function(jsonp){
+      var areaInfo = jsonp.response.location[0];
+      var areaInfoStr = areaInfo.prefecture + areaInfo.city + areaInfo.town;
+      $("#location-address").val(areaInfoStr);
+    });
+
     $.ajax({
       url: "/locations/new",
       type: "GET",
       data: {latlong: {longitude: longitude, latitude: latitude}},
     }).done(function(data){
-      $("#smoking-post-latitude").val(data.latitude);
-      $("#smoking-post-longitude").val(data.longitude);
+      $("#location-latitude").val(data.latitude);
+      $("#locatin-longitude").val(data.longitude);
     })
   };
+
   function saveError() {
     output.innerHTML = "現在地を取得できません";
   };
+
   navigator.geolocation.getCurrentPosition(saveSuccess, saveError);//成功と失敗を判断
 };
 
@@ -81,9 +74,6 @@ function confirmBrowser(){
     return;
   };
 };
-
-
-
  $(function() {
       function readURL(input) {
         if (input.files && input.files[0]) {
@@ -98,5 +88,4 @@ function confirmBrowser(){
      readURL(this);
     });
  });
-
 </script>
