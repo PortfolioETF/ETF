@@ -21,4 +21,13 @@ class User < ApplicationRecord
     opinions.create!(params)
     destroy!
   end
+
+  def create_location_with_smoking_post(latitude, longitude, title, body)
+    if duplicate_location = self.locations.find_by(latitude: latitude, longitude: longitude)
+      duplicate_location.smoking_posts.create!(title: title, body: body)
+    else
+      self.locations.create!(location_smoking_post_params)
+    end
+  end
+
 end
