@@ -1,10 +1,11 @@
 <%= render partial: 'public/smoking_posts/search_form',locals: {q: @q} %>
 <div id="output"></div>
-  <p><button id="save-my-location-button" onclick="saveMyLocation()" type="button" >投稿する</button></p>
+  <p><button id="save-my-location-button" onclick="saveMyLocation()" type="button" >現在地の情報を投稿する</button></p>
 <%= render partial: 'public/smoking_posts/form',locals: {location: @location, smoking_post: @smoking_post} %>
 <div id="map" style="width:100%;height:300px;"></div>
 
 <div id="search_display"></div>
+<div id="location-smoking-posts"></div>
 
 
 <script>
@@ -28,18 +29,25 @@ window.onload = function(){
         position: new google.maps.LatLng(location.latitude, location.longitude),
       });
       var infoWindow = new google.maps.InfoWindow({ // 吹き出しの追加
-        content: location.address
+        <%# content: location.address %>
+        content: `<p id="info-window-click">住所クリックで投稿表示</p><p id="smoking-location-window" onclick="locationShow()" data-id=${location.id}>${location.address}</p>`
       });
       markers.addListener('click', function() { // マーカーをクリ
+      if($(".gm-style-iw.gm-style-iw-c").length > 0){
+        $(".gm-style-iw.gm-style-iw-c").remove();
+        $(".gm-style-iw-t").remove();
+      }
         infoWindow.open(map, markers); // 吹き出しの表示
       });
-    });
-  };
+  });
+  }
   function error(){
     output.innerHTML = "現在地を取得できません";
   };
   navigator.geolocation.getCurrentPosition(success, error);
 };
+
+
 
 function saveMyLocation() {
 
@@ -97,4 +105,20 @@ function confirmBrowser(){
      readURL(this);
     });
  });
+
+ function locationShow(){
+    $("#location-smoking-posts").empty();
+   var id = $("#smoking-location-window").data().id;
+   $.ajax({
+     url: "/locations/" + id,
+     type: "GET",
+     data: [{}],
+   }).done(function(data){
+     for(var i = 0; i < data.length; i++ ){
+       $("#location-smoking-posts").append(`<a href="/smoking_posts/${i + 1}" id="post-title-${i}"></a><div id="post-body-${i}"></div>`);
+       $("#post-title-" + `${i}`).html(data[i].title);
+       $("#post-body-" + `${i}`).html(data[i].body);
+     }
+   })
+ }
 </script>
