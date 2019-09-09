@@ -2,7 +2,9 @@ class Public::SmokingPostsController < Public::ApplicationController
     def index
         @location = current_user.locations.new
         @smoking_post = @location.smoking_posts.build
-        @locations = current_user.locations.to_json
+        @locations = Location.all.to_json
+        @q = Location.ransack(params[:q])
+        # @search_location = @q.result.includes(:smoking_posts).page(params[:page])
     end
 
     def show
@@ -12,13 +14,9 @@ class Public::SmokingPostsController < Public::ApplicationController
     def create
         latitude = location_smoking_post_params[:latitude]
         longitude = location_smoking_post_params[:longitude]
-        if duplicate_location = current_user.locations.find_by(latitude: latitude, longitude: longitude)
-            title = location_smoking_post_params[:smoking_posts_attributes][:'0'][:title]
-            body = location_smoking_post_params[:smoking_posts_attributes][:'0'][:body]
-            duplicate_location.smoking_posts.create(title: title, body: body)
-        else
-          current_user.locations.create!(location_smoking_post_params)
-        end
+        title = location_smoking_post_params[:smoking_posts_attributes][:'0'][:title]
+        body = location_smoking_post_params[:smoking_posts_attributes][:'0'][:body]
+        current_user.create_location_with_smoking_post(latitude, longitude, title, body, location_smoking_post_params)
     end
 
     def update
