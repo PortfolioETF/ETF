@@ -1,8 +1,10 @@
+<%= render partial: 'public/smoking_posts/search_form',locals: {q: @q} %>
 <div id="output"></div>
   <p><button id="save-my-location-button" onclick="saveMyLocation()" type="button" >投稿する</button></p>
 <%= render partial: 'public/smoking_posts/form',locals: {location: @location, smoking_post: @smoking_post} %>
 <div id="map" style="width:100%;height:300px;"></div>
 
+<div id="search_display"></div>
 
 
 <script>

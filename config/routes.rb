@@ -12,7 +12,8 @@ Rails.application.routes.draw do
       resources :opinions, only: %i(new create)
       resource :withdraws, only: %i(show create)
     end
-    resources :locations, only: %i(new create)
+    resources :locations, only: %i(new)
+    get '/smoking_search' => 'locations#smoking_search',as: 'smoking_search'
     resources :smoking_posts, except: %i(new)
   end
 end
