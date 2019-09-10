@@ -13,6 +13,12 @@ class Public::LocationsController < Public::ApplicationController
         @results = @q.result
     end
 
+    def get_destination
+        @location = Location.find(params[:id])
+        render json: @location
+        # Location.find(params[:destination_id])
+    end
+
     private
     def location_params
         params.require(:location).permit(:latitude, :longitude)
