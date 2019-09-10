@@ -13,7 +13,8 @@ Rails.application.routes.draw do
       resource :withdraws, only: %i(show create)
     end
     resources :locations, only: %i(new show)
-    get '/smoking_search' => 'locations#smoking_search',as: 'smoking_search'
+    get '/locations/smoking_search' => 'locations#smoking_search',as: 'smoking_search'
+    get '/locations/get_destination/:id' => 'locations#get_destination',as: 'get_destination'
     resources :smoking_posts, except: %i(new)
   end
 end

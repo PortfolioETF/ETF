@@ -10,7 +10,13 @@ class Public::LocationsController < Public::ApplicationController
 
     def smoking_search
         @q  = Location.ransack(params[:q])
-        @result = @q.result
+        @results = @q.result
+    end
+
+    def get_destination
+        @location = Location.find(params[:id])
+        render json: @location
+        # Location.find(params[:destination_id])
     end
 
     private

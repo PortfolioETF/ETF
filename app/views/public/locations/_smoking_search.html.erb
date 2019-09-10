@@ -1,7 +1,7 @@
-<% @result.each do |f| %>
-<% f.smoking_posts.each do |g| %>
-<%= f.address %>
-<%= g.title %>
-<%= g.body %>
+<% @results.each do |result| %>
+<% result.smoking_posts.each do |smoking_post| %>
+<%= result.address %>
+<%= smoking_post.title %>
+<%= smoking_post.body %>
 <% end %>
 <% end %>
