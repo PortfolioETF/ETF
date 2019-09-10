@@ -1,5 +1,5 @@
 <div id="smoking-post-search-form">
-<%= search_form_for(@q, url: smoking_search_path, remote: true, method: 'get') do |f| %>
+<%= search_form_for(q, url: smoking_search_path, remote: true, method: 'get') do |f| %>
   <%= f.search_field :address_cont %>
   <%= f.submit %>
 <% end %>

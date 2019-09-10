@@ -9,8 +9,8 @@ class User < ApplicationRecord
 
   # associations
   has_many :opinions
-  has_many :locations
-  has_many :smoking_posts, through: :locations
+  has_many :smoking_posts
+  has_many :locations, through: :smoking_posts
 
   # carrierwave
   mount_uploader :image_id, ImageUploader
@@ -21,13 +21,4 @@ class User < ApplicationRecord
     opinions.create!(params)
     destroy!
   end
-
-  def create_location_with_smoking_post(latitude, longitude, title, body, location_smoking_post_params)
-    if duplicate_location = self.locations.find_by(latitude: latitude, longitude: longitude)
-      duplicate_location.smoking_posts.create!(title: title, body: body)
-    else
-      self.locations.create!(location_smoking_post_params)
-    end
-  end
-
 end
