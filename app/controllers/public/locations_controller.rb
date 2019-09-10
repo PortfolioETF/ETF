@@ -10,7 +10,7 @@ class Public::LocationsController < Public::ApplicationController
 
     def smoking_search
         @q  = Location.ransack(params[:q])
-        @result = @q.result
+        @results = @q.result
     end
 
     private
