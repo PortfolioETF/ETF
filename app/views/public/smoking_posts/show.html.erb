@@ -1,2 +1,7 @@
+<%= image_tag @user.image_id.url || '/assets/no_image.jpg' %>
+<%= @user.name %>
+<%= @location.address %>
 <%= @smoking_post.title %>
 <%= @smoking_post.body %>
+
+<%= link_to '投稿を編集', edit_smoking_post_path(@smoking_post)  %>

@@ -1,22 +1,6 @@
-<div id="form-post">
-    <%= form_with model: location, url: smoking_posts_path do |f| %>
-      <%= f.hidden_field :latitude, id: "location-latitude"%>
-      <%= f.hidden_field :longitude, id: "location-longitude" %>
-      <%= f.text_field :address, id: "location-address" %>
-    <%= f.fields_for :smoking_posts do |smoking_f| %>
-      <%= image_tag '', id: "post-img" %>
-      <div>
-        <%= smoking_f.file_field :image_id, id: "smoking-post-img", input_html: {accept: smoking_post.set_extension} %>
-      </div>
-      <div>
-        <%= smoking_f.text_field :title, id: "smoking-post-title" %>
-      </div>
-      <div>
-        <%= smoking_f.text_area :body, id: "smoking-post-body" %>
-      </div>
-      <%= smoking_f.hidden_field :user_id, value: current_user.id %>
-    <% end %>
-      <%= f.submit '投稿を作成' %>
-      <%# type="button"指定がないとparams二つ飛ぶ %>
-    <% end %>
-  </div>
+<%= form_with model: smoking_post do |f| %>
+  <%= f.file_field :image_id, id: "smoking-post-img", input_html: {accept: smoking_post.set_extension} %>
+  <%= f.text_field :title, id: "smoking-post-title" %>
+  <%= f.text_area :body, id: "smoking-post-body" %>
+  <%= f.submit '投稿を更新' %>
+<% end %>

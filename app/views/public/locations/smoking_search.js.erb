@@ -1,1 +1,3 @@
-$('#location-smoking-posts').html("<%= escape_javascript(render 'smoking_search') %>");
+$('#smoking-location-show').empty();
+$('#location-smoking-posts').css('display','block');
+$('#search-result-container').html("<%= escape_javascript(render 'smoking_search') %>");

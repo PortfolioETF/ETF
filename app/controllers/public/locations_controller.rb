@@ -5,18 +5,23 @@ class Public::LocationsController < Public::ApplicationController
 
     def show
         @smoking_posts = Location.find(params[:id]).smoking_posts
-        render json: @smoking_posts
+        @users = @smoking_posts.map{|smoking_post| smoking_post.user}
+        render json: {smoking_posts: @smoking_posts, users: @users}
     end
 
     def smoking_search
         @q  = Location.ransack(params[:q])
-        @results = @q.result
+        @results = @q.result.page(params[:page]).per(5)
+    end
+
+    def after_smoking_search
+        @q  = Location.ransack(params[:page][:q])
+        @results = @q.result.page(params[:page][:page]).per(5)
     end
 
     def get_destination
         @location = Location.find(params[:id])
         render json: @location
-        # Location.find(params[:destination_id])
     end
 
     private

@@ -1,10 +1,9 @@
-<div class="search-smoking-post">
+<div class="smoking-post-search">
 <% @results.each do |result| %>
 <% result.smoking_posts.each do |smoking_post| %>
-<%= result.address %></li>
+<li><%= result.address %></li>
 <%= smoking_post.title %>
 <%= smoking_post.body %>
 <% end %>
 <% end %>
-<%= paginate @results %>
 </div>

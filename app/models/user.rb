@@ -18,7 +18,7 @@ class User < ApplicationRecord
   acts_as_paranoid
 
   def withdraw_after_create_opinion!(params)
-    opinions.create!(params)
-    destroy!
+      opinions.create!(params)
+      destroy!
   end
 end
