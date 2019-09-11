@@ -188,4 +188,38 @@ function confirmBrowser(){
     };
     navigator.geolocation.getCurrentPosition(success, error);
    };
+
+
+  $("#location-smoking-posts").on('DOMSubtreeModified propertychange', function() {
+    $("#location-smoking-posts").css({
+      width: '100%',
+      height: '80px',
+      overflow: 'auto'
+    });
+  });
+  $("#location-smoking-posts").on('scroll',function(){
+     scrollHeight = $("#location-smoking-posts").height();
+     scrollPosition = $("#location-smoking-posts").height() + $("#location-smoking-posts").scrollTop();
+     //console.log('height',$("#location-smoking-posts").height())
+     //console.log('position',scrollPosition)
+     //console.log('top', $("#location-smoking-posts").scrollTop())
+     //console.log((scrollHeight - scrollPosition)/ scrollHeight )
+     //console.log('position', $("#location-smoking-posts").offset().top)
+     scrollComponentHeight = $("#location-smoking-posts").get(0).scrollHeight
+
+    if ( scrollPosition === scrollComponentHeight) {
+      var q = $("#q_address_cont").val();
+      var page = $("#smoking-post-search").length + 2;
+      console.log(page)
+        $.ajax({
+          url: "/after_smoking_search",
+          type: "GET",
+          data: {page: {q: q, page: page}},
+        }).done(function(data){
+          var display = $(data).filter('#smoking-post-search')
+          $(".search-smoking-post").append(display)
+        })
+    }
+   });
+
 </script>
