@@ -9,6 +9,8 @@ class Public::SmokingPostsController < Public::ApplicationController
 
     def show
         @smoking_post = SmokingPost.find(params[:id])
+        @location = @smoking_post.location
+        @user = @smoking_post.user
     end
 
     def create
@@ -20,12 +22,27 @@ class Public::SmokingPostsController < Public::ApplicationController
     end
 
     def update
+        smoking_post = SmokingPost.find(params[:id])
+        if smoking_post.update(smoking_post_params)
+            redirect_to user_path(current_user)
+        else
+            render 'edit'
+        end
+    end
+
+    def edit
+        @smoking_post = SmokingPost.find(params[:id])
     end
 
     def destroy
+        SmokingPost.find(params[:id]).destroy!
     end
 
     private
+    def smoking_post_params
+        params.require(:smoking_post).permit(:title, :body, :image_id)
+    end
+
     def location_smoking_post_params
         params.require(:location).permit(:latitude, :longitude, :address, smoking_posts_attributes: [:title, :body, :image_id, :user_id])
     end
