@@ -4,8 +4,9 @@
 <%= render partial: 'public/smoking_posts/nested_form',locals: {location: @location, smoking_post: @smoking_post} %>
 <div id="map" style="width:100%;height:300px;"></div>
 
-<div id="search_display"></div>
-<div id="location-smoking-posts"></div>
+<div id="smoking-location-show"></div>
+<div id="location-smoking-posts"><div id="search-result-container"></div>
+</div>
 
 
 <script>
@@ -110,7 +111,7 @@ function confirmBrowser(){
  });
 
  function locationShow(){
-    $("#location-smoking-posts").empty();
+    $("#location-smoking-posts").css('display','none')
    var id = $("#smoking-location-window").data().id;
    $.ajax({
      url: "/locations/" + id,
@@ -118,7 +119,7 @@ function confirmBrowser(){
      data: {},
    }).done(function(data){
      for(var i = 0; i < data.smoking_posts.length; i++ ){
-       $("#location-smoking-posts").append(`<h5 id="smoking-post-user-name-${i}"></h5><a href="/smoking_posts/${i + 1}" id="post-title-${i}"></a><div id="post-body-${i}"></div>`);
+       $("#smoking-location-show").append(`<h5 id="smoking-post-user-name-${i}"></h5><a href="/smoking_posts/${i + 1}" id="post-title-${i}"></a><div id="post-body-${i}"></div>`);
        $("#smoking-post-user-name-" + `${i}`).html(data.users[i].name);
        $("#post-title-" + `${i}`).html(data.smoking_posts[i].title);
        $("#post-body-" + `${i}`).html(data.smoking_posts[i].body);
@@ -190,34 +191,33 @@ function confirmBrowser(){
    };
 
 
+//無限スクロール
   $("#location-smoking-posts").on('DOMSubtreeModified propertychange', function() {
+    $("smoking-location-show").empty();
     $("#location-smoking-posts").css({
       width: '100%',
       height: '80px',
-      overflow: 'auto'
+      overflow: 'auto',
+      display: 'block',
+      'background-color': '#FF0000' //削除してね
     });
   });
-  $("#location-smoking-posts").on('scroll',function(){
+
+   $("#location-smoking-posts").on('scroll',function(){
      scrollHeight = $("#location-smoking-posts").height();
      scrollPosition = $("#location-smoking-posts").height() + $("#location-smoking-posts").scrollTop();
-     //console.log('height',$("#location-smoking-posts").height())
-     //console.log('position',scrollPosition)
-     //console.log('top', $("#location-smoking-posts").scrollTop())
-     //console.log((scrollHeight - scrollPosition)/ scrollHeight )
-     //console.log('position', $("#location-smoking-posts").offset().top)
      scrollComponentHeight = $("#location-smoking-posts").get(0).scrollHeight
-
     if ( scrollPosition === scrollComponentHeight) {
       var q = $("#q_address_cont").val();
-      var page = $("#smoking-post-search").length + 2;
-      console.log(page)
+      console.log(q)
+      var page = $(".smoking-post-search").length + 2;
         $.ajax({
           url: "/after_smoking_search",
           type: "GET",
           data: {page: {q: q, page: page}},
         }).done(function(data){
-          var display = $(data).filter('#smoking-post-search')
-          $(".search-smoking-post").append(display)
+          var display = $(data).filter('.smoking-post-search')
+          $("#search-result-container").append(display)
         })
     }
    });
