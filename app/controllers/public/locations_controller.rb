@@ -4,9 +4,8 @@ class Public::LocationsController < Public::ApplicationController
     end
 
     def show
-        @smoking_posts = Location.find(params[:id]).smoking_posts
-        @users = @smoking_posts.map{|smoking_post| smoking_post.user}
-        render json: {smoking_posts: @smoking_posts, users: @users}
+        @smoking_posts = Location.find(params[:id]).smoking_posts.page(params[:page]).per(5).preload(:user)
+        # render json: {smoking_posts: @smoking_posts, users: @users}
     end
 
     def smoking_search
