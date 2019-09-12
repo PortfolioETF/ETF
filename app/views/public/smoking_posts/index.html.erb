@@ -4,7 +4,9 @@
 <%= render partial: 'public/smoking_posts/nested_form',locals: {location: @location, smoking_post: @smoking_post} %>
 <div id="map" style="width:100%;height:300px;"></div>
 
-<div id="smoking-location-show"></div>
+<%# show %>
+<div id="smoking-location-shows"><div id="smoking-location-shows-container"></div></div>
+<%# 検索 %>
 <div id="location-smoking-posts"><div id="search-result-container"></div>
 </div>
 
@@ -44,7 +46,7 @@ function getMyPlace(){
       animation: google.maps.Animation.DROP,
       icon: {
         path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-        scale: 5,
+        scale: 7,
         strokeColor: '#0099FF',
         fillColor: "#0099FF",
         fillOpacity: 1.0,
@@ -110,22 +112,51 @@ function confirmBrowser(){
     });
  });
 
+// locationの投稿を表示
+// 無限スクロール
  function locationShow(){
-    $("#location-smoking-posts").css('display','none')
+  $("#search-result-container").empty();
+  $("#location-smoking-posts").css('display','none');
+
+  $("#smoking-location-shows").off('scroll')
+  $("#smoking-location-shows-container").empty()
+
+ $("#smoking-location-shows-container").append('<button class="remove-display" onclick="removeDisplay()">×</button>')
+
+  $("#smoking-location-shows").css({
+      width: '100%',
+      height: '80px',
+      overflow: 'auto',
+      display: 'block',
+      'background-color': '#FFF000' //削除してね
+    });
    var id = $("#smoking-location-window").data().id;
    $.ajax({
      url: "/locations/" + id,
      type: "GET",
-     data: {},
+     data: {page_data: 1},
    }).done(function(data){
-     for(var i = 0; i < data.smoking_posts.length; i++ ){
-       $("#smoking-location-show").append(`<h5 id="smoking-post-user-name-${i}"></h5><a href="/smoking_posts/${i + 1}" id="post-title-${i}"></a><div id="post-body-${i}"></div>`);
-       $("#smoking-post-user-name-" + `${i}`).html(data.users[i].name);
-       $("#post-title-" + `${i}`).html(data.smoking_posts[i].title);
-       $("#post-body-" + `${i}`).html(data.smoking_posts[i].body);
-     }
+     display = $(data).filter('.smoking-location-post')
+     $("#smoking-location-shows-container").append(display)
+     $("#smoking-location-shows").on('scroll', function() {
+       scrollHeight = $("#smoking-location-shows").height();
+       scrollPosition = scrollHeight + $("#smoking-location-shows").scrollTop();
+       scrollComponentHeight = $("#smoking-location-shows").get(0).scrollHeight
+       if (scrollPosition === scrollComponentHeight) {
+         page = $(".smoking-location-post").length + 1;
+         $.ajax({
+           url: "/locations/" + id,
+           type: "GET",
+           data: {page_data: page},
+         }).done(function(data){
+           pageDisplay = $(data).filter('.smoking-location-post')
+           $("#smoking-location-shows-container").append(pageDisplay)
+         })
+    }
+});
    })
  }
+
 
  function getRoute(){
      confirmBrowser();
@@ -191,35 +222,54 @@ function confirmBrowser(){
    };
 
 
-//無限スクロール
-  $("#location-smoking-posts").on('DOMSubtreeModified propertychange', function() {
-    $("smoking-location-show").empty();
-    $("#location-smoking-posts").css({
+//検索後の無限スクロール
+function searchLocation(){
+  $("#smoking-location-shows-container").empty();
+  $("#smoking-location-shows").css('display','none');
+
+  $("#location-smoking-posts").off('scroll')
+  $("#search-result-container").empty()
+
+  $("#search-result-container").append('<button class="remove-display" onclick="removeDisplay()">×</button>')
+
+  $("#location-smoking-posts").css({
       width: '100%',
       height: '80px',
       overflow: 'auto',
       display: 'block',
-      'background-color': '#FF0000' //削除してね
-    });
+      'background-color': '#FFF000' //削除してね
   });
-
-   $("#location-smoking-posts").on('scroll',function(){
-     scrollHeight = $("#location-smoking-posts").height();
-     scrollPosition = $("#location-smoking-posts").height() + $("#location-smoking-posts").scrollTop();
-     scrollComponentHeight = $("#location-smoking-posts").get(0).scrollHeight
-    if ( scrollPosition === scrollComponentHeight) {
-      var q = $("#q_address_cont").val();
-      console.log(q)
-      var page = $(".smoking-post-search").length + 2;
-        $.ajax({
-          url: "/after_smoking_search",
-          type: "GET",
-          data: {page: {q: q, page: page}},
-        }).done(function(data){
-          var display = $(data).filter('.smoking-post-search')
-          $("#search-result-container").append(display)
-        })
+  var text = $("#address_cont").val();
+  $.ajax({
+    url: "/smoking_search",
+    type: "GET",
+    data: {data: {text: text, page_data: 1}},
+  }).done(function(data){
+    var display = $(data).filter('.smoking-post-search')
+    $("#search-result-container").append(display) //2つめ
+     $("#location-smoking-posts").on('scroll', function() { //1つめ
+       scrollHeight = $("#location-smoking-posts").height();
+       scrollPosition = scrollHeight + $("#location-smoking-posts").scrollTop();
+       scrollComponentHeight = $("#location-smoking-posts").get(0).scrollHeight
+       if (scrollPosition === scrollComponentHeight) {
+         page = $('.smoking-post-search').length + 1;
+         $.ajax({
+           url: "/smoking_search",
+           type: "GET",
+           data: {data: {page_data: page, text: text}}
+         }).done(function(data){
+           pageDisplay = $(data).filter('.smoking-post-search')
+           $("#search-result-container").append(pageDisplay)
+         })
     }
-   });
+});
+  })
+}
 
+function removeDisplay(){
+  $("#smoking-location-shows-container").empty();
+  $("#smoking-location-shows").css('display','none');
+  $("#search-result-container").empty();
+  $("#location-smoking-posts").css('display','none');
+}
 </script>

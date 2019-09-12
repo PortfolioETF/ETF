@@ -3,7 +3,6 @@ class Public::SmokingPostsController < Public::ApplicationController
         @location = Location.new
         @smoking_post = @location.smoking_posts.build
         @locations = Location.all.to_json
-        @q = Location.ransack(params[:q])
         # @results = @q.result.page(params[:page]).per(5)
         # @search_location = @q.result.includes(:smoking_posts).page(params[:page])
     end
