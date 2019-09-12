@@ -1,6 +1,6 @@
 <div id="smoking-post-search-form">
-<%= search_form_for q, url: smoking_search_path, remote: true, html: {method: :get} do |f| %>
-  <%= f.search_field :address_cont %>
-  <%= f.submit %>
+<%= form_with url: smoking_search_path, html: {method: :get} do |f| %>
+  <%= f.text_field :address_cont %>
+  <%= f.submit onclick: "searchLocation()", type: "button"%>
 <% end %>
 </div>

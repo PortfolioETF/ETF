@@ -9,4 +9,30 @@ class Location < ApplicationRecord
         self.create(location_smoking_post_params)
       end
     end
+
+    def self.search(search)
+      if !search || search.empty?
+        '検索フォームに入力してください'
+      elsif self.where(['address LIKE ?', "%#{search}%"]).empty?
+        '検索結果: 0件'
+      elsif self.where(['address LIKE ?', "%#{search}%"]).empty? == false
+        self.where(['address LIKE ?', "%#{search}%"])
+      else
+        'もう一度お試しください'
+      end
+    end
+
+    def self.search_result_smo_string?(target, params)
+      if target.is_a?(String)
+        []
+      else
+        target.page(params).per(5).preload(:smoking_posts).order(created_at: "DESC")
+      end
+    end
+
+    def  self.be_error?(targets, search_locations)
+      if targets.empty?
+        search_locations
+      end
+    end
 end

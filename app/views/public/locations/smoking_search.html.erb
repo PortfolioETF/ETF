@@ -1,0 +1,16 @@
+<div class="smoking-post-search">
+<% if @search_error.present? %>
+  <%= @search_error %>
+<% end %>
+<% if @locations.present? %>
+<% @locations.each do |location| %>
+<% location.smoking_posts.order(created_at: "DESC").each do |smoking_post| %>
+<%= smoking_post.user.name %>
+<li><%= location.address %></li>
+<%= smoking_post.title %>
+<%= smoking_post.body %>
+<% end %>
+<% end %>
+<%= paginate @locations %>
+<% end %>
+</div>
