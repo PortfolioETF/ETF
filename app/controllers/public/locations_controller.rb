@@ -13,15 +13,8 @@ class Public::LocationsController < Public::ApplicationController
         @search_error = Location.be_error?(@locations, @search_locations)
     end
 
-    def after_search_set_marker
-        location = Location.find(params[:location_id])
-        latitude = location.latitude
-        longitude = location.longitude
-        render json: {latlong: {latitude: latitude, longitude: longitude}}
-    end
-
-    def get_destination
-        @location = Location.find(params[:id])
+    def location_info
+        @location = Location.find(params[:location_id])
         render json: @location
     end
 

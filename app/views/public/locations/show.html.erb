@@ -1,6 +1,6 @@
 <div class="smoking-location-post">
 <div></div>
-<% @smoking_posts.each do |smoking_post| %>
+<% @smoking_posts.order(created_at: "DESC").each do |smoking_post| %>
 <li><%= smoking_post.user.name %></li>
 <%= smoking_post.title %>
 <%= smoking_post.body %>

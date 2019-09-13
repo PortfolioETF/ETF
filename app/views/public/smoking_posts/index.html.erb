@@ -33,7 +33,7 @@ function getMyPlace(){
       var infoWindow = new google.maps.InfoWindow({ // 吹き出しの追加
         <%# content: location.address %>
         content: `<p id="info-window-click">住所クリックで投稿表示</p><p class="smoking-location-window" onclick="locationShow()" data-id=${location.id}>${location.address}</p>
-        <button onclick="getRoute()" id="get-route-button" data-id=${location.id} type="button">経路を表示</button>`//!!button追加!!
+        <button onclick="getRoute()" id="get-route-button" data-id=${location.id} type="button">経路を表示</button><button onclick="saveThisLocation()" id="get-this-location-button" data-id=${location.id} type="button">この場所に投稿する</button>`//!!button追加!!
       });
       markers.addListener('click', function() { // マーカーをクリ
       if($(".gm-style-iw.gm-style-iw-c").length > 0){
@@ -59,12 +59,12 @@ function getMyPlace(){
       $('.smo-post-show-button').on('click', function(e){
       id = e.target.id[0]
       $.ajax({
-        url: "/after_search_set_marker",
+        url: "/location_info",
         type: "GET",
         data: {location_id: id},
       }).done(function(data){
-        latitude = data.latlong.latitude
-        longitude = data.latlong.longitude
+        latitude = data.latitude
+        longitude = data.longitude
         map.panTo(new google.maps.LatLng(latitude, longitude))
         $("#output").html('<button onclick="getMyPlace()" type="button" id="get-my-place-button">現在地に戻る</button>')
       })
@@ -82,7 +82,6 @@ function getMyPlace(){
 function saveMyLocation() {
   confirmBrowser();
   function saveSuccess(position) {
-    postFormDisplay();
     var latitude  = position.coords.latitude;//緯度
     var longitude = position.coords.longitude;//経度
     var title = $("#smoking-post-title").val();
@@ -100,6 +99,7 @@ function saveMyLocation() {
     }).done(function(data){
       $("#location-latitude").val(data.latitude);
       $("#location-longitude").val(data.longitude);
+      postFormDisplay();
     })
   };
   function saveError() {
@@ -107,6 +107,35 @@ function saveMyLocation() {
   };
   navigator.geolocation.getCurrentPosition(saveSuccess, saveError);//成功と失敗を判断
 };
+
+function saveThisLocation(){
+  id = $("#get-this-location-button").data().id
+  $.ajax({
+    url: "/location_info",
+    type: "GET",
+    data: {location_id: id},
+  }).done(function(data){
+    latitude = data.latitude
+    longitude = data.longitude
+    title = $("#smoking-post-title").val();
+    body = $("#smoking-post-body").val();
+    const url = "http://geoapi.heartrails.com/api/json?method=searchByGeoLocation&x=" + longitude + "&y=" + latitude + "&jsonp=?";
+    $.getJSON(url, function(jsonp){
+      var areaInfo = jsonp.response.location[0];
+      var areaInfoStr = areaInfo.prefecture + areaInfo.city + areaInfo.town;
+      $("#location-address").val(areaInfoStr)
+    });
+    $.ajax({
+      url: "/locations/new",
+      type: "GET",
+      data: {latlong: {longitude: longitude, latitude: latitude}},
+    }).done(function(data){
+      $("#location-latitude").val(data.latitude);
+      $("#location-longitude").val(data.longitude);
+      postFormDisplay();
+    });
+  })
+}
 
 function confirmBrowser(){
     $("#output").empty();
@@ -181,11 +210,11 @@ function confirmBrowser(){
      function success(position){
        var latitude = position.coords.latitude;
        var longitude = position.coords.longitude;
-       var destinationId = $("#get-route-button").data().id;
+       var location_id = $("#get-route-button").data().id;
        $.ajax({
-         url: "/locations/get_destination/" + destinationId,
+         url: "/location_info",
          type: "GET",
-         data: {},
+         data: {location_id: id},
        }).done(function(data){
          var options = {zoom: 16, center: new google.maps.LatLng(latitude, longitude), mapTypeId: google.maps.MapTypeId.ROADMAP
          };
