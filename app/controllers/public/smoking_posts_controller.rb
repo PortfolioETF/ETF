@@ -3,8 +3,6 @@ class Public::SmokingPostsController < Public::ApplicationController
         @location = Location.new
         @smoking_post = @location.smoking_posts.build
         @locations = Location.all.to_json
-        # @results = @q.result.page(params[:page]).per(5)
-        # @search_location = @q.result.includes(:smoking_posts).page(params[:page])
     end
 
     def show
@@ -14,17 +12,26 @@ class Public::SmokingPostsController < Public::ApplicationController
     end
 
     def create
+        @location = Location.new
+        @smoking_post = @location.smoking_posts.build
+        @locations = Location.all.to_json
+        # for render
         latitude = location_smoking_post_params[:latitude]
         longitude = location_smoking_post_params[:longitude]
         title = location_smoking_post_params[:smoking_posts_attributes][:'0'][:title]
         body = location_smoking_post_params[:smoking_posts_attributes][:'0'][:body]
-        Location.create_location_with_smoking_post(latitude, longitude, title, body, current_user, location_smoking_post_params)
+        result = Location.create_location_with_smoking_post(latitude, longitude, title, body, current_user, location_smoking_post_params)
+        if result.id
+            redirect_to smoking_post_path(current_user.smoking_posts.last)
+        else
+            render 'index'
+        end
     end
 
     def update
-        smoking_post = SmokingPost.find(params[:id])
-        if smoking_post.update(smoking_post_params)
-            redirect_to user_path(current_user)
+        @smoking_post = SmokingPost.find(params[:id])
+        if @smoking_post.update(smoking_post_params)
+            redirect_to smoking_post_path(@smoking_post)
         else
             render 'edit'
         end
@@ -36,6 +43,7 @@ class Public::SmokingPostsController < Public::ApplicationController
 
     def destroy
         SmokingPost.find(params[:id]).destroy!
+        redirect_to user_path(current_user)
     end
 
     private

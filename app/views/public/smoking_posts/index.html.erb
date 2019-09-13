@@ -27,10 +27,12 @@ function getMyPlace(){
       var markers = new google.maps.Marker({
         map: map,
         position: new google.maps.LatLng(location.latitude, location.longitude),
+        zIndex: 1,
+        title: "1",
       });
       var infoWindow = new google.maps.InfoWindow({ // 吹き出しの追加
         <%# content: location.address %>
-        content: `<p id="info-window-click">住所クリックで投稿表示</p><p id="smoking-location-window" onclick="locationShow()" data-id=${location.id}>${location.address}</p>
+        content: `<p id="info-window-click">住所クリックで投稿表示</p><p class="smoking-location-window" onclick="locationShow()" data-id=${location.id}>${location.address}</p>
         <button onclick="getRoute()" id="get-route-button" data-id=${location.id} type="button">経路を表示</button>`//!!button追加!!
       });
       markers.addListener('click', function() { // マーカーをクリ
@@ -43,14 +45,30 @@ function getMyPlace(){
   });
   new google.maps.Marker({
       map: map, position: latlng,
-      animation: google.maps.Animation.DROP,
+      animation: google.maps.Animation.BOUNCE,
+      zIndex: 1,
       icon: {
         path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-        scale: 7,
+        scale: 4,
         strokeColor: '#0099FF',
         fillColor: "#0099FF",
         fillOpacity: 1.0,
       },
+    });
+    $(document).on('click', function(){
+      $('.smo-post-show-button').on('click', function(e){
+      id = e.target.id[0]
+      $.ajax({
+        url: "/after_search_set_marker",
+        type: "GET",
+        data: {location_id: id},
+      }).done(function(data){
+        latitude = data.latlong.latitude
+        longitude = data.latlong.longitude
+        map.panTo(new google.maps.LatLng(latitude, longitude))
+        $("#output").html('<button onclick="getMyPlace()" type="button" id="get-my-place-button">現在地に戻る</button>')
+      })
+      });
     });
   }
   function error(){
@@ -130,7 +148,7 @@ function confirmBrowser(){
       display: 'block',
       'background-color': '#FFF000' //削除してね
     });
-   var id = $("#smoking-location-window").data().id;
+   var id = $(".smoking-location-window").data().id;
    $.ajax({
      url: "/locations/" + id,
      type: "GET",
