@@ -1,3 +1,64 @@
 // Place all the styles related to the Public::Application controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@media screen and (max-width:414px) {
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    html body {
+        height: 736px;
+        width: 414px;
+    }
+
+    nav {
+        position: fixed;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        width: 100%;
+        height: 10%;
+        background-color: #DDDDDD;
+    }
+
+    .app-title {
+        padding-left: 20px;
+    }
+
+
+
+
+    .navbar {
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        height: 100%;
+        text-align: right;
+        display: flex;
+        font-size: 12px;
+    }
+
+    .navbar-text {
+        text-align: right;
+        font-size: 10px;
+        justify-content: center;
+        align-items: center;
+        width: 20%;
+        height: 100%;
+        display: flex;
+    }
+
+    h5 {
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold',
+            sans-serif;
+        font-size: 18px;
+        display: flex;
+        width: 50%;
+    }
+}
+
+// <body><nav class="nav"><div class=""><div class=""><h4 class="app-title">Easy To Find</h3></div><ul class="navbar-text"><% if user_signed_in? %><li class="navbar-text"></li><li class="navbar-text"></li><li class="navbar-text"></li><li class="navbar-text"><%=link_to "logout",
+// destroy_user_session_path,
+// method: :delete %></li><% else %><li class="navbar-text"></li><li class="navbar-text"></li><li class="navbar-text"></li><li class="navbar-text"></li><% end %></ul></div></div>
