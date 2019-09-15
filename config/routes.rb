@@ -14,8 +14,7 @@ Rails.application.routes.draw do
     end
     resources :locations, only: %i(new show)
     get 'smoking_search' => 'locations#smoking_search',as: 'smoking_search'
-    get 'after_search_set_marker' => 'locations#after_search_set_marker',as: 'after_search_set_marker'
-    get '/locations/get_destination/:id' => 'locations#get_destination',as: 'get_destination'
+    get 'location_info' => 'locations#location_info',as: 'location_info'
     resources :smoking_posts, except: %i(new)
   end
 end

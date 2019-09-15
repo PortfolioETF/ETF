@@ -1,8 +1,40 @@
-<%= image_tag @user.image_id.url || '/assets/no_image.jpg' %>
-<%= @user.name %>
-<%= image_tag @smoking_post.image_id.url || '/assets/no_image.jpg' %>
-<%= @location.address %>
-<%= @smoking_post.title %>
-<%= @smoking_post.body %>
+<div class="smoking-posts-show">
+    <div class="user-info-post-show">
+      <%= image_tag @user.image_id.url || '/assets/no_image.jpg', class: "user-img" %>
+      <div class="name-smo-lg">
+        <%= @user.name %>
+      </div>
+    </div>
+  </div>
+  <div class="notice-container">
+    <p class="notice"><%= notice(flash[:notice]) %>
+  </div>
+  <div class="post-img-container">
+    <%= image_tag @smoking_post.image_id.url || '/assets/no_image.jpg', class: "post-img" %>
+  </div>
+  <div class="post-title-smo">
+    <div class="title-smo show">タイトル</div>
+    <p class="title-smo show">
+      <%= @smoking_post.title %>
+    </p>
+  </div>
+  <div class="partertion-container">
+    <p class="partertion-bar">----------------------------------------本文--------------------------------------------</p>
+  </div>
+  <div class="body-container">
+    <p class="body-smo show">
+      <%= @smoking_post.body %>
+    </p>
+  </div>
+  <div class="post-info-smo">
+    <p class="time-smo">
+      <%= @smoking_post.created_at.strftime("%Y-%m-%d %H:%M") %>
+    </p>
+    <div class="address-smo">
+      <%= @location.address %>
+    </div>
+</div>
 
-<%= link_to '投稿を編集', edit_smoking_post_path(@smoking_post)  %>
+<div class="link-container">
+  <%= link_to '投稿を編集', edit_smoking_post_path(@smoking_post),class: "link-to"  %>
+</div>

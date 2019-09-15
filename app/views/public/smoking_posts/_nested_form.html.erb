@@ -1,22 +1,32 @@
 <div id="form-post">
+<div id="nested-form">
+<button class="remove-display-nest"><span class="batsu">×</span></button>
     <%= form_with model: location, url: smoking_posts_path do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
       <%= f.hidden_field :latitude, id: "location-latitude"%>
       <%= f.hidden_field :longitude, id: "location-longitude" %>
-      <%= f.text_field :address, id: "location-address" %>
     <%= f.fields_for :smoking_posts do |smoking_f| %>
-      <%= image_tag '', id: "post-img" %>
+      <%= image_tag smoking_f.object.image_id.url || '/assets/no_image.jpg', id: "post-img" %>
       <div>
-        <%= smoking_f.file_field :image_id, id: "smoking-post-img", input_html: {accept: smoking_post.set_extension} %>
+        <%= smoking_f.file_field :image_id, id: "smoking-post-img", input_html: {accept: smoking_f.object.set_extension} %>
       </div>
-      <div>
+      <p class="post-label">住所　　続きを入力してください</p>
+      <%= f.text_field :address, id: "location-address" %>
+      <p class="post-label">タイトル</p>
         <%= smoking_f.text_field :title, id: "smoking-post-title" %>
-      </div>
-      <div>
+      <p class="post-label">本文</p>
         <%= smoking_f.text_area :body, id: "smoking-post-body" %>
-      </div>
       <%= smoking_f.hidden_field :user_id, value: current_user.id %>
     <% end %>
-      <%= f.submit '投稿を作成' %>
+      <%= f.submit '投稿を作成', class:"create-button" %>
       <%# type="button"指定がないとparams二つ飛ぶ %>
     <% end %>
   </div>
+  </div>
+
+<script>
+$(".remove-display-nest").on('click', function(){
+  $("#form-post").css('display', 'none')
+  $("#save-my-location-button").css('display', 'inline-block')
+})
+</script>

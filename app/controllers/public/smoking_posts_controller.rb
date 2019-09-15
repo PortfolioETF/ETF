@@ -12,6 +12,8 @@ class Public::SmokingPostsController < Public::ApplicationController
     end
 
     def create
+        p "ああああああああああ"
+        p params
         @location = Location.new
         @smoking_post = @location.smoking_posts.build
         @locations = Location.all.to_json
@@ -20,9 +22,10 @@ class Public::SmokingPostsController < Public::ApplicationController
         longitude = location_smoking_post_params[:longitude]
         title = location_smoking_post_params[:smoking_posts_attributes][:'0'][:title]
         body = location_smoking_post_params[:smoking_posts_attributes][:'0'][:body]
-        result = Location.create_location_with_smoking_post(latitude, longitude, title, body, current_user, location_smoking_post_params)
+        image_id = location_smoking_post_params[:smoking_posts_attributes][:'0'][:image_id]
+        result = Location.create_location_with_smoking_post(latitude, longitude, title, body, current_user,image_id, location_smoking_post_params)
         if result.id
-            redirect_to smoking_post_path(current_user.smoking_posts.last)
+            redirect_to smoking_post_path(current_user.smoking_posts.last), notice: "投稿しました"
         else
             render 'index'
         end
@@ -31,7 +34,7 @@ class Public::SmokingPostsController < Public::ApplicationController
     def update
         @smoking_post = SmokingPost.find(params[:id])
         if @smoking_post.update(smoking_post_params)
-            redirect_to smoking_post_path(@smoking_post)
+            redirect_to smoking_post_path(@smoking_post), notice: "編集しました"
         else
             render 'edit'
         end
@@ -43,7 +46,7 @@ class Public::SmokingPostsController < Public::ApplicationController
 
     def destroy
         SmokingPost.find(params[:id]).destroy!
-        redirect_to user_path(current_user)
+        redirect_to user_path(current_user), notice: "投稿を削除しました"
     end
 
     private

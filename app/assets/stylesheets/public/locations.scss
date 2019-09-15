@@ -1,3 +1,14 @@
 // Place all the styles related to the Public::Locations controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.smoking-location-post {
+    padding-top: 11%;
+}
+
+.after-search-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 2%;
+    padding-top: 2%;
+}
