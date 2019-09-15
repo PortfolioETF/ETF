@@ -12,8 +12,6 @@ class Public::SmokingPostsController < Public::ApplicationController
     end
 
     def create
-        p "ああああああああああ"
-        p params
         @location = Location.new
         @smoking_post = @location.smoking_posts.build
         @locations = Location.all.to_json
