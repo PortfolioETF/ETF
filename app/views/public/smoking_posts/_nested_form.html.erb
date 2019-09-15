@@ -2,12 +2,13 @@
 <div id="nested-form">
 <button class="remove-display-nest"><span class="batsu">×</span></button>
     <%= form_with model: location, url: smoking_posts_path do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
       <%= f.hidden_field :latitude, id: "location-latitude"%>
       <%= f.hidden_field :longitude, id: "location-longitude" %>
     <%= f.fields_for :smoking_posts do |smoking_f| %>
-      <%= image_tag '', id: "post-img" %>
+      <%= image_tag smoking_f.object.image_id.url || '/assets/no_image.jpg', id: "post-img" %>
       <div>
-        <%= smoking_f.file_field :image_id, id: "smoking-post-img", input_html: {accept: smoking_post.set_extension} %>
+        <%= smoking_f.file_field :image_id, id: "smoking-post-img", input_html: {accept: smoking_f.object.set_extension} %>
       </div>
       <p class="post-label">住所　　続きを入力してください</p>
       <%= f.text_field :address, id: "location-address" %>

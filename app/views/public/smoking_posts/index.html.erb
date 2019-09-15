@@ -129,19 +129,11 @@ function saveThisLocation(){
   }).done(function(data){
     latitude = data.latitude
     longitude = data.longitude
-    title = $("#smoking-post-title").val();
-    body = $("#smoking-post-body").val();
     const url = "http://geoapi.heartrails.com/api/json?method=searchByGeoLocation&x=" + longitude + "&y=" + latitude + "&jsonp=?";
     $.getJSON(url, function(jsonp){
       var areaInfo = jsonp.response.location[0];
       var areaInfoStr = areaInfo.prefecture + areaInfo.city + areaInfo.town;
       $("#location-address").val(areaInfoStr)
-    });
-    $.ajax({
-      url: "/locations/new",
-      type: "GET",
-      data: {latlong: {longitude: longitude, latitude: latitude}},
-    }).done(function(data){
       $("#location-latitude").val(data.latitude);
       $("#location-longitude").val(data.longitude);
       postFormDisplay();

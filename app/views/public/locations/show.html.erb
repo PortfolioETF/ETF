@@ -9,9 +9,9 @@
   </div>
   </div>
   <div class="post-title-smo">
-  <div class="title-smo">タイトル</div>
+  <div class="title-smo">タイトル(click)</div>
   <p class="title-smo">
-    <%= smoking_post.title %>
+    <%= link_to smoking_post.title, smoking_post_path(smoking_post), class: "link-to" %>
   </p>
   </div>
   <p class="partertion-bar">本文------------------------------------------------------------------------------------</p>
