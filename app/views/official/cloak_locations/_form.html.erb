@@ -1,0 +1,11 @@
+<div id="cloak-location-form">
+<%= form_with model: cloak_location, url: cloak_locations_path do |f| %>
+<%= image_tag cloak.image_id.url || '/assets/no_image.jpg', id: "cloak-img" %>
+<%= cloak.cloak_name %>
+<%= cloak.address %>
+<%= cloak.phone_number %>
+<%= f.hidden_field :latitude, id: "cloak-location-latitude" %>
+<%= f.hidden_field :longitude, id: "cloak-location-longitude" %>
+<%= f.submit '店舗登録', id: "create-cloak-location-button" %>
+<% end %>
+</div>

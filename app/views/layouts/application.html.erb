@@ -30,7 +30,7 @@
       <li class="navbar-text">
         <%= link_to "logout", destroy_user_session_path, method: :delete %>
       </li>
-    <% else %>
+    <% elsif cloak_signed_in? %>
     <li class="navbar-text">
       </li>
       <li class="navbar-text">
@@ -38,6 +38,7 @@
       <li class="navbar-text">
       </li>
         <li class="navbar-text">
+        <%= link_to "logout/cloak", destroy_cloak_session_path, method: :delete %>
       </li>
     <% end %>
     </ul>

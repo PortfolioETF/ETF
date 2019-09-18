@@ -1,0 +1,4 @@
+<% @closed_days.each do |closed_day| %>
+<%= closed_day.closed_day %>
+<%= link_to "削除", closed_day_path(closed_day), method: :delete, data: {confirm: "削除してよろしいですか？"} %>
+<% end %>

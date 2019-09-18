@@ -3,7 +3,7 @@
 <button class="remove-display-nest"><span class="batsu">×</span></button>
     <%= form_with model: location, url: smoking_posts_path do |f| %>
       <%= render 'layouts/error_messages', model: f.object %>
-      <%= f.hidden_field :latitude, id: "location-latitude"%>
+      <%= f.hidden_field :latitude, id: "location-latitude" %>
       <%= f.hidden_field :longitude, id: "location-longitude" %>
     <%= f.fields_for :smoking_posts do |smoking_f| %>
       <%= image_tag smoking_f.object.image_id.url || '/assets/no_image.jpg', id: "post-img" %>

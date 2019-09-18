@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :cloaks, controllers: {
+    sessions: 'cloaks/sessions',
+    registrations: 'cloaks/registrations'
+  }
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations'
@@ -16,5 +20,10 @@ Rails.application.routes.draw do
     get 'smoking_search' => 'locations#smoking_search',as: 'smoking_search'
     get 'location_info' => 'locations#location_info',as: 'location_info'
     resources :smoking_posts, except: %i(new)
+  end
+  scope module: :official do
+    resources :cloaks
+    resources :cloak_locations
+    resources :closed_days, only: %i(index new create update destroy)
   end
 end

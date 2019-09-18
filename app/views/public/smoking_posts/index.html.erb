@@ -38,7 +38,6 @@ function getMyPlace(){
         map: map,
         position: new google.maps.LatLng(location.latitude, location.longitude),
         zIndex: 1,
-        title: "1",
       });
       var infoWindow = new google.maps.InfoWindow({ // 吹き出しの追加
         <%# content: location.address %>
