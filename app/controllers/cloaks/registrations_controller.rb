@@ -50,7 +50,7 @@ class Cloaks::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
-    new_closed_days_path
+    new_official_closed_day_path
   end
 
   # The path used after sign up for inactive accounts.

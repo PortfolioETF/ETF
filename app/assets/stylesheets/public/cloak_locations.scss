@@ -1,0 +1,38 @@
+// Place all the styles related to the Public::CloakLocations controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@media screen and (max-width:414px) {
+    #public-cloak-map {
+        width: 100%;
+        height: 600px;
+    }
+
+    .cloak-search {
+        padding-top: 11%;
+    }
+
+    .cloak-info {
+        display: flex;
+        align-items: center;
+        padding-left: 2%;
+    }
+
+    .cloak_name {
+        font: -webkit-control;
+    }
+
+    .cloak-location-button {
+        padding-right: 2%;
+    }
+
+    .remove-display-public-cloak {
+        width: 80%;
+        position: fixed;
+        right: 0;
+        left: 0;
+        background-color: #668ad8;
+        margin: 0 auto;
+        height: 5%;
+        color: #fff;
+    }
+}

@@ -1,0 +1,8 @@
+<div id="cloak-search">
+<div id="cloak-search-form">
+<%= form_with url: cloak_search_path, html: {method: :get} do |f| %>
+  <%= f.text_field :address_cont, placeholder: "住所で検索", class: "search-form"%>
+  <%= f.submit '検索',onclick: "searchCloak()", type: "button", class: "search-button"%>
+<% end %>
+</div>
+</div>

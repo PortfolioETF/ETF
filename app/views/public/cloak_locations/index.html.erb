@@ -1,0 +1,256 @@
+<div id="cloak-location-main">
+<div id="cloak-location-index">
+<%= render partial: 'public/cloak_locations/search_form' %>
+<div id="public-cloak-output"></div>
+</div>
+<div id="public-cloak-map"></div>
+  <div id="public-cloak-location-shows">
+    <div id="public-cloak-location-shows-container"></div>
+  </div>
+  <div id="public-cloak-search">
+    <div id="public-cloak-search-result-container"></div>
+  </div>
+  </div>
+</div>
+
+
+<script>
+//jsで書かないと動作しない可能性あり
+window.onload = getPublicCloakMap();
+function getPublicCloakMap(){
+    confirmBrowser();
+    function success(position){
+        var cloakLocations = JSON.parse('<%= raw @cloak_locations %>')
+        var cloaks = JSON.parse('<%= raw @cloaks %>')
+        var latitude = position.coords.latitude
+        var longitude = position.coords.longitude
+        var latlng = new google.maps.LatLng(latitude, longitude);
+        var map = new google.maps.Map(document.getElementById('public-cloak-map'), {
+            zoom: 17, center: latlng,
+        });
+        //
+        cloakLocations.forEach(function(cloakLocation){
+          console.log('s' + cloakLocation.latitude)
+          var markers = new google.maps.Marker({
+            map: map,
+            position: new google.maps.LatLng(cloakLocation.latitude, cloakLocation.longitude),
+          });
+          cloakInfo = $.grep(cloaks, function(elem, index){
+            return elem.id === cloakLocation.cloak_id
+          });
+          //console.log(cloakInfo[0].cloak_name)
+          var infoWindow = new google.maps.InfoWindow({ // 吹き出しの追加
+          content: `<p id="info-window-click">店名click</p><p class="public-cloak-location-window" onclick="publicCloakShow()" data-id=${cloakLocation.cloak_id}>${cloakInfo[0].cloak_name}</p>
+          <button onclick="getCloakRoute()" id="get-cloak-route-button" data-id=${cloakLocation.id} type="button">経路を表示</button>`
+        });
+          markers.addListener('click', function() { // マーカーをクリ
+          if($(".gm-style-iw.gm-style-iw-c").length > 0){
+            console.log(this)
+          $(".gm-style-iw.gm-style-iw-c").remove();
+          $(".gm-style-iw-t").remove();
+          }
+         infoWindow.open(map, markers); // 吹き出しの表示
+         });
+        })
+        new google.maps.Marker({
+          map: map, position: latlng,
+          animation: google.maps.Animation.BOUNCE,
+          zIndex: 2,
+          icon: {
+            path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+            scale: 4,
+            strokeColor: '#0099FF',
+            fillColor: "#0099FF",
+            fillOpacity: 1.0,
+          },
+        });
+        $(document).on('click', function(){
+          $(".cloak-location-button").on('click', function(e){
+            id = e.target.id[0]
+            $.ajax({
+              url: "/cloak_location_info",
+              type: "GET",
+              data: {cloak_location_id: id},
+            }).done(function(data){
+              latitude = data.latitude;
+              longitude = data.longitude;
+              $("#public-cloak-search-result-container").empty();
+              $("#public-cloak-search").css('display','none');
+              map.panTo(new google.maps.LatLng(latitude, longitude))
+              $("#public-cloak-output").html('<button onclick="getPublicCloakMap()" type="button" id="get-public-cloak-map-button">現在地に戻る</button>')
+            })
+          })
+        })
+    }
+            function error(){
+            output.innerHTML = "現在地を取得できません";
+             }
+    navigator.geolocation.getCurrentPosition(success, error);
+}
+
+function publicCloakShow(){
+  $("#public-cloak-search-result-container").empty();
+  $("#public-cloak-search").css('display','none');
+
+  $("#public-cloak-location-shows").off('scroll')
+  $("#public-cloak-location-shows-container").empty()
+
+  $("#public-cloak-location-shows-container").append('<button class="remove-display" onclick="removeDisplayPublicCloak()">閉じる</button>')
+
+  $("#public-cloak-location-shows").css({
+      width: '80%',
+      height: '80%',
+      position: 'absolute',
+      top: '10%',
+      left: '0',
+      right: '0',
+      margin: '0 auto',
+      overflow: 'auto',
+      display: 'block',
+      'text-align': 'center',
+      'background-color': '#fff',
+      'box-shadow': '10px 10px 10px 10px rgba(0, 0, 0, 0.4)',
+    });
+    id = $('.public-cloak-location-window').data().id;
+    $.ajax({
+        url: "/cloaks/" + id,
+        type: "GET",
+        data: {},
+    }).done(function(data){
+        display = $(data).filter("#cloak-location-show")
+        $("#public-cloak-location-shows-container").append(display)
+    })
+}
+
+function searchCloak(){
+  $("#public-cloak-location-shows-container").empty();
+  $("#public-cloak-location-shows").css('display','none');
+
+  $("#public-cloak-search").off('scroll')
+  $("#public-cloak-search-result-container").empty()
+
+  $("#public-cloak-search-result-container").append('<button class="remove-display-public-cloak" onclick="removeDisplayPublicCloak()">検索結果を閉じる</button>')
+
+  $("#public-cloak-search").css({
+      width: '80%',
+      height: '80%',
+      position: 'absolute',
+      top: '10%',
+      left: '0',
+      right: '0',
+      margin: '0 auto',
+      overflow: 'auto',
+      display: 'block',
+      'text-align': 'center',
+      'background-color': '#fff',
+      'box-shadow': '10px 10px 10px 10px rgba(0, 0, 0, 0.4)'
+  });
+  text = $("#address_cont").val();
+  console.log(text)
+  $.ajax({
+    url: "/cloak_search",
+    type: "GET",
+    data: {data: {text: text, page_data: 1}},
+  }).done(function(data){
+    var display = $(data).filter('.cloak-search')
+    $("#public-cloak-search-result-container").append(display)
+    $("#public-cloak-search").on('scroll', function(){
+      scrollHeight = $("#public-cloak-search").height();
+      scrollPosition = scrollHeight + $("#public-cloak-search").scrollTop();
+      scrollComponentHeight = $("#public-cloak-search").get(0).scrollHeight
+      if (scrollComponentHeight === scrollPosition){
+        page = $('.cloak-search').length + 1;
+        $.ajax({
+          url: "/cloak_search",
+          type: "GET",
+          data: {data: {page_data: page, text: text}},
+        }).done(function(data){
+          pageDisplay = $(data).filter('.cloak-search')
+          $("#public-cloak-search-result-container").append(pageDisplay)
+        });
+      }
+    });
+  });
+}
+
+function getCloakRoute(){
+  confirmBrowser();
+  function success(position){
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    var id = $("#get-cloak-route-button").data().id;
+    $.ajax({
+      url: "/cloak_location_info",
+      type: "GET",
+      data: {cloak_location_id: id}
+    }).done(function(data){
+      var options = {zoom: 16, center: new google.maps.LatLng(latitude, longitude), mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      map = new google.maps.Map(document.getElementById('public-cloak-map'), options);
+      var renderOptions = {
+        map: map,
+        draggable: true,
+        preserveViewport: true
+      };
+      var directionsDisplay = new google.maps.DirectionsRenderer(renderOptions);
+      var directionsService = new google.maps.DirectionsService();
+      directionsDisplay.set(map);
+      var request = {
+        origin: new google.maps.LatLng(latitude, longitude),
+        destination: new google.maps.LatLng(data.latitude, data.longitude),
+        travelMode: google.maps.DirectionsTravelMode.WALKING,//車か徒歩のみ
+      };
+      directionsService.route(request, function(response, status){
+        if (status === google.maps.DirectionsStatus.OK){
+          new google.maps.DirectionsRenderer({
+            map: map,
+            directions: response,
+            suppressMarkers: true,
+          });
+          var leg = response.routes[0].legs[0];
+          new google.maps.Marker({
+            position: leg.end_location,
+            map: map,
+          });
+          new google.maps.Marker({
+            map: map,
+            position: leg.start_location,
+            animation: google.maps.Animation.DROP,
+            icon: {
+                 path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                 scale: 5,
+                 strokeColor: '#0099FF',
+                 fillColor: "#0099FF",
+                 fillOpacity: 1.0,
+            }
+          });
+          $("#public-cloak-output").html(`<p>目的地: <span>${leg.end_address}</span></br>目的地までの距離: <span>${leg.distance.text}</span>    所要時間: <span>${leg.duration.text}</span></p><button onclick="getPublicCloakMap()" type="button" id="get-public-cloak-map-button">現在地に戻る</button>`)
+             setTimeout(function() {
+               map.setZoom(16); // ルート表示後にズーム率を変更
+             });
+        }
+      });
+    });
+  };
+  function error(){
+      output.innerHTML = "現在地を取得できません";
+  };
+  navigator.geolocation.getCurrentPosition(success, error);
+}
+
+
+function removeDisplayPublicCloak(){
+  $("#spublic-cloak-location-shows-container").empty();
+  $("#public-cloak-location-shows").css('display','none');
+  $("#public-cloak-search-result-container").empty();
+  $("#public-cloak-search").css('display','none');
+}
+
+function confirmBrowser(){
+    $("#public-cloak-output").empty();
+    if(!navigator.geolocation){
+    $("#public-cloak-output").html("<p>EasyToFindはあなたのブラウザーでサポートされていない可能性があります</p>");
+    return;
+  };
+};
+</script>

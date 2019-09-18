@@ -20,8 +20,12 @@ Rails.application.routes.draw do
     get 'smoking_search' => 'locations#smoking_search',as: 'smoking_search'
     get 'location_info' => 'locations#location_info',as: 'location_info'
     resources :smoking_posts, except: %i(new)
+    resources :cloaks, only: %i(show)
+    get 'cloak_search' => 'cloaks#cloak_search',as: 'cloak_search'
+    resources :cloak_locations, only: %i(index show)
+    get 'cloak_location_info' => 'cloak_locations#cloak_location_info',as: 'cloak_location_info'
   end
-  scope module: :official do
+  namespace :official do
     resources :cloaks
     resources :cloak_locations
     resources :closed_days, only: %i(index new create update destroy)

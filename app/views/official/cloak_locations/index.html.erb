@@ -82,7 +82,7 @@ function createCloakLocation(){
     var title = $("#smoking-post-title").val();
     var body = $("#smoking-post-body").val();
     $.ajax({
-      url: "/cloak_locations/new",
+      url: "/official/cloak_locations/new",
       type: "GET",
       data: {latlong: {longitude: longitude, latitude: latitude}},
     }).done(function(data){

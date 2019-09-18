@@ -12,16 +12,16 @@ class Official::CloakLocationsController < Official::ApplicationController
 
     def create
         if current_cloak.cloak_location.present?
-            redirect_to cloak_path(current_cloak), notice: '既に登録してあります'
+            redirect_to official_cloak_path(current_cloak), notice: '既に登録してあります'
         else
             cloak_location = current_cloak.build_cloak_location(cloak_location_params)
             cloak_location.save!
-            redirect_to cloak_path(current_cloak), notice: '店舗の位置情報を登録しました'
+            redirect_to official_cloak_path(current_cloak), notice: '店舗の位置情報を登録しました'
         end
     end
 
     private
     def cloak_location_params
-        params.require(:cloak_location).permit(:latitude, :longitude, :cloak_id)
+        params.require(:cloak_location).permit(:latitude, :longitude, :cloak_id, :description)
     end
 end

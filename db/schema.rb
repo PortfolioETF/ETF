@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_17_163655) do
+ActiveRecord::Schema.define(version: 2019_09_18_035425) do
 
   create_table "cloak_locations", force: :cascade do |t|
     t.integer "cloak_id", null: false
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2019_09_17_163655) do
     t.float "longitude", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "description"
     t.index ["cloak_id"], name: "index_cloak_locations_on_cloak_id"
   end
 
