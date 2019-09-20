@@ -1,15 +1,18 @@
 <div id="closed-day-form">
   <%= form_with model: @cloak, url: official_closed_days_path, method: :post do |cloak| %>
   <div id="day-form-container">
+    <h3 class="closed-day-title">定休日(曜日)</h3>
     <div class="day-form">
-      <%= cloak.fields_for :closed_days do |day| %>
-      <%= day.select :closed_day, ClosedDay.closed_days.keys, name: "#{day.index}" %>
-      <% end %>
+    <%= cloak.fields_for :closed_days do |closed_day| %>
+      <%= closed_day.select :closed_day, ClosedDay.closed_days.keys, name: "#{closed_day.index}", class: "select-closed-day" %>
+    <% end %>
     </div>
   </div>
-    <%= cloak.submit '定休日を登録' %>
+  <div id="closed-day-button-container">
+    <%= cloak.submit '定休日を登録', id: "create-closed-day" %>
     <% end %>
-    <button id="add-day-form" onclick="addDayForm()">定休日を追加</button>
+    <button id="add-day-form" onclick="addDayForm()", type="button">定休日を追加</button>
+  </div>
 </div>
 
 <script>

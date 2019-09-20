@@ -1,3 +1,111 @@
 // Place all the styles related to the Official::Cloaks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@media screen and (max-width:414px) {
+    #cloak-show-container {
+        width: 100%;
+        padding-top: 20%;
+        justify-content: center;
+        text-align: center;
+    }
+
+    #official-cloak-location-show {
+        padding-top: 5%;
+        padding-bottom: 10%;
+    }
+
+    .cloak-updated-at {
+        color: #999999;
+        padding-top: 2%;
+    }
+
+    .closed-day-container-show {
+        display: flex;
+        justify-content: center;
+        padding-bottom: 1%;
+    }
+
+    .closed-day-label {
+        color: #999999;
+        padding-top: 2%;
+    }
+
+    .closed-day-text {
+        padding-right: 5%;
+    }
+
+    .batsu-over {
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .cloak-time-container {
+        padding-top: 3%;
+
+    }
+
+    .link-to-container {
+        display: flex;
+        justify-content: center;
+        padding-top: 2%;
+    }
+
+    .cloak-email-container {
+        padding-top: 2%;
+    }
+
+    .cloak-email-label {
+        color: #999999;
+    }
+
+    .cloak-email {
+        font-weight: bolder;
+    }
+
+    #cloak_cloak_name {
+        border: inset;
+        text-align: center;
+        width: 70%;
+    }
+
+    #cloak_email {
+        border: inset;
+        text-align: center;
+        width: 70%;
+    }
+
+    #cloak_phone_number {
+        border: inset;
+        text-align: center;
+        width: 70%;
+    }
+
+    #cloak_address {
+        border: inset;
+        text-align: center;
+        width: 70%;
+    }
+
+    .edit-cloak-button {
+        display: inline-block;
+        padding: 0.5em 1em;
+        text-decoration: none;
+        background: #668ad8;
+        color: #FFF;
+        border-bottom: solid 4px #627295;
+        border-radius: 3px;
+        width: 50%;
+        margin-top: 5%;
+    }
+
+    .withdraw-cloak-button {
+        padding: 0.5em 1em;
+        text-decoration: none;
+        background: #627295;
+        color: #FFF;
+        border-radius: 3px;
+        width: 30%;
+        margin-top: 10%;
+        font-size: xx-small;
+    }
+}

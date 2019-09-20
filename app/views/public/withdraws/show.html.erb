@@ -1,15 +1,19 @@
-<h1>退会確認</h1>
-<%= form_with model: @opinion, url: user_withdraws_path(current_user) do |f| %>
-  <% Opinion.flag_keys.each do |flag| %>
-    <%= f.radio_button :withdraw_flag, flag %>
-    <label>
-      <%= flag %>
-    </label>
+<div id="withdraws-show">
+  <h1>退会確認</h1>
+  <%= form_with model: @opinion, url: user_withdraws_path(current_user) do |f| %>
+    <% Opinion.flag_keys.each do |flag| %>
+    <div class="flags-container">
+      <%= f.radio_button :withdraw_flag, flag, class: "withdraw-flags" %>
+      <label>
+        <%= flag %>
+      </label>
+    </div>
   <% end %>
-  <p>
+  <p class="withdraws-description">
     今後の参考のために</br>
     ご要望・改善点等ご記入お願いします。
   </p>
     <%= f.text_area :opinion %>
-    <%= f.submit '退会します' %>
-<% end %>
+    <%= f.submit '退会します', id: "withdraws-button" %>
+  <% end %>
+</div>

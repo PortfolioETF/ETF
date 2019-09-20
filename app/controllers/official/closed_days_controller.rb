@@ -7,7 +7,7 @@ class Official::ClosedDaysController < Official::ApplicationController
     def create
         length = ClosedDay.params_length(params[:cloak][:closed_days_attributes])
         ClosedDay.create_closed_days(length, current_cloak, params[:cloak][:closed_days_attributes])
-        redirect_to cloak_path(current_cloak)
+        redirect_to official_cloak_path(current_cloak)
     end
 
     def destroy

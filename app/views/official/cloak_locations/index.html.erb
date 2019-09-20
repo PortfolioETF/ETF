@@ -22,37 +22,43 @@ window.onload = getMap();
 function getMap(){
     confirmBrowser();
     function success(position){
-        var cloakLocations = JSON.parse('<%= raw @cloak_locations %>')
-        var cloaks = JSON.parse('<%= raw @cloaks %>')
-        console.log(cloaks.id)
-        console.log(cloakLocations.cloak_id)
+      var parseJson = function(jsonString) {
+        console.log(jsonString)
+      var converted = convertNl(jsonString);
+      return JSON.parse(converted);
+    　};
+
+      var convertNl = function(jsonString) {
+      return jsonString
+      .replace(/(\r\n)/g, '\n')
+      .replace(/(\r)/g,   '\n')
+      .replace(/(\n)/g,  '\\n');
+      };
+        var cloakLocations = parseJson('<%= raw @cloak_locations %>')
+        var cloaks = parseJson('<%= raw @cloaks %>')
         var latitude = position.coords.latitude
         var longitude = position.coords.longitude
         var latlng = new google.maps.LatLng(latitude, longitude);
-        console.log(latlng)
         var map = new google.maps.Map(document.getElementById('cloak-map'), {
             zoom: 17, center: latlng,
         });
-        cloaks.forEach(function(cloak){
-            cloakLocations.forEach(function(cloakLocation){
-              console.log(cloak.id)
-        console.log(cloakLocation.cloak_id)
+        cloakLocations.forEach(function(cloakLocation){
                 markers = new google.maps.Marker({
                 map: map,
                 position: new google.maps.LatLng(cloakLocation.latitude, cloakLocation.longitude),
-            })
-            if(cloak.id === cloakLocation.cloak_id){
-            infoWindow = new google.maps.InfoWindow({
-                content: `<p id="info-window-click">店名クリック</p><p class="smoking-location-window" onclick="cloakShow()" data-id=${cloak.id}>${cloak.cloak_name}</p>`
             });
-            }
+            cloakInfo = $.grep(cloaks, function(elem, index){
+              return elem.id === cloakLocation.cloak_id
+            });
+            infoWindow = new google.maps.InfoWindow({
+                content: `<p id="info-window-click">店名クリック</p><p class="smoking-location-window" onclick="cloakShow()" data-id=${cloakLocation.cloak_id}>${cloakInfo[0].cloak_name}</p>`
+            });
             markers.addListener('click', function() { // マーカーをクリ
             if($(".gm-style-iw.gm-style-iw-c").length > 0){
               $(".gm-style-iw.gm-style-iw-c").remove();
               $(".gm-style-iw-t").remove();
             }
             infoWindow.open(map, markers);
-            });
             });
         });
         new google.maps.Marker({

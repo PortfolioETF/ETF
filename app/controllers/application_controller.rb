@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
         if resource.is_a?(User)
             user_path(resource)
         elsif resource.is_a?(Cloak)
-            root_path
+            official_cloak_path(resource)
         elsif resource.is_a?(Admin)
             admin_root_path
         end

@@ -1,3 +1,110 @@
 // Place all the styles related to the Official::ClosedDays controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@media screen and (max-width:414px) {
+    #closed-day-form {
+        padding-top: 20%;
+        text-align: center;
+    }
+
+    .closed-day-title {
+        padding-bottom: 10%;
+    }
+
+    #cloak_closed_days_attributes_0_closed_day {
+        background-image: linear-gradient(45deg, transparent 50%, blue 50%), linear-gradient(135deg, blue 50%, transparent 50%), linear-gradient(to right, skyblue, skyblue);
+        background-position: calc(100% - 14px) calc(1em + 2px), calc(100% - 9px) calc(1em + 2px), 100% 0;
+        background-size: 5px 5px, 5px 5px, 2.5em 2.6em;
+        background-repeat: no-repeat;
+        width: 20%;
+        height: 30px;
+    }
+
+    #cloak_closed_days_attributes_1_closed_day {
+        margin-top: 5%;
+        background-image: linear-gradient(45deg, transparent 50%, blue 50%), linear-gradient(135deg, blue 50%, transparent 50%), linear-gradient(to right, skyblue, skyblue);
+        background-position: calc(100% - 14px) calc(1em + 2px), calc(100% - 9px) calc(1em + 2px), 100% 0;
+        background-size: 5px 5px, 5px 5px, 2.5em 2.6em;
+        background-repeat: no-repeat;
+        width: 20%;
+        height: 30px;
+    }
+
+    #cloak_closed_days_attributes_2_closed_day {
+        margin-top: 5%;
+        background-image: linear-gradient(45deg, transparent 50%, blue 50%), linear-gradient(135deg, blue 50%, transparent 50%), linear-gradient(to right, skyblue, skyblue);
+        background-position: calc(100% - 14px) calc(1em + 2px), calc(100% - 9px) calc(1em + 2px), 100% 0;
+        background-size: 5px 5px, 5px 5px, 2.5em 2.6em;
+        background-repeat: no-repeat;
+        width: 20%;
+        height: 30px;
+    }
+
+    #cloak_closed_days_attributes_3_closed_day {
+        margin-top: 5%;
+        background-image: linear-gradient(45deg, transparent 50%, blue 50%), linear-gradient(135deg, blue 50%, transparent 50%), linear-gradient(to right, skyblue, skyblue);
+        background-position: calc(100% - 14px) calc(1em + 2px), calc(100% - 9px) calc(1em + 2px), 100% 0;
+        background-size: 5px 5px, 5px 5px, 2.5em 2.6em;
+        background-repeat: no-repeat;
+        width: 20%;
+        height: 30px;
+    }
+
+    #cloak_closed_days_attributes_4_closed_day {
+        margin-top: 5%;
+        background-image: linear-gradient(45deg, transparent 50%, blue 50%), linear-gradient(135deg, blue 50%, transparent 50%), linear-gradient(to right, skyblue, skyblue);
+        background-position: calc(100% - 14px) calc(1em + 2px), calc(100% - 9px) calc(1em + 2px), 100% 0;
+        background-size: 5px 5px, 5px 5px, 2.5em 2.6em;
+        background-repeat: no-repeat;
+        width: 20%;
+        height: 30px;
+    }
+
+    #cloak_closed_days_attributes_5_closed_day {
+        margin-top: 5%;
+        background-image: linear-gradient(45deg, transparent 50%, blue 50%), linear-gradient(135deg, blue 50%, transparent 50%), linear-gradient(to right, skyblue, skyblue);
+        background-position: calc(100% - 14px) calc(1em + 2px), calc(100% - 9px) calc(1em + 2px), 100% 0;
+        background-size: 5px 5px, 5px 5px, 2.5em 2.6em;
+        background-repeat: no-repeat;
+        width: 20%;
+        height: 30px;
+    }
+
+    #cloak_closed_days_attributes_6_closed_day {
+        margin-top: 5%;
+        background-image: linear-gradient(45deg, transparent 50%, blue 50%), linear-gradient(135deg, blue 50%, transparent 50%), linear-gradient(to right, skyblue, skyblue);
+        background-position: calc(100% - 14px) calc(1em + 2px), calc(100% - 9px) calc(1em + 2px), 100% 0;
+        background-size: 5px 5px, 5px 5px, 2.5em 2.6em;
+        background-repeat: no-repeat;
+        width: 20%;
+        height: 30px;
+    }
+
+    #closed-day-button-container {
+        padding-top: 10%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    #add-day-form {
+        display: inline-block;
+        padding: 0.5em 1em;
+        text-decoration: none;
+        background: #f7f7f7;
+        color: #668ad8;
+        font-weight: bold;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+
+    }
+
+    #create-closed-day {
+        display: inline-block;
+        padding: 0.5em 1em;
+        text-decoration: none;
+        background: #f7f7f7;
+        color: #668ad8;
+        font-weight: bold;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+
+    }
+}

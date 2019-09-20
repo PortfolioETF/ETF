@@ -26,7 +26,20 @@ window.onload = getMyPlace();
 function getMyPlace(){
   confirmBrowser();
   function success(position) {
-    var locations = JSON.parse('<%= raw @locations%>');
+
+    var parseJson = function(jsonString) {
+      var converted = convertNl(jsonString);
+      return JSON.parse(converted);
+    };
+
+    var convertNl = function(jsonString) {
+      return jsonString
+      .replace(/(\r\n)/g, '\n')
+      .replace(/(\r)/g,   '\n')
+      .replace(/(\n)/g,  '\\n');
+    };
+
+    var locations = parseJson('<%= raw @locations%>');
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
     var latlng = new google.maps.LatLng(latitude, longitude);

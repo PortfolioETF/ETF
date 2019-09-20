@@ -1,9 +1,11 @@
-<h1>運営に報告・意見</h1>
-<%= form_with model: @opinion, url: user_opinions_path(current_user) do |f| %>
-  <p>
-    運営に対するご意見等を</br>
-    下記にご記入お願いします。
-  </p>
+<div id="opinions-new">
+  <h1>運営に報告・意見</h1>
+  <%= form_with model: @opinion, url: user_opinions_path(current_user) do |f| %>
+  <div class="description-container">
+    <p class="description">運営に対するご意見等を</p>
+      <p>下記にご記入お願いします。</p>
+  </div>
     <%= f.text_area :opinion %>
-    <%= f.submit '送信します' %>
+    <%= f.submit '送信します', class: "opinion-button" %>
 <%end%>
+</div>

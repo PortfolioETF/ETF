@@ -20,6 +20,24 @@ class Official::CloakLocationsController < Official::ApplicationController
         end
     end
 
+    def edit
+        @cloak_location = current_cloak.cloak_location
+    end
+
+    def update
+        @cloak_location = current_cloak.cloak_location
+        if @cloak_location.update!(cloak_location_params)
+            redirect_to official_cloak_path(current_cloak), notice: '店舗概要を編集しました'
+        else
+            render 'edit'
+        end
+    end
+
+    def destroy
+        current_cloak.cloak_location.destroy!
+        redirect_to official_cloak_path(current_cloak), notice: '位置情報と店舗概要を削除しました'
+    end
+
     private
     def cloak_location_params
         params.require(:cloak_location).permit(:latitude, :longitude, :cloak_id, :description)

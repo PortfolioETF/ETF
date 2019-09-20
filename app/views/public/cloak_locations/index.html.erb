@@ -20,8 +20,19 @@ window.onload = getPublicCloakMap();
 function getPublicCloakMap(){
     confirmBrowser();
     function success(position){
-        var cloakLocations = JSON.parse('<%= raw @cloak_locations %>')
-        var cloaks = JSON.parse('<%= raw @cloaks %>')
+      var parseJson = function(jsonString) {
+      var converted = convertNl(jsonString);
+      return JSON.parse(converted);
+    　};
+
+      var convertNl = function(jsonString) {
+      return jsonString
+      .replace(/(\r\n)/g, '\n')
+      .replace(/(\r)/g,   '\n')
+      .replace(/(\n)/g,  '\\n');
+      };
+        var cloakLocations = parseJson('<%= raw @cloak_locations %>')
+        var cloaks = parseJson('<%= raw @cloaks %>')
         var latitude = position.coords.latitude
         var longitude = position.coords.longitude
         var latlng = new google.maps.LatLng(latitude, longitude);
@@ -30,7 +41,6 @@ function getPublicCloakMap(){
         });
         //
         cloakLocations.forEach(function(cloakLocation){
-          console.log('s' + cloakLocation.latitude)
           var markers = new google.maps.Marker({
             map: map,
             position: new google.maps.LatLng(cloakLocation.latitude, cloakLocation.longitude),
@@ -38,14 +48,12 @@ function getPublicCloakMap(){
           cloakInfo = $.grep(cloaks, function(elem, index){
             return elem.id === cloakLocation.cloak_id
           });
-          //console.log(cloakInfo[0].cloak_name)
           var infoWindow = new google.maps.InfoWindow({ // 吹き出しの追加
           content: `<p id="info-window-click">店名click</p><p class="public-cloak-location-window" onclick="publicCloakShow()" data-id=${cloakLocation.cloak_id}>${cloakInfo[0].cloak_name}</p>
           <button onclick="getCloakRoute()" id="get-cloak-route-button" data-id=${cloakLocation.id} type="button">経路を表示</button>`
         });
           markers.addListener('click', function() { // マーカーをクリ
           if($(".gm-style-iw.gm-style-iw-c").length > 0){
-            console.log(this)
           $(".gm-style-iw.gm-style-iw-c").remove();
           $(".gm-style-iw-t").remove();
           }
@@ -237,6 +245,19 @@ function getCloakRoute(){
   };
   navigator.geolocation.getCurrentPosition(success, error);
 }
+//
+//
+function reserveCloak(){
+  id = this.event.target.getAttribute('data-id');
+  $.ajax({
+    url: "/cloak_calender",
+    type: "GET",
+    data: {id: id},
+  }).done(function(data){
+  })
+}
+//
+//
 
 
 function removeDisplayPublicCloak(){

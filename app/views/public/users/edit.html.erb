@@ -1,13 +1,29 @@
-<h1>User Edit</h1>
-<%= form_with model: @user do |f| %>
-  <%= image_tag @user.image_id.url, id: :img_prev if @user.image_id? %>
-  <%= f.file_field :image_id, id: :user_img %>
-  <p>
-    <%= f.check_box :remove_img %>画像を削除する
-  </p>
-  <%= f.text_field :name, value: @user.name %>
-  <%= f.email_field :email, value: @user.email %>
-  <%= f.submit 'この内容で保存' %>
-<% end %>
-
-<%= link_to '退会手続きに進む', user_withdraws_path(@user) %>
+<div id="user-edit">
+  <div class="notice-container">
+    <p class="notice"><%= notice(flash[:notice]) %>
+  </div>
+  <div class="image-select-container">
+    <h1>User Edit</h1>
+    <%= image_tag @user.image_id.url || '/assets/no_image.jpg', class: "img_prev" %>
+    <%= form_with model: @user do |f| %>
+      <%= f.file_field :image_id, class: "file-field" %>
+      <p class="remove-image-description"><%= f.check_box :remove_img %>画像を削除する</p>
+  </div>
+  <div class="user-info-container">
+    <div class="user-name-container">
+      <p class="edit-label">名前: </p>
+      <%= f.text_field :name, class: "user-name", value: @user.name %>
+    </div>
+    <div class="user-email-container">
+      <p class="edit-label">メール: </p>
+      <%= f.email_field :email, class: "user-email", value: @user.email %>
+    </div>
+    <div class="user-button-container">
+      <%= f.submit 'この内容で変更', class: "user-button" %>
+    </div>
+  <% end %>
+  </div>
+</div>
+<div id="withdraw-container">
+  <%= link_to '退会', user_withdraws_path(@user), class: "public-link-edit" %>
+</div>

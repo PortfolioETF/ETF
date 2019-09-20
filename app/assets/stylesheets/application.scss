@@ -13,16 +13,32 @@
  *= require_tree .
  *= require_self
  */
-html body {
-    height: 100%;
-}
+@media screen and (max-width:414px) {
+    html body {
+        height: 736px;
+        width: 414px;
+    }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-.pagination {
-    display: none;
+    .pagination {
+        display: none;
+    }
+
+    .header-link {
+        text-decoration: none;
+        color: #627295;
+        position: relative;
+
+    }
+
+    .header-link:hover {
+        font-weight: bold;
+        position: relative;
+        z-index: 3;
+    }
 }

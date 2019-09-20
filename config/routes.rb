@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     resources :smoking_posts, except: %i(new)
     resources :cloaks, only: %i(show)
     get 'cloak_search' => 'cloaks#cloak_search',as: 'cloak_search'
+    get 'cloak_calender' => 'cloaks#cloak_calender',as: 'cloak_calender'
     resources :cloak_locations, only: %i(index show)
     get 'cloak_location_info' => 'cloak_locations#cloak_location_info',as: 'cloak_location_info'
   end

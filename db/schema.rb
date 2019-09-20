@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_18_035425) do
+ActiveRecord::Schema.define(version: 2019_09_19_095129) do
 
   create_table "cloak_locations", force: :cascade do |t|
     t.integer "cloak_id", null: false
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2019_09_18_035425) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "address", null: false
-    t.string "imege_id"
+    t.string "image_id"
     t.index ["deleted_at"], name: "index_cloaks_on_deleted_at"
     t.index ["email"], name: "index_cloaks_on_email", unique: true
     t.index ["reset_password_token"], name: "index_cloaks_on_reset_password_token", unique: true
@@ -70,11 +70,12 @@ ActiveRecord::Schema.define(version: 2019_09_18_035425) do
     t.string "title"
     t.text "body"
     t.integer "location_id"
+    t.integer "user_id"
     t.string "image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
     t.index ["location_id"], name: "index_smoking_posts_on_location_id"
+    t.index ["user_id"], name: "index_smoking_posts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -89,8 +90,6 @@ ActiveRecord::Schema.define(version: 2019_09_18_035425) do
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.datetime "deleted_at"
-    t.string "provider"
-    t.string "uid"
     t.string "image_id"
     t.string "name", null: false
     t.datetime "created_at", null: false
