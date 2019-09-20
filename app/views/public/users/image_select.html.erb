@@ -1,23 +1,33 @@
+<div id="image-select">
+  <div class="image-select-container">
 <h1>画像登録</h1>
 <%= form_with model: @user do |f| %>
-<%= image_tag '/assets/no_image.jpg', id: :img_prev %>
-<%= f.file_field :image_id, id: :user_img, input_html: {accept: @user.set_extension} %>
-<p><%= f.check_box :remove_img %>画像を削除する</p>
+  <%= image_tag '/assets/no_image.jpg', class: "img_prev" %>
+  <%= f.file_field :image_id, class: "file-field", input_html: {accept: @user.set_extension} %>
+  </div>
+<p class="image-remove"><%= f.check_box :remove_img %>画像を削除する</p>
 
 <div id="user_info">
-  <div class="user_name">
-    <%= @user.name %>
+  <div class="user-name-container-pre">
+    <p class="user-name-label">名前:</p>
+    <div class="username">
+      <%= @user.name %>
+    </div>
   </div>
-  <div id="user_email">
-    <%= @user.email %>
+  <div class="user-email-container-pre">
+    <p class="user-name-label">メール:</p>
+    <div id="user-email">
+      <%= @user.email %>
+    </div>
   </div>
   <div class="user_confirm_message">
     <p>こちらの内容で登録します</p>
   </div>
-  <%= f.submit '登録' %>
+  <%= f.submit '登録', class: "create-user-image-button" %>
   <% end %>
 </div>
-<%= link_to '画像を登録せずに進む', user_path(@user) %>
+  <%= link_to '画像を登録せずに進む', user_path(@user),class: "public-link" %>
+</div>
 
 
 <script>
@@ -26,12 +36,12 @@ $(function() {
    if (input.files && input.files[0]) {
      var reader = new FileReader();
      reader.onload = function (e) {
-       $('#img_prev').attr('src', e.target.result);
+       $('.img_prev').attr('src', e.target.result);
      }
      reader.readAsDataURL(input.files[0]);
    }
  }
- $("#user_img").change(function(){
+ $(".file-field").change(function(){
    readURL(this);
    $('#user_info').toggle(true);
  });

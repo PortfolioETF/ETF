@@ -4,19 +4,20 @@ class Public::UsersController < Public::ApplicationController
     end
 
     def edit
-        @user = User.find(params[:id ])
+        @user = User.find(params[:id])
     end
 
     def update
-        if current_user.update(user_params)
-            redirect_to user_path(current_user), notice: "更新が完了しました"
+        @user = User.find(params[:id])
+        if @user.update(user_params)
+            redirect_to user_path(@user), notice: "更新が完了しました"
         else
             render 'edit'
         end
     end
 
     def image_select
-        @user = User.find(params[:id ])
+        @user = User.find(params[:id])
     end
 
     private

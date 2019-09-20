@@ -1,0 +1,28 @@
+<div id="cloak-location-show">
+<%= image_tag @cloak.image_id.url || '/assets/no_image.jpg', class: "cloak-img" %>
+<div id="cloak-name-container">
+  <p class="cloak-name-label">店名: </p>
+  <p class="cloak-name"><%= @cloak.cloak_name %></p>
+</div>
+  <div class="notice-container">
+    <p class="notice"><%= notice(flash[:notice]) %>
+  </div>
+<div class="cloak-phone-number-container">
+  <p class="cloak-phone-number-label">Tel: </p>
+  <p class="cloak-phone-number"><%= @cloak.phone_number %></p>
+</div>
+<div class="cloak-address-container">
+  <p class="cloak-address-label">住所</p>
+  <p class="cloak-address"><%= @cloak.address %></p>
+</div>
+<div class="cloak-description-container">
+  <p class="cloak-description-label">店舗情報</p>
+  <% if @cloak.cloak_location != nil %>
+    <p class="cloak-description"><%= @cloak.cloak_location.description %></p>
+  <% else %>
+    <p>位置情報が未登録です</p>
+  <% end %>
+</div>
+<p class="cloak-time"><%= @cloak.updated_at.strftime("%Y-%m-%d %H:%M") %></p>
+<button class="reserve-button", onclick="reserveCloak()" type="button", data-id=<%= @cloak.id %>>予約状況を確認</button>
+</div>

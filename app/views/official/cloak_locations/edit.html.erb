@@ -1,0 +1,9 @@
+<div id="cloak-location-form-edit">
+<p>店舗概要</p>
+<%= form_with model: @cloak_location, url: official_cloak_location_path(@cloak_location), class: "cloak-location-form-edit-container" do |f| %>
+<%= f.text_area :description, placeholder: "店舗の説明や料金体系等をご記入下さい", class: "cloak-location-description" %>
+<div class="cloak-location-button-container">
+  <%= f.submit '更新', class: "create-cloak-location-button" %>
+</div>
+<% end %>
+</div>

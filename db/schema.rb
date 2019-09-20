@@ -10,7 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_09_174145) do
+ActiveRecord::Schema.define(version: 2019_09_19_095129) do
+
+  create_table "cloak_locations", force: :cascade do |t|
+    t.integer "cloak_id", null: false
+    t.float "latitude", null: false
+    t.float "longitude", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "description"
+    t.index ["cloak_id"], name: "index_cloak_locations_on_cloak_id"
+  end
+
+  create_table "cloaks", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "cloak_name", null: false
+    t.string "phone_number", null: false
+    t.integer "availability", null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "address", null: false
+    t.string "image_id"
+    t.index ["deleted_at"], name: "index_cloaks_on_deleted_at"
+    t.index ["email"], name: "index_cloaks_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_cloaks_on_reset_password_token", unique: true
+  end
+
+  create_table "closed_days", force: :cascade do |t|
+    t.integer "cloak_id", null: false
+    t.integer "closed_day", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cloak_id"], name: "index_closed_days_on_cloak_id"
+  end
 
   create_table "locations", force: :cascade do |t|
     t.float "latitude"
@@ -33,11 +70,12 @@ ActiveRecord::Schema.define(version: 2019_09_09_174145) do
     t.string "title"
     t.text "body"
     t.integer "location_id"
+    t.integer "user_id"
     t.string "image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
     t.index ["location_id"], name: "index_smoking_posts_on_location_id"
+    t.index ["user_id"], name: "index_smoking_posts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -52,8 +90,6 @@ ActiveRecord::Schema.define(version: 2019_09_09_174145) do
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.datetime "deleted_at"
-    t.string "provider"
-    t.string "uid"
     t.string "image_id"
     t.string "name", null: false
     t.datetime "created_at", null: false

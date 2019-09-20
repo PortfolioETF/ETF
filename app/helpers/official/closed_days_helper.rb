@@ -1,0 +1,2 @@
+module Official::ClosedDaysHelper
+end

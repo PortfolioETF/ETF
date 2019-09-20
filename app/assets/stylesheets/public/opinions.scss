@@ -1,3 +1,34 @@
 // Place all the styles related to the Public::Opinions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@media screen and (max-width:414px) {
+    #opinions-new {
+        padding-top: 30%;
+        text-align: center;
+    }
+
+    .description-container {
+        padding-top: 5%;
+    }
+
+    #opinion_opinion {
+        border: ridge;
+        width: 90%;
+        height: 200px;
+        margin-top: 3%;
+    }
+
+    .opinion-button {
+        display: inline-block;
+        padding: 0.5em 1em;
+        text-decoration: none;
+        background: #f7f7f7;
+        border-left: solid 6px #668ad8;
+        color: #668ad8;
+        font-weight: bold;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+        margin-top: 7%;
+    }
+
+
+}

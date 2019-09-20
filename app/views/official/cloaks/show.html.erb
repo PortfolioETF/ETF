@@ -1,0 +1,53 @@
+<div id="cloak-show-container">
+  <div class="notice-container">
+    <p class="notice"><%= notice(flash[:notice]) %>
+  </div>
+<div id="official-cloak-location-show">
+<h4>Cloak Mypage</h4>
+<%= image_tag @cloak.image_id.url || '/assets/no_image.jpg', class: "cloak-img" %>
+<div id="cloak-name-container">
+  <p class="cloak-name-label">店名: </p>
+  <p class="cloak-name"><%= @cloak.cloak_name %></p>
+</div>
+<div class="cloak-email-container">
+  <p class="cloak-email-label">メール</p>
+  <p class="cloak-email"><%= @cloak.email %></p>
+</div>
+<div class="cloak-phone-number-container">
+  <p class="cloak-phone-number-label">Tel: </p>
+  <p class="cloak-phone-number"><%= @cloak.phone_number %></p>
+</div>
+<div class="cloak-address-container">
+  <p class="cloak-address-label">住所</p>
+  <p class="cloak-address"><%= @cloak.address %></p>
+</div>
+<div class="cloak-description-container">
+  <p class="cloak-description-label">店舗概要</p>
+  <% if @cloak.cloak_location != nil %>
+    <p class="cloak-description"><%= @cloak.cloak_location.description %></p>
+  <% else %>
+    <p>位置情報が未登録です</p>
+    <p>ヘッダーにあるCloakのリンクから登録しましょう</p>
+  <% end %>
+</div>
+<div class="closed-day-container">
+<p class="closed-day-label">定休日</p>
+  <% @closed_days.each do |closed_day| %>
+    <div class=closed-day-container-show>
+      <p class="closed-day-text"><%= closed_day.closed_day %></p>
+      <%= link_to "×", official_closed_day_path(closed_day), method: :delete, data: {confirm: "削除してよろしいですか？"}, class: "batsu-over" %>
+    </div>
+  <% end %>
+</div>
+<div class="link-to-container">
+　　<%= link_to '編集', edit_official_cloak_path(@cloak), class: "link-to" %>
+    <% if @cloak.cloak_location != nil %>
+　　   <%= link_to '店舗概要編集', edit_official_cloak_location_path(@cloak.cloak_location.id), class: "link-to" %>
+    <% end %>
+　　<%= link_to '定休日追加', new_official_closed_day_path, class: "link-to" %>
+</div>
+<div class="cloak-time-container">
+<p class="cloak-time">更新日: <%= @cloak.updated_at.strftime("%Y-%m-%d %H:%M") %></p>
+</div>
+</div>
+</div>

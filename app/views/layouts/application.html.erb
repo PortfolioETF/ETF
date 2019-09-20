@@ -19,25 +19,27 @@
     <ul class="navbar">
     <% if user_signed_in? %>
       <li class="navbar-text">
-      aaaaaa
+        <%= link_to "Home", user_path(current_user), class: "header-link" %>
       </li>
       <li class="navbar-text">
-      bbbbb
+        <%= link_to "Smoking", smoking_posts_path, class: "header-link" %>
       </li>
       <li class="navbar-text">
-      ccccc
+        <%= link_to "Cloak", cloak_locations_path, class: "header-link" %>
       </li>
       <li class="navbar-text">
-        <%= link_to "logout", destroy_user_session_path, method: :delete %>
+        <%= link_to "logout", destroy_user_session_path, method: :delete, class: "header-link" %>
       </li>
-    <% else %>
+    <% elsif cloak_signed_in? %>
     <li class="navbar-text">
       </li>
       <li class="navbar-text">
       </li>
       <li class="navbar-text">
+        <%= link_to "MyCloak", official_cloak_path(current_cloak), class: "header-link"%>
       </li>
         <li class="navbar-text">
+        <%= link_to "logout/cloak", destroy_cloak_session_path, method: :delete, class: "header-link"%>
       </li>
     <% end %>
     </ul>
