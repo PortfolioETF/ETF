@@ -1,1 +1,22 @@
-<h1>Users Show</h1>
+<div id="my-page">
+  <h3 id="my-page-label">My Page</h3>
+  <div class="notice-container">
+    <p class="notice"><%= notice(flash[:notice]) %>
+  </div>
+  <%= image_tag @user.image_id.url || '/assets/no_image.jpg', class: "img_prev" %>
+  <div class="user_info-show">
+    <div class="user-name-container-pre">
+      <p class="user-name-label">名前:</p>
+      <div class="username"><%= @user.name %></div>
+    </div>
+    <div class="user-email-container-pre">
+      <p class="user-name-label">メール:</p>
+      <div id="user-email"><%= @user.email %></div>
+    </div>
+  </div>
+  <div class="user-show-link-container">
+    <%= link_to '編集', edit_user_path(@user) %>
+    <%= link_to '予約履歴', reserves_path %>
+    <%= link_to '投稿履歴', my_posts_path %>
+  </div>
+</div>

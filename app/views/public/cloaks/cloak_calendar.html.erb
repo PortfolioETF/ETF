@@ -1,0 +1,38 @@
+<div class="cloak-calendar-public">
+  <div class="public-cloak-name-container">
+    <div class="cloak-name-label-public">店名前: </div>
+    <p class="cloak-name-reserve"><%= @cloak.cloak_name %></p>
+  </div>
+  <div id="calendar-public"></div>
+</div>
+
+<script>
+$(function () {
+    function eventCalendar() {
+        return $('#calendar-public').fullCalendar({});
+    };
+    function clearCalendar() {
+        $('#calendar-public').html('');
+    };
+    $(document).on('turbolinks:load', function () {
+    eventCalendar();
+    });
+    $(document).on('turbolinks:before-cache', clearCalendar);
+
+    $('#calendar-public').fullCalendar({
+      contentHeight: 'auto',
+      dayClick: function(date,allDay,jsEvent){ //日をクリックしたとき
+      date = date._d
+      　$.ajax({
+        url: "/reserves/new",
+        type: "GET",
+        data: {date: date},
+      }).done(function(data){
+        display = $(data).filter("#reserf-new")
+        $("#calendar-public").css('display', 'none')
+        $("#reserf-display").append(display)
+      })
+      },
+    });
+});
+</script>

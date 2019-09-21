@@ -2,10 +2,10 @@
   <div class="notice-container">
     <p class="notice"><%= notice(flash[:notice]) %>
   </div>
+  <%= form_with model: @user, local: true do |f| %>
   <div class="image-select-container">
     <h1>User Edit</h1>
     <%= image_tag @user.image_id.url || '/assets/no_image.jpg', class: "img_prev" %>
-    <%= form_with model: @user do |f| %>
       <%= f.file_field :image_id, class: "file-field" %>
       <p class="remove-image-description"><%= f.check_box :remove_img %>画像を削除する</p>
   </div>
@@ -21,8 +21,8 @@
     <div class="user-button-container">
       <%= f.submit 'この内容で変更', class: "user-button" %>
     </div>
-  <% end %>
   </div>
+  <% end %>
 </div>
 <div id="withdraw-container">
   <%= link_to '退会', user_withdraws_path(@user), class: "public-link-edit" %>

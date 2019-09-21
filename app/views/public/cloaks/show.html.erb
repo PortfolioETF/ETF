@@ -1,3 +1,7 @@
+<div id="public-cloak-calendar">
+    <div id="cloak-calender-container"></div>
+</div>
+<div id="reserf-display"></div>
 <div id="cloak-location-show">
 <%= image_tag @cloak.image_id.url || '/assets/no_image.jpg', class: "cloak-img" %>
 <div id="cloak-name-container">
@@ -24,5 +28,43 @@
   <% end %>
 </div>
 <p class="cloak-time"><%= @cloak.updated_at.strftime("%Y-%m-%d %H:%M") %></p>
-<button class="reserve-button", onclick="reserveCloak()" type="button", data-id=<%= @cloak.id %>>予約状況を確認</button>
+<button class="reserve-button", onclick="calendarCloak()" type="button", data-id=<%= @cloak.id %>>予約状況を確認</button>
 </div>
+<script>
+function calendarCloak(){
+  id = this.event.target.getAttribute('data-id');
+  $.ajax({
+    url: "/cloak_calendar",
+    type: "GET",
+    data: {id: id},
+  }).done(function(data){
+    $("#public-cloak-calendar").css('display', 'block')
+    display = $(data).filter('.cloak-calendar-public')
+    $("#cloak-calender-container").append(display)
+    $("#cloak-location-show").css('display', 'none')
+    $('#calendar-public').fullCalendar({
+      contentHeight: 'auto',
+      dayClick: function(date,allDay,jsEvent){ //日をクリックしたとき
+      date = date._d
+      　$.ajax({
+        url: "/reserves/new",
+        type: "GET",
+        data: {date: date, id: id},
+      }).done(function(data){
+        $("#reserf-display").append('<button class="remove-display" onclick="removeDisplay()">閉じる</button>')
+        display = $(data).filter("#reserf-new")
+        $("#public-cloak-calendar").css('display', 'none')
+        $("#cloak-calendar-container").empty();
+        $("#reserf-display").css('display', 'block')
+        $("#reserf-display").append(display)
+      })
+      },
+    });
+  })
+}
+function removeDisplay(){
+  $("#reserf-display").empty();
+  $("#reserf-display").css('display', 'none');
+  $("#cloak-location-show").css('display', 'block');
+}
+</script>

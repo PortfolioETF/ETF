@@ -1,0 +1,99 @@
+// Place all the styles related to the Public::Reserves controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@media screen and (max-width:414px) {
+    #reserf-new {
+        text-align: center;
+    }
+
+    #public-reserves-index {
+        padding-top: 20%;
+    }
+
+    .reserves-index-title {
+        text-align: center;
+    }
+
+    .public-reserf-cloak-name-container {
+        display: flex;
+        padding-left: 10%;
+        align-items: baseline;
+    }
+
+    .public-reserf-cloak-name-label {
+        font-size: small;
+        color: #999999;
+        padding-right: 2%;
+    }
+
+    .public-reserf-cloak-address-container {
+        padding-left: 10%;
+        align-items: baseline;
+        overflow-wrap: break-word;
+        padding-right: 2%;
+        padding-top: 3%;
+    }
+
+    .public-reserf-cloak-address-label {
+        font-size: small;
+        color: #999999;
+        padding-right: 2%;
+    }
+
+    .public-reserf-cloak-time-container {
+        padding-left: 10%;
+        align-items: baseline;
+        overflow-wrap: break-word;
+        padding-right: 2%;
+        padding-top: 3%;
+    }
+
+    .public-reserf-cloak-time-label {
+        font-size: small;
+        color: #999999;
+        padding-right: 2%;
+    }
+
+    .start-time-container {
+        display: flex;
+    }
+
+    .public-reserf-cloak-start-time {
+        font-size: smaller;
+        padding-right: 5%;
+    }
+
+    .nami {
+        font-size: small;
+    }
+
+    .public-reserf-cloak-end-time {
+        font-size: smaller;
+    }
+
+    .link-to-cloak {
+        display: inline-block;
+        transition: .3s;
+        text-decoration: none;
+        color: #668ad8;
+    }
+
+    .public-reserf-amount-container {
+        padding-left: 10%;
+        align-items: baseline;
+        overflow-wrap: break-word;
+        padding-right: 2%;
+        padding-top: 3%;
+        display: flex;
+    }
+
+    .public-reserf-amount-label {
+        font-size: small;
+        color: #999999;
+        padding-right: 2%;
+    }
+
+    .public-reserf-amount {
+        font-size: smaller;
+    }
+}

@@ -35,4 +35,182 @@
         height: 5%;
         color: #fff;
     }
+
+    .cloak-calendar-public {
+        width: 80%;
+        height: 80%;
+        position: absolute;
+        top: 10%;
+        left: 0px;
+        right: 0px;
+        margin: 0px auto;
+        overflow: auto;
+        display: block;
+        text-align: center;
+        background-color: rgb(255, 255, 255);
+        box-shadow: rgba(0, 0, 0, 0.4) 10px 10px 10px 10px;
+    }
+
+    .fc-day-grid-event .fc-content {
+        white-space: normal !important;
+        word-wrap: break-word !important;
+    }
+
+    .fc-event {
+        font-size: 18px;
+        margin-bottom: 4px;
+    }
+
+    .fc-header-toolbar {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0px;
+        z-index: 9;
+        background-color: white;
+    }
+
+    .fc-head {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 86px;
+        z-index: 10;
+        background-color: #e9e9e9;
+    }
+
+    .fc-header-toolbar {
+        padding-top: 10px;
+        margin-bottom: 6px !important;
+    }
+
+    .fc-day-grid-event .fc-content {
+        white-space: normal !important;
+        word-wrap: break-word !important;
+    }
+
+    .fc-toolbar.fc-header-toolbar {
+        font-size: small;
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+
+    .public-cloak-name-container {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+    }
+
+    .cloak-name-label-public {
+        color: #999999;
+        font-size: small;
+        padding-right: 5%;
+    }
+
+    #reserf-display {
+        width: 80%;
+        height: 80%;
+        position: absolute;
+        top: 10%;
+        left: 0px;
+        right: 0px;
+        margin: 0px auto;
+        overflow: auto;
+        display: none;
+        text-align: center;
+        background-color: rgb(255, 255, 255);
+        box-shadow: rgba(0, 0, 0, 0.4) 10px 10px 10px 10px;
+    }
+
+    .date-header-container {
+        width: auto;
+        display: flex;
+        justify-content: center;
+        padding-top: 30%;
+    }
+
+    .date-year {
+        padding-right: 3%;
+    }
+
+    .date-month {
+        padding-right: 3%;
+    }
+
+    .reserf-start-time {
+        padding: 3%;
+    }
+
+    #reserf_start_time_5i {
+        background-image: linear-gradient(45deg, transparent 50%, blue 50%), linear-gradient(135deg, blue 50%, transparent 50%), linear-gradient(to right, skyblue, skyblue);
+        background-position: calc(100% - 14px) calc(1em + 2px), calc(100% - 9px) calc(1em + 2px), 100% 0;
+        background-size: 5px 5px, 5px 5px, 2.5em 2.6em;
+        background-repeat: no-repeat;
+        width: 20%;
+        height: 30px;
+        padding-left: 2%;
+        margin-left: 5%;
+    }
+
+    #reserf_start_time_4i {
+        background-image: linear-gradient(45deg, transparent 50%, blue 50%), linear-gradient(135deg, blue 50%, transparent 50%), linear-gradient(to right, skyblue, skyblue);
+        background-position: calc(100% - 14px) calc(1em + 2px), calc(100% - 9px) calc(1em + 2px), 100% 0;
+        background-size: 5px 5px, 5px 5px, 2.5em 2.6em;
+        background-repeat: no-repeat;
+        width: 20%;
+        height: 30px;
+        padding-left: 2%;
+    }
+
+    .reserf-end-time {
+        padding-top: 10%;
+        padding-bottom: 3%;
+    }
+
+    #reserf_end_time_4i {
+        background-image: linear-gradient(45deg, transparent 50%, blue 50%), linear-gradient(135deg, blue 50%, transparent 50%), linear-gradient(to right, skyblue, skyblue);
+        background-position: calc(100% - 14px) calc(1em + 2px), calc(100% - 9px) calc(1em + 2px), 100% 0;
+        background-size: 5px 5px, 5px 5px, 2.5em 2.6em;
+        background-repeat: no-repeat;
+        width: 20%;
+        height: 30px;
+        padding-left: 2%;
+    }
+
+    #reserf_end_time_5i {
+        background-image: linear-gradient(45deg, transparent 50%, blue 50%), linear-gradient(135deg, blue 50%, transparent 50%), linear-gradient(to right, skyblue, skyblue);
+        background-position: calc(100% - 14px) calc(1em + 2px), calc(100% - 9px) calc(1em + 2px), 100% 0;
+        background-size: 5px 5px, 5px 5px, 2.5em 2.6em;
+        background-repeat: no-repeat;
+        width: 20%;
+        height: 30px;
+        padding-left: 2%;
+        margin-left: 5%;
+    }
+
+    .amount-input-field {
+        border: inset;
+    }
+
+    .amount-container {
+        padding-top: 10%;
+    }
+
+    .reserve-button-container {
+        margin-top: 5%;
+    }
+
+    #reserf_start_time_2i {
+        display: none;
+    }
+
+    #reserf_start_time_3i {
+        display: none;
+    }
+
+    #reserf_end_time_2i {
+        display: none;
+    }
+
+    #reserf_end_time_3i {
+        display: none;
+    }
 }

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/withdraw_complete' => 'home#withdraw_complete',as: 'withdraw_complete'
   scope module: :public do
     get 'users/:id/image_select' => 'users#image_select',as: 'image_select'
+    get 'users/my_posts' => 'users#my_posts',as: 'my_posts'
     resources :users, only: %i(show edit update destroy) do
       resources :opinions, only: %i(new create)
       resource :withdraws, only: %i(show create)
@@ -22,9 +23,10 @@ Rails.application.routes.draw do
     resources :smoking_posts, except: %i(new)
     resources :cloaks, only: %i(show)
     get 'cloak_search' => 'cloaks#cloak_search',as: 'cloak_search'
-    get 'cloak_calender' => 'cloaks#cloak_calender',as: 'cloak_calender'
+    get 'cloak_calendar' => 'cloaks#cloak_calendar',as: 'cloak_calendar'
     resources :cloak_locations, only: %i(index show)
     get 'cloak_location_info' => 'cloak_locations#cloak_location_info',as: 'cloak_location_info'
+    resources :reserves
   end
   namespace :official do
     resources :cloaks
