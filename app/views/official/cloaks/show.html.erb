@@ -4,6 +4,9 @@
   </div>
 <div id="official-cloak-location-show">
 <h4>Cloak Mypage</h4>
+<% if @cloak.cloak_location == nil %>
+  <p class="notice">Mapで位置情報を登録しましょう</p>
+<% end %>
 <%= image_tag @cloak.image_id.url || '/assets/no_image.jpg', class: "cloak-img" %>
 <div id="cloak-name-container">
   <p class="cloak-name-label">店名: </p>
@@ -35,10 +38,13 @@
   <% @closed_days.each do |closed_day| %>
     <div class=closed-day-container-show>
       <p class="closed-day-text"><%= closed_day.closed_day %></p>
-      <%= link_to "×", official_closed_day_path(closed_day), method: :delete, data: {confirm: "削除してよろしいですか？"}, class: "batsu-over" %>
+      <% if current_cloak.id == @cloak.id %>
+        <%= link_to "×", official_closed_day_path(closed_day), method: :delete, data: {confirm: "削除してよろしいですか？"}, class: "batsu-over" %>
+      <% end %>
     </div>
   <% end %>
 </div>
+<% if current_cloak.id == @cloak.id %>
 <div class="link-to-container">
 　　<%= link_to '編集', edit_official_cloak_path(@cloak), class: "link-to" %>
     <% if @cloak.cloak_location != nil %>
@@ -46,6 +52,7 @@
     <% end %>
 　　<%= link_to '定休日追加', new_official_closed_day_path, class: "link-to" %>
 </div>
+<% end %>
 <div class="cloak-time-container">
 <p class="cloak-time">更新日: <%= @cloak.updated_at.strftime("%Y-%m-%d %H:%M") %></p>
 </div>

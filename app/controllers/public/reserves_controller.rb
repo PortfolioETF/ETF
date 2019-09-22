@@ -16,11 +16,21 @@ class Public::ReservesController < Public::ApplicationController
         @cloak = Cloak.find(reserf_params[:cloak_id])
         @availability = params[:availability]
         @reserf = current_user.reserves.new(reserf_params)
-        if @reserf.save
-            redirect_to reserves_path, notice: "予約が完了しました"
+        if reserf_params[:amount] < @availability
+          if @reserf.save
+              redirect_to reserves_path, notice: "予約が完了しました"
+          else
+              render 'new'
+          end
         else
+            flash.now[:notice] = "#{reserf_params[:amount]}個は予約できない可能性があります"
             render 'new'
         end
+    end
+
+    def destroy
+        Reserf.find(params[:id]).destroy!
+        redirect_to reserves_path, notice: "キャンセルしました"
     end
 
     private

@@ -277,12 +277,25 @@ function calendarCloak(){
         $("#cloak-calendar-container").empty();
         $("#reserf-display").css('display', 'block')
         $("#reserf-display").append(display)
+        watchAmount();
       })
       },
     });
   })
 }
 //
+function watchAmount(){
+  $(".amount-input-field").on('keyup', function(e){
+    inputAmount = e.target.value
+    availability = $(".availability").html()
+    if (availability - inputAmount < 0){
+      $("#amount-alert").empty();
+      $("#amount-alert").append(`<p class=notice>${inputAmount}個は予約できない可能性があります</p>`);
+    }else{
+      $("#amount-alert").empty();
+    }
+  })
+}
 //
 //
 //

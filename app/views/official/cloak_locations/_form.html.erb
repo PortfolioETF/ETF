@@ -1,12 +1,36 @@
 <div id="cloak-location-form">
+<button class="remove-display-nest"><span class="batsu">×</span></button>
 <%= form_with model: cloak_location, url: official_cloak_locations_path do |f| %>
-<%= image_tag cloak.image_id.url || '/assets/no_image.jpg', id: "cloak-img" %>
-<%= cloak.cloak_name %>
-<%= cloak.address %>
-<%= cloak.phone_number %>
-<%= f.text_field :description, placeholder: "店舗の説明や料金体系等をご記入下さい" %>
+  <%= image_tag cloak.image_id.url || '/assets/no_image.jpg', id: "official-cloak-img" %>
+  <div id="cloak-name-container">
+    <p class="cloak-name-label">店名: </p>
+    <p class="cloak-name"><%= cloak.cloak_name %></p>
+  </div>
+  <div class="cloak-email-container">
+    <p class="cloak-email-label">メール</p>
+    <p class="cloak-email"><%= cloak.email %></p>
+  </div>
+  <div class="cloak-phone-number-container">
+    <p class="cloak-phone-number-label">Tel: </p>
+    <p class="cloak-phone-number"><%= cloak.phone_number %></p>
+  </div>
+  <div class="cloak-address-container">
+    <p class="cloak-address-label">住所</p>
+    <p class="cloak-address"><%= cloak.address %></p>
+  </div>
+  <p class="cloak-description-label">概要</p>
+<%= f.text_area :description, placeholder: "店舗の説明や料金体系等をご記入下さい", class: "official-cloak-location-description" %>
 <%= f.hidden_field :latitude, id: "cloak-location-latitude" %>
 <%= f.hidden_field :longitude, id: "cloak-location-longitude" %>
-<%= f.submit '店舗登録', id: "create-cloak-location-button" %>
+<div class="cloak-location-button-container">
+  <%= f.submit '位置情報登録', id: "create-cloak-location-button" %>
+</div>
 <% end %>
 </div>
+
+<script>
+  $(".remove-display-nest").on('click', function(){
+      $("#cloak-location-form").css('display', 'none')
+      $("#create-cloak-location-button").css('display', 'inline-block')
+  })
+</script>

@@ -30,6 +30,8 @@
 <p class="cloak-time"><%= @cloak.updated_at.strftime("%Y-%m-%d %H:%M") %></p>
 <button class="reserve-button", onclick="calendarCloak()" type="button", data-id=<%= @cloak.id %>>予約状況を確認</button>
 </div>
+
+
 <script>
 function calendarCloak(){
   id = this.event.target.getAttribute('data-id');
@@ -56,10 +58,24 @@ function calendarCloak(){
         $("#public-cloak-calendar").css('display', 'none')
         $("#cloak-calendar-container").empty();
         $("#reserf-display").css('display', 'block')
-        $("#reserf-display").append(display)
+        $("#reserf-display").append(display);
+        watchAmount();
       })
       },
     });
+  })
+}
+
+function watchAmount(){
+  $(".amount-input-field").on('keyup', function(e){
+    inputAmount = e.target.value
+    availability = $(".availability").html()
+    if (availability - inputAmount < 0){
+      $("#amount-alert").empty();
+      $("#amount-alert").append(`<p class=notice>${inputAmount}個は予約できない可能性があります</p>`);
+    }else{
+      $("#amount-alert").empty();
+    }
   })
 }
 function removeDisplay(){

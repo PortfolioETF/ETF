@@ -1,6 +1,6 @@
 class Official::CloaksController < Official::ApplicationController
     def show
-        @cloak = current_cloak
+        @cloak = Cloak.find(params[:id])
         @closed_days = @cloak.closed_days
     end
 

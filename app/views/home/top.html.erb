@@ -1,4 +1,62 @@
-<h1>TOP</h1>
+<div id="top-page">
+    <div class="top-description-container">
+      <p class="top-description">
+      喫煙可能な場所<span class="top">Smoking</span></br>
+      荷物を預けられる<span class="top">Cloak</span></br>
+      現在地等から探すお手伝いをします</br>
+      まだみんなが知らない場所があれば共有しませんか？
+      </p>
+    </div>
+  <div id="top-page-container">
+        <div id="theTarget">
+            <div class="top-img" style="background-image: url('/test6.png')"></div>
+            <div class="top-img" style="background-image: url('/test2.jpg')"></div>
+            <div class="top-img" style="background-image: url('/test3.jpg')"></div>
+            <div class="top-img" style="background-image: url('/test4.jpg')"></div>
+            <div class="top-img" style="background-image: url('/test5.jpg')"></div>
+        </div>
+    </div>
+  <div class="top-p-container">
+  <div class="top-user-link-container">
+    <p class="user-link-label">探す人はこちら</p>
+    <%= link_to 'SignUp', new_user_registration_path, class: "top-link left", data: {confirm: "20歳以上ですか？"} %>
+    <%= link_to 'LogIn', new_user_session_path, class: "top-link" %>
+  </div>
+  <div class="top-cloak-link-container">
+    <p class="cloak-link-label">Cloak店舗の方はこちら</p>
+    <%= link_to 'SingnUp', new_cloak_registration_path, class: "top-link left" %>
+    <%= link_to 'LogIn', new_cloak_session_path, class: "top-link" %>
+  </div>
+  </div>
+</div>
 
-<%= link_to '新規登録へ',  new_user_registration_path %>
-<%= link_to 'ログインへ',  new_user_session_path %>
+
+<script>
+$("document").ready(function() {
+     $("#theTarget").skippr();
+});
+  
+ // オプションを指定してSkipprの実行
+$("#theTarget").skippr({
+     // スライドショーの変化 ("fade" or "slide")
+     transition : 'fade',
+     // 変化に係る時間(ミリ秒)
+     speed : 1000,
+     // easingの種類
+     easing : 'easeOutQuart',
+     // ナビゲーションの形("block" or "bubble")
+     navType : 'block',
+     // 子要素の種類("div" or "img")
+     childrenElementType : 'div',
+     // ナビゲーション矢印の表示(trueで表示)
+     arrows : false,
+     // スライドショーの自動再生(falseで自動再生なし)
+     autoPlay : true,
+     // 自動再生時のスライド切替間隔(ミリ秒)
+     autoPlayDuration : 5000,
+     // キーボードの矢印キーによるスライド送りの設定(trueで有効)
+     keyboardOnAlways : false,
+     // 一枚目のスライド表示時に戻る矢印を表示するかどうか(falseで非表示)
+     hidePrevious : false
+});
+</script>

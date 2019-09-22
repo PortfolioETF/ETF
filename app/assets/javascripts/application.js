@@ -18,5 +18,6 @@
 //= require fullcalendar/lang/ja
 //= require jquery_ujs
 //= require turbolinks
+//= require_tree ../../../vendor/assets/javascripts/.
 //= require underscore
 //= require_tree .

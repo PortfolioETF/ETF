@@ -4,3 +4,39 @@ ja:
       - :year
       - :month
       - :day
+ja:
+  activerecord:
+    attributes:
+      cloak_location:
+        cloak_id: Cloak
+        latitude: 緯度
+        longitude: 経度
+        description: 店舗概要
+      cloak:
+        password: パスワード
+        email: メールアドレス
+        cloak_name: Cloak名
+        phone_number: 電話番号
+        availability: 受け入れ可能数
+        address: 住所
+        image_id: 画像
+      closed_day:
+        closed_day: 定休日
+      location:
+        latitude: 緯度
+        longitude: 経度
+        address: 住所
+      opinion:
+        opinion: ご意見
+      reserf:
+        start_time: ご利用開始時間
+        end_time: お受け取り時間
+        amount: ご利用個数
+      smoking_post:
+        title: タイトル
+        body: 投稿内容
+        image_id: 画像
+      user:
+        email: メールアドレス
+        password: パスワード
+        name: お名前

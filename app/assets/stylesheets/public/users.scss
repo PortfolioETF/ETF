@@ -169,6 +169,8 @@
 
     .user-show-link-container {
         padding-top: 10%;
+        display: flex;
+        justify-content: space-around;
     }
 
     #my-posts {
@@ -230,5 +232,10 @@
 
     .my-posts-body-container {
         padding-top: 2%;
+    }
+
+    .user-show-link {
+        text-decoration: none;
+        color: #668ad8;
     }
 }

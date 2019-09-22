@@ -4,12 +4,21 @@ class Cloak < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  validates :email, presence: true, uniqueness_without_deleted: true
+  validates :cloak_name, presence: true, length: { maximum: 20 }, uniqueness: true
+  validates :phone_number, presence: true, length: { maximum: 12 }
+  validates :availability, presence: true
+  validates :availability, numericality: { only_integer: true, greater_than: 0 }
+  validates :address, presence: true
+
   has_many :closed_days
   has_many :reserves
   accepts_nested_attributes_for :closed_days
   has_one :cloak_location
 
   mount_uploader :image_id, ImageUploader
+
+  acts_as_paranoid
 
   def self.search(search)
     if !search || search.empty?

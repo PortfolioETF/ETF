@@ -5,7 +5,11 @@
     <div class="date-day"><%= @date.day %>日</div>
   </div>
   <div class="availability-container">
-    <%= @availability %>個空きあり
+    <span class="availability"><%= @availability %></span>個空きあり
+    <div id="amount-alert"></div>
+    <div class="notice-container">
+      <p class="notice"><%= notice(flash[:notice]) %></p>
+    </div>
   </div>
 <%= form_with model: @reserf, local: true do |f| %>
   <%= render 'layouts/error_messages', model: f.object %>

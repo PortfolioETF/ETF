@@ -32,5 +32,6 @@ Rails.application.routes.draw do
     resources :cloaks
     resources :cloak_locations
     resources :closed_days, only: %i(index new create update destroy)
+    resources :reserves, only: %i(index update destroy)
   end
 end

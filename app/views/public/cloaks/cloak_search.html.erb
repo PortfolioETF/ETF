@@ -33,10 +33,10 @@
     <p class="public-alert">位置情報が登録されておりません</p>
   <% end %>
 </p>
-<p class="time-cloak-search">
+<p class="time-cloak-search-public">
   <%= cloak.updated_at.strftime("%Y-%m-%d %H:%M") %>
 </p>
-<button class="reserve-button" type="button">予約状況を確認</button>
+<button class="reserve-button" type="button" onclick="calendarCloak()" data-id=<%= cloak.id %>>予約状況を確認</button>
 <p class="partertion-bar">------------------------------------------------------------------------------------</p>
 <% end %>
 <%= paginate @cloaks %>

@@ -1,19 +1,16 @@
 <div id="public-reserves-index">
-  <h2 class="reserves-index-title">予約履歴</h2>
-  <div class="h-container">
-    <h5 class="reserves-index-title-h5">アプリでのキャンセルは前日まで有効です</h2>
-  </div>
+  <h2 class="reserves-index-title">予約一覧</h2>
   <div class="notice-container">
     <p class="notice"><%= notice(flash[:notice]) %>
   </div>
   <% @reserves.each do |reserf| %>
     <div class="public-reserf-cloak-name-container">
-      <p class="public-reserf-cloak-name-label">店舗名:</p>
-      <%= link_to reserf.cloak.cloak_name, cloak_path(reserf.cloak.id), class: "link-to-cloak" %>
+      <p class="public-reserf-cloak-name-label">名前:</p>
+      <%= reserf.user.name %>
     </div>
     <div class="public-reserf-cloak-address-container">
-      <p class="public-reserf-cloak-address-label">住所:</p>
-      <div class="public-reserf-cloak-address"><%= reserf.cloak.address %></div>
+      <p class="public-reserf-cloak-address-label">メール:</p>
+      <div class="public-reserf-cloak-address"><%= reserf.user.email %></div>
     </div>
     <div class="public-reserf-cloak-time-container">
       <p class="public-reserf-cloak-time-label">時間:</p>
@@ -27,11 +24,9 @@
       <p class="public-reserf-amount-label">スーツケースの個数:</p>
       <div class="public-reserf-amount"><%= reserf.amount %>個分</div>
     </div>
-    <% if Time.now.yesterday < reserf.start_time %>
       <div class="cancel-container">
-        <%= link_to "キャンセル", reserf_path(reserf), method: :delete, data: {confirm: "キャンセルしてよろしいですか？"}, class: "link-to" %>
+        <%= link_to "キャンセル", official_reserf_path(reserf), method: :delete, data: {confirm: "キャンセルしてよろしいですか？"}, class: "link-to" %>
       </div>
-    <% end %>
     <p class="partertion-bar">-------------------------------------------------------------------------------------------------------------------</p>
   <% end %>
   <%= paginate @reserves %>
