@@ -47,6 +47,7 @@ function calendarCloak(){
     $('#calendar-public').fullCalendar({
       contentHeight: 'auto',
       dayClick: function(date,allDay,jsEvent){ //日をクリックしたとき
+      if (this[0].innerText != "定休日"){
       date = date._d
       　$.ajax({
         url: "/reserves/new",
@@ -61,7 +62,41 @@ function calendarCloak(){
         $("#reserf-display").append(display);
         watchAmount();
       })
+      }
       },
+      eventSources: [{
+        url: '/closed_day',
+        type: 'GET',
+        data: {id: id},
+        success: function(doc){
+          doc.forEach(function(d){
+            day = d.closed_day.slice(0,1)
+            if (day === "日"){
+              $(".fc-widget-content.fc-sun").html(`<p class="calendar-closed-day">定休日</p>`)
+              $(".fc-widget-content.fc-sun").css('background-color', '#FFBEDA')
+            }else if (day === "土"){
+              $(".fc-widget-content.fc-sat").html(`<p class="calendar-closed-day">定休日</p>`)
+              $(".fc-widget-content.fc-sat").css('background-color', '#FFBEDA')
+            }else if (day === "月"){
+              $(".fc-widget-content.fc-mon").html(`<p class="calendar-closed-day">定休日</p>`)
+              $(".fc-widget-content.fc-mon").css('background-color', '#FFBEDA')
+            }else if (day === "火"){
+              $(".fc-widget-content.fc-tue").html(`<p class="calendar-closed-day">定休日</p>`)
+              $(".fc-widget-content.fc-tue").css('background-color', '#FFBEDA')
+            }else if (day === "水"){
+              $(".fc-widget-content.fc-wed").html(`<p class="calendar-closed-day">定休日</p>`)
+              $(".fc-widget-content.fc-wed").css('background-color', '#FFBEDA')
+            }else if (day === "木"){
+              $(".fc-widget-content.fc-thu").html(`<p class="calendar-closed-day">定休日</p>`)
+              $(".fc-widget-content.fc-thu").css('background-color', '#FFBEDA')
+            }else if (day === "金"){
+              $(".fc-widget-content.fc-fri").html(`<p class="calendar-closed-day">定休日</p>`)
+              $(".fc-widget-content.fc-fri").css('background-color', '#FFBEDA')
+            }
+          })
+        }
+      }
+      ],
     });
   })
 }

@@ -213,4 +213,14 @@
     #reserf_end_time_3i {
         display: none;
     }
+
+    .fc-day.fc-widget-content {
+        position: relative;
+    }
+
+    .calendar-closed-day {
+        font-size: small;
+        position: absolute;
+        bottom: 0px;
+    }
 }

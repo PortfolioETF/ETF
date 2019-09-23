@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     resources :cloaks, only: %i(show)
     get 'cloak_search' => 'cloaks#cloak_search',as: 'cloak_search'
     get 'cloak_calendar' => 'cloaks#cloak_calendar',as: 'cloak_calendar'
+    get 'closed_day' => 'cloaks#closed_day',as: 'closed_day'
     resources :cloak_locations, only: %i(index show)
     get 'cloak_location_info' => 'cloak_locations#cloak_location_info',as: 'cloak_location_info'
     resources :reserves
