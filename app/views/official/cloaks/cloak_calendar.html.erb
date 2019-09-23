@@ -1,0 +1,83 @@
+<div class="cloak-calendar-public">
+      <div class="notice-container">
+        <p class="notice"><%= notice(flash[:notice]) %>
+      </div>
+  <div id="emergency-closed-day-display"></div>
+  <div id="calendar-public"></div>
+</div>
+
+<script>
+window.onload = calendarCloak();
+function calendarCloak(){
+    $('#calendar-public').fullCalendar({
+      contentHeight: 'auto',
+      dayClick: function(date,allDay,jsEvent){ //日をクリックしたとき
+      if (this[0].innerText != "定休日"){
+      date = date._d
+      　$.ajax({
+        url: "/official/emergency_closed_days/new",
+        type: "GET",
+        data: {date: date},
+      }).done(function(data){
+        $("#emergency-closed-day-display").append('<button class="remove-display" onclick="removeDisplay()">閉じる</button>')
+        display = $(data).filter("#emergency-closed-day")
+        $("#calendar-public").css('display', 'none')
+        $("#emergency-closed-day-display").append(display);
+      })
+      }
+      },
+      eventSources: [{
+        url: '/official/closed_days',
+        type: 'GET',
+        data: {id: '<%= current_cloak.id %>'},
+        success: function(doc){
+          doc.forEach(function(d){
+            day = d.closed_day.slice(0,1)
+            if (day === "日"){
+              $(".fc-widget-content.fc-sun").html(`<p class="calendar-closed-day">定休日</p>`)
+              $(".fc-widget-content.fc-sun").css('background-color', '#FFBEDA')
+            }else if (day === "土"){
+              $(".fc-widget-content.fc-sat").html(`<p class="calendar-closed-day">定休日</p>`)
+              $(".fc-widget-content.fc-sat").css('background-color', '#FFBEDA')
+            }else if (day === "月"){
+              $(".fc-widget-content.fc-mon").html(`<p class="calendar-closed-day">定休日</p>`)
+              $(".fc-widget-content.fc-mon").css('background-color', '#FFBEDA')
+            }else if (day === "火"){
+              $(".fc-widget-content.fc-tue").html(`<p class="calendar-closed-day">定休日</p>`)
+              $(".fc-widget-content.fc-tue").css('background-color', '#FFBEDA')
+            }else if (day === "水"){
+              $(".fc-widget-content.fc-wed").html(`<p class="calendar-closed-day">定休日</p>`)
+              $(".fc-widget-content.fc-wed").css('background-color', '#FFBEDA')
+            }else if (day === "木"){
+              $(".fc-widget-content.fc-thu").html(`<p class="calendar-closed-day">定休日</p>`)
+              $(".fc-widget-content.fc-thu").css('background-color', '#FFBEDA')
+            }else if (day === "金"){
+              $(".fc-widget-content.fc-fri").html(`<p class="calendar-closed-day">定休日</p>`)
+              $(".fc-widget-content.fc-fri").css('background-color', '#FFBEDA')
+            }
+          })
+          $.ajax({
+              url: "/official/emergency_closed_days",
+              type: "GET",
+              data: {},
+          }).done(function(data){
+              data.forEach(function(d){
+                  time = d.start_time.slice(0, 10)
+                  a = $("[data-date=" + time + "]")[0]
+                  $("[data-date=" + time + "]")[0].innerHTML = (`<p class="calendar-closed-day">定休日</p>`)
+                  $("[data-date=" + time + "]")[0].style.backgroundColor = '#FFBEDA'
+              })
+          })
+        }
+      }
+      ],
+    });
+  }
+
+
+function removeDisplay(){
+  $("#reserf-display").empty();
+  $("#reserf-display").css('display', 'none');
+  $("#cloak-location-show").css('display', 'block');
+}
+</script>

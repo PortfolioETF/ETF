@@ -331,8 +331,10 @@ function searchLocation(){
            type: "GET",
            data: {data: {page_data: page, text: text}}
          }).done(function(data){
+           if ($(data).filter('.smoking-post-search')[0].childElementCount > 0){
            pageDisplay = $(data).filter('.smoking-post-search')
            $("#search-result-container").append(pageDisplay)
+           }
          })
     }
 });

@@ -46,8 +46,9 @@ function calendarCloak(){
     $("#cloak-location-show").css('display', 'none')
     $('#calendar-public').fullCalendar({
       contentHeight: 'auto',
-      dayClick: function(date,allDay,jsEvent){ //日をクリックしたとき
+      dayClick: function(date,allDay,jsEvent){
       if (this[0].innerText != "定休日"){
+        if(this.hasClass('fc-past') == false){
       date = date._d
       　$.ajax({
         url: "/reserves/new",
@@ -63,9 +64,10 @@ function calendarCloak(){
         watchAmount();
       })
       }
+      }
       },
       eventSources: [{
-        url: '/closed_day',
+        url: '/closed_days',
         type: 'GET',
         data: {id: id},
         success: function(doc){
@@ -93,6 +95,18 @@ function calendarCloak(){
               $(".fc-widget-content.fc-fri").html(`<p class="calendar-closed-day">定休日</p>`)
               $(".fc-widget-content.fc-fri").css('background-color', '#FFBEDA')
             }
+          })
+          $.ajax({
+              url: "/emergency_closed_days",
+              type: "GET",
+              data: {id: id},
+          }).done(function(data){
+              data.forEach(function(d){
+                  time = d.start_time.slice(0, 10)
+                  a = $("[data-date=" + time + "]")[0]
+                  $("[data-date=" + time + "]")[0].innerHTML = (`<p class="calendar-closed-day">定休日</p>`)
+                  $("[data-date=" + time + "]")[0].style.backgroundColor = '#FFBEDA'
+              })
           })
         }
       }

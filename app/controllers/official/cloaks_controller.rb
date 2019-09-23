@@ -22,6 +22,15 @@ class Official::CloaksController < Official::ApplicationController
         redirect_to root_path
     end
 
+    def cloak_calendar
+        @cloak = current_cloak
+    end
+
+    def closed_day
+        closed_days = current_cloak.closed_days
+        render json: closed_days
+    end
+
     private
     def cloak_params
         params.require(:cloak).permit(:cloak_name, :email, :phone_number, :address, :image_id)

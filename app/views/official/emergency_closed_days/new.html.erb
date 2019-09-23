@@ -1,0 +1,12 @@
+<div id="emergency-closed-day">
+  <%= form_with model: @emergency_closed_day, url: official_emergency_closed_days_path, local: true do |f| %>
+    <%= f.hidden_field :start_time, value: @date %>
+    <%= f.hidden_field :end_time, value: @date %>
+    <%= hidden_field_tag :date, value: @date %>
+    <p class="emergency-closed-day-confirm">
+      <%= @date.strftime("%Y-%m-%d") %>
+      <p class="confirm-p">を休日として登録します</p>
+    </p>
+    <%= f.submit "登録", class: "emergency-closed-day-button" %>
+  <% end %>
+</div>

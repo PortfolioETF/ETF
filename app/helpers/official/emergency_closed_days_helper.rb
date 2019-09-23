@@ -1,0 +1,2 @@
+module Official::EmergencyClosedDaysHelper
+end

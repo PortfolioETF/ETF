@@ -25,7 +25,6 @@ function getMap(){
     confirmBrowser();
     function success(position){
       var parseJson = function(jsonString) {
-        console.log(jsonString)
       var converted = convertNl(jsonString);
       return JSON.parse(converted);
     　};

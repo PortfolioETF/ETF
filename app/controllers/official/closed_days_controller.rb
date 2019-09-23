@@ -1,7 +1,14 @@
 class Official::ClosedDaysController < Official::ApplicationController
+
+    def index
+        closed_days = current_cloak.closed_days
+        render json: closed_days
+    end
+
     def new
         @cloak = current_cloak
         @closed_day = @cloak.closed_days.build
+        @emergency_closed_days = current_cloak.emergency_closed_days.where("end_time > ?", Time.now)
     end
 
     def create
