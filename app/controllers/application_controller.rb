@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
             user_path(resource)
         elsif resource.is_a?(Cloak)
             official_cloak_path(resource)
-        elsif resource.is_a?(Admin)
-            admin_root_path
+        elsif resource.is_a?(AdminUser)
+            admin_dashboard_path
         end
     end
 

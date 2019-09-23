@@ -1,5 +1,5 @@
 class Opinion < ApplicationRecord
-    validates :opinion, presence: true, length(length: {is: 200})
+    validates :opinion, presence: true, length: {maximum: 200}
 
     belongs_to :user
 
