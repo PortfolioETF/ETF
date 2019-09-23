@@ -12,9 +12,4 @@ class Public::CloaksController < ApplicationController
     def cloak_calendar
         @cloak = Cloak.find(params[:id])
     end
-
-    def closed_day
-        closed_days = Cloak.find(params[:id]).closed_days
-        render json: closed_days
-    end
 end

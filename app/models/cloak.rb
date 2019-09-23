@@ -11,10 +11,11 @@ class Cloak < ApplicationRecord
   validates :availability, numericality: { only_integer: true, greater_than: 0 }
   validates :address, presence: true
 
-  has_many :closed_days
+  has_many :closed_days, dependent: :destroy
   has_many :reserves
   accepts_nested_attributes_for :closed_days
-  has_one :cloak_location
+  has_one :cloak_location, dependent: :destroy
+  has_many :emergency_closed_days, dependent: :destroy
 
   mount_uploader :image_id, ImageUploader
 

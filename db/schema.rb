@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_23_080446) do
+ActiveRecord::Schema.define(version: 2019_09_23_144135) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -73,6 +73,15 @@ ActiveRecord::Schema.define(version: 2019_09_23_080446) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cloak_id"], name: "index_closed_days_on_cloak_id"
+  end
+
+  create_table "emergency_closed_days", force: :cascade do |t|
+    t.datetime "start_time", null: false
+    t.datetime "end_time", null: false
+    t.integer "cloak_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cloak_id"], name: "index_emergency_closed_days_on_cloak_id"
   end
 
   create_table "locations", force: :cascade do |t|

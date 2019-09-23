@@ -1,73 +1,35 @@
-<div id="public-cloak-calendar">
-    <div id="cloak-calender-container"></div>
+<div class="cloak-calendar-public">
+      <div class="notice-container">
+        <p class="notice"><%= notice(flash[:notice]) %>
+      </div>
+  <div id="emergency-closed-day-display"></div>
+  <div id="calendar-public"></div>
 </div>
-<div id="reserf-display"></div>
-<div id="cloak-location-show">
-<%= image_tag @cloak.image_id.url || '/assets/no_image.jpg', class: "cloak-img" %>
-<div id="cloak-name-container">
-  <p class="cloak-name-label">店名: </p>
-  <p class="cloak-name"><%= @cloak.cloak_name %></p>
-</div>
-  <div class="notice-container">
-    <p class="notice"><%= notice(flash[:notice]) %>
-  </div>
-<div class="cloak-phone-number-container">
-  <p class="cloak-phone-number-label">Tel: </p>
-  <p class="cloak-phone-number"><%= @cloak.phone_number %></p>
-</div>
-<div class="cloak-address-container">
-  <p class="cloak-address-label">住所</p>
-  <p class="cloak-address"><%= @cloak.address %></p>
-</div>
-<div class="cloak-description-container">
-  <p class="cloak-description-label">店舗情報</p>
-  <% if @cloak.cloak_location != nil %>
-    <p class="cloak-description"><%= @cloak.cloak_location.description %></p>
-  <% else %>
-    <p>位置情報が未登録です</p>
-  <% end %>
-</div>
-<p class="cloak-time"><%= @cloak.updated_at.strftime("%Y-%m-%d %H:%M") %></p>
-<button class="reserve-button", onclick="calendarCloak()" type="button", data-id=<%= @cloak.id %>>予約状況を確認</button>
-</div>
-
 
 <script>
+window.onload = calendarCloak();
 function calendarCloak(){
-  id = this.event.target.getAttribute('data-id');
-  $.ajax({
-    url: "/cloak_calendar",
-    type: "GET",
-    data: {id: id},
-  }).done(function(data){
-    $("#public-cloak-calendar").css('display', 'block')
-    display = $(data).filter('.cloak-calendar-public')
-    $("#cloak-calender-container").append(display)
-    $("#cloak-location-show").css('display', 'none')
     $('#calendar-public').fullCalendar({
       contentHeight: 'auto',
       dayClick: function(date,allDay,jsEvent){ //日をクリックしたとき
       if (this[0].innerText != "定休日"){
       date = date._d
       　$.ajax({
-        url: "/reserves/new",
+        url: "/official/emergency_closed_days/new",
         type: "GET",
-        data: {date: date, id: id},
+        data: {date: date},
       }).done(function(data){
-        $("#reserf-display").append('<button class="remove-display" onclick="removeDisplay()">閉じる</button>')
-        display = $(data).filter("#reserf-new")
-        $("#public-cloak-calendar").css('display', 'none')
-        $("#cloak-calendar-container").empty();
-        $("#reserf-display").css('display', 'block')
-        $("#reserf-display").append(display);
-        watchAmount();
+        $("#emergency-closed-day-display").append('<button class="remove-display" onclick="removeDisplay()">閉じる</button>')
+        display = $(data).filter("#emergency-closed-day")
+        $("#calendar-public").css('display', 'none')
+        $("#emergency-closed-day-display").append(display);
       })
       }
       },
       eventSources: [{
-        url: '/closed_days',
+        url: '/official/closed_days',
         type: 'GET',
-        data: {id: id},
+        data: {id: '<%= current_cloak.id %>'},
         success: function(doc){
           doc.forEach(function(d){
             day = d.closed_day.slice(0,1)
@@ -95,9 +57,9 @@ function calendarCloak(){
             }
           })
           $.ajax({
-              url: "/emergency_closed_days",
+              url: "/official/emergency_closed_days",
               type: "GET",
-              data: {id: id},
+              data: {},
           }).done(function(data){
               data.forEach(function(d){
                   time = d.start_time.slice(0, 10)
@@ -110,21 +72,9 @@ function calendarCloak(){
       }
       ],
     });
-  })
-}
+  }
 
-function watchAmount(){
-  $(".amount-input-field").on('keyup', function(e){
-    inputAmount = e.target.value
-    availability = $(".availability").html()
-    if (availability - inputAmount < 0){
-      $("#amount-alert").empty();
-      $("#amount-alert").append(`<p class=notice>${inputAmount}個は予約できない可能性があります</p>`);
-    }else{
-      $("#amount-alert").empty();
-    }
-  })
-}
+
 function removeDisplay(){
   $("#reserf-display").empty();
   $("#reserf-display").css('display', 'none');

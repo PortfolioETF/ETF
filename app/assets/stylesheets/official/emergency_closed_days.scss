@@ -1,0 +1,32 @@
+// Place all the styles related to the Official::EmergencyClosedDays controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@media screen and (max-width:414px) {
+    #emergency-closed-day {
+        padding-top: 50%;
+    }
+
+    .emergency-closed-day-button {
+        display: inline-block;
+        padding: 0.5em 1em;
+        text-decoration: none;
+        background: #668ad8;
+        color: #FFF;
+        border-bottom: solid 4px #627295;
+        border-radius: 3px;
+        width: 50%;
+        margin-top: 5%;
+    }
+
+    #emergency-closed-day-container {
+        padding-top: 20%;
+    }
+
+    .closed-day-e {
+        padding-top: 3%;
+    }
+
+    .description-e {
+        font-size: smaller;
+    }
+}

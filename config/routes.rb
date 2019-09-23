@@ -26,15 +26,19 @@ Rails.application.routes.draw do
     resources :cloaks, only: %i(show)
     get 'cloak_search' => 'cloaks#cloak_search',as: 'cloak_search'
     get 'cloak_calendar' => 'cloaks#cloak_calendar',as: 'cloak_calendar'
-    get 'closed_day' => 'cloaks#closed_day',as: 'closed_day'
     resources :cloak_locations, only: %i(index)
     get 'cloak_location_info' => 'cloak_locations#cloak_location_info',as: 'cloak_location_info'
     resources :reserves, only: %i(index new create destroy)
+    resources :closed_days, only: %i(index)
+    resources :emergency_closed_days, only: %i(index)
   end
+
   namespace :official do
     resources :cloaks, only: %i(show edit update destroy)
+    get 'cloak_calendar' => 'cloaks#cloak_calendar',as: 'cloak_calendar'
     resources :cloak_locations, except: %i(show)
-    resources :closed_days, only: %i(new create destroy)
+    resources :closed_days, only: %i(index new create destroy)
+    resources :emergency_closed_days, only: %i(index new create destroy)
     resources :reserves, only: %i(index destroy)
   end
 end
