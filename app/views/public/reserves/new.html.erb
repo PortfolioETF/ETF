@@ -1,0 +1,63 @@
+<div id="reserf-new">
+  <div class="date-header-container">
+    <div class="date-year"><%= @date.year %>年</div>
+    <div class="date-month"><%= @date.month %>月</div>
+    <div class="date-day"><%= @date.day %>日</div>
+  </div>
+  <div class="availability-container">
+    <span class="availability"><%= @availability %></span>個空きあり
+    <div id="amount-alert"></div>
+    <div class="notice-container">
+      <p class="notice"><%= notice(flash[:notice]) %></p>
+    </div>
+  </div>
+<%= form_with model: @reserf, local: true do |f| %>
+  <%= render 'layouts/error_messages', model: f.object %>
+  <p class="reserf-start-time">お預け時間</p>
+  <div class="start-reserve-form-container">
+  <%= raw sprintf(f.datetime_select(:start_time,
+        start_year:     @date.year,# 選択可能な開始年
+        start_month:     @date.month,# 選択可能な開始月
+        start_day:     @date.day,# 選択可能な開始日
+        end_year:       @date.year,# 選択可能な終了年
+        end_month:       @date.month,# 選択可能な終了年
+        end_day:       @date.day,# 選択可能な終了年
+        use_two_digit_numbers: true,# 月日を2桁の値で表示
+        date_separator: '%s',# 年, 月
+        datetime_separator: '%s',# 日
+        time_separator: '%s',# 時
+        discard_year: true,
+        minute_step: 15,
+        default: @date,
+  ), '', '', '時') + '分' %>
+  </div>
+  <p class="reserf-end-time">お受け取り予定時間</p>
+  <div class="end-reserve-form-container">
+  <%= raw sprintf(f.datetime_select(:end_time,
+        start_year:     @date.year,# 選択可能な開始年
+        start_month:     @date.month,# 選択可能な開始月
+        start_day:     @date.day,# 選択可能な開始日
+        end_year:       @date.year,# 選択可能な終了年
+        end_month:       @date.month,# 選択可能な終了年
+        end_day:       @date.day,# 選択可能な終了年
+        use_two_digit_numbers: true,# 月日を2桁の値で表示
+        date_separator: '%s',# 年, 月
+        datetime_separator: '%s',# 日
+        time_separator: '%s',# 時
+        discard_year: true,
+        minute_step: 15,
+        default: @date,
+  ), '', '', '時') + '分' %>
+  </div>
+  <div class="amount-container">
+    <p class="amount-label">預ける個数(スーツケース何個分か)</p>
+    <%= f.number_field :amount, class: "amount-input-field" %>個
+  </div>
+  <%= f.hidden_field :cloak_id, value: "#{@cloak.id}" %>
+  <%= hidden_field_tag :availability, "#{@availability}" %>
+  <%= hidden_field_tag :date, "#{@date}" %>
+  <div class="reserve-button-container">
+    <%= f.submit '予約する', class: "reserve-button" %>
+  </div>
+<% end %>
+</div>

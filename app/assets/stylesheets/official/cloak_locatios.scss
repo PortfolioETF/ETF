@@ -6,6 +6,20 @@
 
     #cloak-location-form {
         display: none;
+        width: 80%;
+        height: 80%;
+        position: absolute;
+        top: 10%;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        overflow: auto;
+        text-align: center;
+        background-color: #fff;
+        box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.4);
+        z-index: 2;
+        padding-top: 3%;
+        padding-bottom: 5%;
     }
 
     #cloak-location-form-edit {
@@ -34,5 +48,45 @@
         border-radius: 3px;
         width: 50%;
         margin-top: 5%;
+    }
+
+    .save-button-official {
+        text-align: center;
+        padding-bottom: 2%;
+    }
+
+    #create-cloak-location-button {
+        display: inline-block;
+        padding: 0.5em 1em;
+        text-decoration: none;
+        background: #f7f7f7;
+        border-left: solid 6px #668ad8;
+        color: #668ad8;
+        font-weight: bold;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+    }
+
+    .official-cloak-location-index {
+        padding-bottom: 3%;
+        width: 100%;
+        padding-top: 17%;
+        justify-content: center;
+        text-align: center;
+        display: flex;
+    }
+
+    #official-cloak-img {
+        width: 80%;
+    }
+
+    .official-cloak-location-description {
+        border: inset;
+        width: 80%;
+        height: 300px;
+        overflow-wrap: auto;
+    }
+
+    .cloak-description-label {
+        padding-top: 3%
     }
 }

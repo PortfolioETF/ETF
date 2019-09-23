@@ -1,4 +1,6 @@
 class Opinion < ApplicationRecord
+    validates :opinion, presence: true, length(length: {is: 200})
+
     belongs_to :user
 
 # defaultは特に理由はない

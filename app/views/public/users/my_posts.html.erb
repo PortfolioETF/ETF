@@ -1,0 +1,33 @@
+<div id="my-posts">
+  <h3 class="my-posts-label">投稿履歴</h3>
+  <% if @smoking_posts.present? %>
+    <% @smoking_posts.each do |smoking_post| %>
+      <div class="my-posts-link-container">
+        <%= link_to '編集', edit_smoking_post_path(smoking_post), class: "user-button" %>
+      </div>
+      <div class="my-posts-img-container">
+        <%= image_tag smoking_post.image_id.url || '/assets/no_image.jpg', class: "my-posts-img" %>
+      </div>
+      <div class="my-posts-title-container">
+        <p class="my-posts-title-label">タイトル:</p>
+        <p class="my-posts-title">
+          <%= link_to smoking_post.title, smoking_post_path(smoking_post), class: "link-to" %>
+        </p>
+      </div>
+      <div class="my-posts-address-container">
+        <p class="my-posts-address-label">住所:</p>
+        <p class="my-posts-address"><%= smoking_post.location.address %></p>
+      </div>
+      <div class="my-posts-body-container">
+        <p class="my-posts-body-label">本文:</p>
+        <p class="my-posts-body"><%= smoking_post.body %></p>
+      </div>
+      <p class="partertion-bar">-------------------------------------------------------------------------------------------------------</p>
+    <% end %>
+    <% else %>
+      <div class="no-post-container">
+        <p class="no-post">現在投稿がありません</p>
+      </div>
+    <%= paginate @smoking_posts %>
+  <% end %>
+</div>

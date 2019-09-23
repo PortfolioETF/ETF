@@ -53,6 +53,7 @@
 
     #cloak-location-show {
         padding-top: 20%;
+        text-align: center
     }
 
     .cloak-img {
@@ -177,8 +178,12 @@
         padding-bottom: 4%;
     }
 
-    .time-cloak-search {
+    .time-cloak-search-public {
         text-align: end;
+        font-size: xx-small;
+        padding-right: 4%;
+        color: #CCCCCC;
+
     }
 
     #public-cloak-output {
@@ -197,5 +202,10 @@
         background: #00bcd4;
         transition: .4s;
         margin-right: 2%;
+    }
+
+    .cancel-container {
+        text-align: end;
+        padding-right: 5%;
     }
 }

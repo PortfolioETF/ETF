@@ -1,6 +1,6 @@
 <div id="smo-main">
   <div class="smo-index">
-      <%= render partial: 'public/smoking_posts/search_form',locals: {q: @q} %>
+      <%= render partial: 'public/smoking_posts/search_form' %>
     <div class="save-button">
       <p>
         <button id="save-my-location-button" onclick="saveMyLocation()" type="button" >現在地の情報を投稿する</button>
@@ -134,6 +134,7 @@ function saveMyLocation() {
 
 function saveThisLocation(){
   id = $("#get-this-location-button").data().id
+  areaInfo = $(".smoking-location-window").html()
   $.ajax({
     url: "/location_info",
     type: "GET",
@@ -141,15 +142,10 @@ function saveThisLocation(){
   }).done(function(data){
     latitude = data.latitude
     longitude = data.longitude
-    const url = "http://geoapi.heartrails.com/api/json?method=searchByGeoLocation&x=" + longitude + "&y=" + latitude + "&jsonp=?";
-    $.getJSON(url, function(jsonp){
-      var areaInfo = jsonp.response.location[0];
-      var areaInfoStr = areaInfo.prefecture + areaInfo.city + areaInfo.town;
-      $("#location-address").val(areaInfoStr)
-      $("#location-latitude").val(data.latitude);
-      $("#location-longitude").val(data.longitude);
-      postFormDisplay();
-    });
+    $("#location-address").val(areaInfo)
+    $("#location-latitude").val(data.latitude);
+    $("#location-longitude").val(data.longitude);
+    postFormDisplay();
   })
 }
 

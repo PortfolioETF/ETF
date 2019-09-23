@@ -1,6 +1,6 @@
 <div id="smo-main">
-  <div class="smo-index"></div>
-    <div class="save-button">
+  <div class="official-cloak-location-index"></div>
+    <div class="save-button-official">
       <p>
         <button id="create-cloak-location-button" onclick="createCloakLocation()" type="button" >現在地に店舗を登録</button>
       </p>
@@ -17,6 +17,8 @@
 </div>
 </div>
 </div>
+
+
 <script>
 window.onload = getMap();
 function getMap(){
@@ -102,6 +104,45 @@ function createCloakLocation(){
   };
   navigator.geolocation.getCurrentPosition(saveSuccess, saveError);//成功と失敗を判断
 };
+
+function cloakShow(){
+  $("#search-result-container").empty();
+  $("#location-smoking-posts").css('display','none');
+
+  $("#smoking-location-shows").off('scroll')
+  $("#smoking-location-shows-container").empty()
+
+  $("#smoking-location-shows-container").append('<button class="remove-display" onclick="removeDisplayOfficialCloak()">閉じる</button>')
+
+  $("#smoking-location-shows").css({
+      width: '80%',
+      height: '80%',
+      position: 'absolute',
+      top: '10%',
+      left: '0',
+      right: '0',
+      margin: '0 auto',
+      overflow: 'auto',
+      display: 'block',
+      'text-align': 'center',
+      'background-color': '#fff',
+      'box-shadow': '10px 10px 10px 10px rgba(0, 0, 0, 0.4)',
+    });
+    id = $('.smoking-location-window').data().id;
+    $.ajax({
+        url: "/official/cloaks/" + id,
+        type: "GET",
+        data: {},
+    }).done(function(data){
+        display = $(data).filter("#cloak-show-container")
+        $("#smoking-location-shows-container").append(display)
+    })
+}
+
+function removeDisplayOfficialCloak(){
+  $("#smoking-location-shows-container").empty()
+  $("#smoking-location-shows").css('display', 'none')
+}
 
 function CloakLocationFormDisplay(){
   $("#cloak-location-form").css('display', 'block')

@@ -31,16 +31,28 @@
         <%= link_to "logout", destroy_user_session_path, method: :delete, class: "header-link" %>
       </li>
     <% elsif cloak_signed_in? %>
-    <li class="navbar-text">
+      <li class="navbar-text-c">
+        <%= link_to "Home", official_cloak_path(current_cloak), class: "header-link-c"%>
       </li>
-      <li class="navbar-text">
+      <li class="navbar-text-c">
+        <%= link_to "Reserved", official_reserves_path, class: "header-link-c"%>
       </li>
-      <li class="navbar-text">
-        <%= link_to "MyCloak", official_cloak_path(current_cloak), class: "header-link"%>
+      <li class="navbar-text-c">
+        <%= link_to "Map",  official_cloak_locations_path, class: "header-link-c"%>
       </li>
+        <li class="navbar-text-c">
+        <%= link_to "logout(C)", destroy_cloak_session_path, method: :delete, class: "header-link-c"%>
+      </li>
+      <% else %>
         <li class="navbar-text">
-        <%= link_to "logout/cloak", destroy_cloak_session_path, method: :delete, class: "header-link"%>
-      </li>
+           <%= link_to "Home", root_path, class: "header-link"%>
+        </li>
+        <li class="navbar-text">
+           <%= link_to "SignUp", new_user_registration_path, class: "header-link"%>
+        </li>
+        <li class="navbar-text">
+           <%= link_to "LogIn", new_user_session_path, class: "header-link"%>
+        </li>
     <% end %>
     </ul>
   </div>

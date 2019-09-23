@@ -1,14 +1,14 @@
-<h2>Log in</h2>
+<h2 class="new-registration-label">LogIn(Cloak)</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
+  <div class="new-registration-field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "new-registration-form" %>
   </div>
 
-  <div class="field">
+  <div class="new-registration-field">
     <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+    <%= f.password_field :password, autocomplete: "current-password", class: "new-registration-form" %>
   </div>
 
   <% if devise_mapping.rememberable? %>
@@ -19,8 +19,6 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "LogIn", class: "new-user-create-button" %>
   </div>
 <% end %>
-
-<%= render "cloaks/shared/links" %>

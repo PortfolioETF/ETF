@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_19_095129) do
+ActiveRecord::Schema.define(version: 2019_09_21_032151) do
 
   create_table "cloak_locations", force: :cascade do |t|
     t.integer "cloak_id", null: false
@@ -64,6 +64,18 @@ ActiveRecord::Schema.define(version: 2019_09_19_095129) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_opinions_on_user_id"
+  end
+
+  create_table "reserves", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "cloak_id", null: false
+    t.datetime "start_time", null: false
+    t.datetime "end_time", null: false
+    t.integer "amount", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cloak_id"], name: "index_reserves_on_cloak_id"
+    t.index ["user_id"], name: "index_reserves_on_user_id"
   end
 
   create_table "smoking_posts", force: :cascade do |t|

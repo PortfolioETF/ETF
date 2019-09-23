@@ -1,6 +1,6 @@
 class Official::CloaksController < Official::ApplicationController
     def show
-        @cloak = current_cloak
+        @cloak = Cloak.find(params[:id])
         @closed_days = @cloak.closed_days
     end
 
@@ -15,6 +15,11 @@ class Official::CloaksController < Official::ApplicationController
         else
             render 'edit'
         end
+    end
+
+    def destroy
+        current_cloak.destroy!
+        redirect_to root_path
     end
 
     private

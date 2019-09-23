@@ -1,6 +1,6 @@
 class Public::UsersController < Public::ApplicationController
     def show
-        @user = User.find(params[:id])
+        @user = current_user
     end
 
     def edit
@@ -18,6 +18,10 @@ class Public::UsersController < Public::ApplicationController
 
     def image_select
         @user = User.find(params[:id])
+    end
+
+    def my_posts
+        @smoking_posts = current_user.smoking_posts.page(params[:page]).per(10).order(updated_at: "DESC").preload(:location)
     end
 
     private
