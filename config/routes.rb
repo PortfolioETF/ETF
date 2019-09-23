@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   scope module: :public do
     get 'users/:id/image_select' => 'users#image_select',as: 'image_select'
     get 'users/my_posts' => 'users#my_posts',as: 'my_posts'
-    resources :users, only: %i(show edit update destroy) do
+    resources :users, only: %i(show edit update) do
       resources :opinions, only: %i(new create)
       resource :withdraws, only: %i(show create)
     end
@@ -25,14 +25,14 @@ Rails.application.routes.draw do
     get 'cloak_search' => 'cloaks#cloak_search',as: 'cloak_search'
     get 'cloak_calendar' => 'cloaks#cloak_calendar',as: 'cloak_calendar'
     get 'closed_day' => 'cloaks#closed_day',as: 'closed_day'
-    resources :cloak_locations, only: %i(index show)
+    resources :cloak_locations, only: %i(index)
     get 'cloak_location_info' => 'cloak_locations#cloak_location_info',as: 'cloak_location_info'
-    resources :reserves
+    resources :reserves, only: %i(index new create destroy)
   end
   namespace :official do
-    resources :cloaks
-    resources :cloak_locations
-    resources :closed_days, only: %i(index new create update destroy)
-    resources :reserves, only: %i(index update destroy)
+    resources :cloaks, only: %i(show edit update destroy)
+    resources :cloak_locations, except: %i(show)
+    resources :closed_days, only: %i(new create destroy)
+    resources :reserves, only: %i(index destroy)
   end
 end

@@ -17,6 +17,11 @@ class Official::CloaksController < Official::ApplicationController
         end
     end
 
+    def destroy
+        current_cloak.destroy!
+        redirect_to root_path
+    end
+
     private
     def cloak_params
         params.require(:cloak).permit(:cloak_name, :email, :phone_number, :address, :image_id)
