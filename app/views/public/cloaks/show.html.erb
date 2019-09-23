@@ -46,8 +46,9 @@ function calendarCloak(){
     $("#cloak-location-show").css('display', 'none')
     $('#calendar-public').fullCalendar({
       contentHeight: 'auto',
-      dayClick: function(date,allDay,jsEvent){ //日をクリックしたとき
+      dayClick: function(date,allDay,jsEvent){
       if (this[0].innerText != "定休日"){
+        if(this.hasClass('fc-past') == false){
       date = date._d
       　$.ajax({
         url: "/reserves/new",
@@ -62,6 +63,7 @@ function calendarCloak(){
         $("#reserf-display").append(display);
         watchAmount();
       })
+      }
       }
       },
       eventSources: [{

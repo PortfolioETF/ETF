@@ -265,6 +265,7 @@ function calendarCloak(){
       contentHeight: 'auto',
       dayClick: function(date,allDay,jsEvent){ //日をクリックしたとき
       if (this[0].innerText != "定休日"){
+        if (this[0].innerText != "定休日"){
       date = date._d
       　$.ajax({
         url: "/reserves/new",
@@ -279,6 +280,7 @@ function calendarCloak(){
         $("#reserf-display").append(display)
         watchAmount();
       })
+      }
       }
       },
       eventSources: [{
