@@ -176,8 +176,10 @@ function searchCloak(){
           type: "GET",
           data: {data: {page_data: page, text: text}},
         }).done(function(data){
+          if ($(data).filter('.cloak-search')[0].childElementCount > 0){
           pageDisplay = $(data).filter('.cloak-search')
           $("#public-cloak-search-result-container").append(pageDisplay)
+          };
         });
       }
     });
