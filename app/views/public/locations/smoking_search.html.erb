@@ -1,39 +1,29 @@
 <div class="smoking-post-search">
-<% if @search_error.present? %>
-  <%= @search_error %>
-<% end %>
-<% if @locations.present? %>
-<% @locations.each do |location| %>
-<% location.smoking_posts.order(created_at: "DESC").each do |smoking_post| %>
-<div class="after-search-wrap">
-<div class="user-info">
-<%= image_tag smoking_post.user.image_id.url || '/assets/no_image.jpg', id: :img_prev_post %>
-<div class="name-smo">
-  <%= smoking_post.user.name %>
-</div>
-</div>
-<button class="smo-post-show-button" id="<%= location.id %>">地図に表示</button>
-</div>
-<div class="post-title-smo">
-<div class="title-smo">タイトル</div>
-<p class="title-smo">
-  <%= smoking_post.title %>
-</p>
-</div>
-<p class="partertion-bar">本文------------------------------------------------------------------------------------</p>
-<p class="body-smo">
-  <%= smoking_post.body %>
-</p>
-<div class="post-info-smo">
-<p class="time-smo">
-  <%= smoking_post.created_at.strftime("%Y-%m-%d %H:%M") %>
-</p>
-<div class="address-smo">
-  <%= location.address %>
-</div>
-</div>
-<% end %>
-<% end %>
-<%= paginate @locations %>
-<% end %>
+  <%= render 'layouts/search_error_messages', ,locals: {search_error: @search_error} %>
+  <% if @locations.present? %>
+    <% @locations.each do |location| %>
+      <% location.smoking_posts.order(created_at: "DESC").each do |smoking_post| %>
+        <div class="after-search-wrap">
+          <div class="user-info">
+            <%= image_tag smoking_post.user.image_id.url || '/assets/no_image.jpg', id: :img_prev_post %>
+            <div class="name-smo">
+              <%= smoking_post.user.name %>
+            </div>
+          </div>
+          <button class="smo-post-show-button" id="<%= location.id %>">地図に表示</button>
+        </div>
+        <div class="post-title-smo">
+          <div class="title-smo">タイトル</div>
+            <p class="title-smo"><%= smoking_post.title %></p>
+          </div>
+          <p class="partertion-bar">本文------------------------------------------------------------------------------------</p>
+          <p class="body-smo"><%= smoking_post.body %></p>
+          <div class="post-info-smo">
+            <p class="time-smo"><%= smoking_post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+            <div class="address-smo"><%= location.address %></div>
+          </div>
+        <% end %>
+      <% end %>
+      <%= paginate @locations %>
+  <% end %>
 </div>

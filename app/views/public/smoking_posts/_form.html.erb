@@ -1,5 +1,5 @@
 <div id="form-post-edit">
-<div id="form-edit">
+  <div id="form-edit">
     <%= form_with model: smoking_post, url: smoking_post_path(smoking_post), local: true do |f| %>
       <%= render 'layouts/error_messages', model: f.object %>
       <%= image_tag smoking_post.image_id.url || '/assets/no_image.jpg', id: "post-img" %>
@@ -13,4 +13,4 @@
       <%= f.submit '投稿を編集', class:"create-button" %>
     <% end %>
   </div>
-  </div>
+</div>

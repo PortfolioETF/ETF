@@ -1,45 +1,42 @@
 <div class="cloak-search">
-<% if @search_error.present? %>
-  <%= @search_error %>
-<% end %>
-<% if @cloaks.present? %>
-<% @cloaks.each do |cloak| %>
-<div class="after-search-wrap">
-<div class="cloak-info">
-<%= image_tag cloak.image_id.url || '/assets/no_image.jpg', id: :img_prev_post %>
-<div class="cloak_name">
-  <%= link_to cloak.cloak_name, cloak_path(cloak.id)  %>
-</div>
-</div>
-<% if cloak.cloak_location != nil %>
-<button class="cloak-location-button" id="<%= cloak.cloak_location.id %>">地図に表示</button>
-<% end %>
-</div>
-<div class="cloak-ad-tel-container">
-  <div class="cloak-address-container-search">
-    <div class="title-smo">住所: </div>
-    <p class="title-smo"><%= cloak.address %></p>
-  </div>
-<div class="cloak-phone-number-smo">
-  <p class="cloak-phone-number-label-search">Tel: </p>
-  <p class="cloak-phone-number-search"><%= cloak.phone_number %></p>
-</div>
-</div>
-<p class="partertion-bar">---------------------------------------店舗概要------------------------------------------</p>
-<p class="body-cloak">
-  <% if cloak.cloak_location != nil %>
-    <%= cloak.cloak_location.description %>
-  <% elsif cloak.cloak_location == nil %>
-    <p class="public-alert">位置情報が登録されておりません</p>
+  <%= render 'layouts/search_error_messages', ,locals: {search_error: @search_error} %>
+  <% if @cloaks.present? %>
+    <% @cloaks.each do |cloak| %>
+      <div class="after-search-wrap">
+        <div class="cloak-info">
+          <%= image_tag cloak.image_id.url || '/assets/no_image.jpg', id: :img_prev_post %>
+          <div class="cloak_name">
+            <%= link_to cloak.cloak_name, cloak_path(cloak.id)  %>
+          </div>
+        </div>
+        <% if cloak.cloak_location != nil %>
+          <button class="cloak-location-button" id="<%= cloak.cloak_location.id %>">地図に表示</button>
+        <% end %>
+      </div>
+      <div class="cloak-ad-tel-container">
+        <div class="cloak-address-container-search">
+          <div class="title-smo">住所: </div>
+          <p class="title-smo"><%= cloak.address %></p>
+        </div>
+        <div class="cloak-phone-number-smo">
+          <p class="cloak-phone-number-label-search">Tel: </p>
+          <p class="cloak-phone-number-search"><%= cloak.phone_number %></p>
+        </div>
+      </div>
+      <p class="partertion-bar">---------------------------------------店舗概要------------------------------------------</p>
+      <p class="body-cloak">
+        <% if cloak.cloak_location != nil %>
+          <%= cloak.cloak_location.description %>
+        <% else %>
+          <p class="public-alert">位置情報が未登録です</p>
+        <% end %>
+      </p>
+      <p class="time-cloak-search-public">
+        <%= cloak.updated_at.strftime("%Y-%m-%d %H:%M") %>
+      </p>
+      <button class="reserve-button" type="button" onclick="calendarCloak()" data-id=<%= cloak.id %>>予約状況を確認</button>
+      <p class="partertion-bar">------------------------------------------------------------------------------------</p>
+    <% end %>
+    <%= paginate @cloaks %>
   <% end %>
-</p>
-<p class="time-cloak-search-public">
-  <%= cloak.updated_at.strftime("%Y-%m-%d %H:%M") %>
-</p>
-<button class="reserve-button" type="button" onclick="calendarCloak()" data-id=<%= cloak.id %>>予約状況を確認</button>
-<p class="partertion-bar">------------------------------------------------------------------------------------</p>
-<% end %>
-<%= paginate @cloaks %>
-<% end %>
-</div>
 </div>

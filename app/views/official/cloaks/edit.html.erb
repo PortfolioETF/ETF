@@ -5,25 +5,25 @@
   <div id="official-cloak-location-show">
     <%= form_with model: @cloak, url: official_cloak_path(@cloak) do |f| %>
     <%= render 'layouts/error_messages', model: f.object %>
-  <%= image_tag @cloak.image_id.url || '/assets/no_image.jpg', class: "cloak-img" %>
-  <%= f.file_field :image_id, id: "smoking-post-img", input_html: {accept: f.object.set_extension} %>
-  <div id="cloak-name-container">
-  <p class="cloak-name-label">店名: </p>
-  <p class="cloak-name"><%= f.text_field :cloak_name %></p>
-</div>
-<div class="cloak-email-container">
-  <p class="cloak-email-label">メール</p>
-  <p class="cloak-email"><%= f.text_field :email %></p>
-</div>
-<div class="cloak-phone-number-container">
-  <p class="cloak-phone-number-label">Tel: </p>
-  <p class="cloak-phone-number"><%= f.text_field :phone_number %></p>
-</div>
-<div class="cloak-address-container">
-  <p class="cloak-address-label">住所</p>
-  <p class="cloak-address"><%= f.text_field :address %></p>
-</div>
-  <%= f.submit 'この内容で変更する', class:"edit-cloak-button" %>
+    <%= image_tag @cloak.image_id.url || '/assets/no_image.jpg', class: "cloak-img" %>
+      <%= f.file_field :image_id, id: "smoking-post-img", input_html: {accept: f.object.set_extension} %>
+      <div id="cloak-name-container">
+        <p class="cloak-name-label">店名: </p>
+        <p class="cloak-name"><%= f.text_field :cloak_name %></p>
+      </div>
+      <div class="cloak-email-container">
+        <p class="cloak-email-label">メール</p>
+        <p class="cloak-email"><%= f.text_field :email %></p>
+      </div>
+      <div class="cloak-phone-number-container">
+        <p class="cloak-phone-number-label">Tel: </p>
+        <p class="cloak-phone-number"><%= f.text_field :phone_number %></p>
+      </div>
+      <div class="cloak-address-container">
+        <p class="cloak-address-label">住所</p>
+        <p class="cloak-address"><%= f.text_field :address %></p>
+      </div>
+      <%= f.submit 'この内容で変更する', class:"edit-cloak-button" %>
   <% end %>
   <div class="link-container">
     <%= link_to '退会する', official_cloak_path(@cloak), method: :delete, class:"withdraw-cloak-button", data: {confirm: "退会してよろしいですか？"} %>

@@ -3,25 +3,25 @@
     <p class="notice"><%= notice(flash[:notice]) %>
   </div>
   <%= form_with model: @user, local: true do |f| %>
-  <div class="image-select-container">
-    <h1>User Edit</h1>
-    <%= image_tag @user.image_id.url || '/assets/no_image.jpg', class: "img_prev" %>
+    <div class="image-select-container">
+      <h1>User Edit</h1>
+      <%= image_tag @user.image_id.url || '/assets/no_image.jpg', class: "img_prev" %>
       <%= f.file_field :image_id, class: "file-field" %>
       <p class="remove-image-description"><%= f.check_box :remove_img %>画像を削除する</p>
-  </div>
-  <div class="user-info-container">
-    <div class="user-name-container">
-      <p class="edit-label">名前: </p>
-      <%= f.text_field :name, class: "user-name", value: @user.name %>
     </div>
-    <div class="user-email-container">
-      <p class="edit-label">メール: </p>
-      <%= f.email_field :email, class: "user-email", value: @user.email %>
+    <div class="user-info-container">
+      <div class="user-name-container">
+        <p class="edit-label">名前: </p>
+        <%= f.text_field :name, class: "user-name", value: @user.name %>
+      </div>
+      <div class="user-email-container">
+        <p class="edit-label">メール: </p>
+        <%= f.email_field :email, class: "user-email", value: @user.email %>
+      </div>
+      <div class="user-button-container">
+        <%= f.submit 'この内容で変更', class: "user-button" %>
+      </div>
     </div>
-    <div class="user-button-container">
-      <%= f.submit 'この内容で変更', class: "user-button" %>
-    </div>
-  </div>
   <% end %>
 </div>
 <div id="withdraw-container">

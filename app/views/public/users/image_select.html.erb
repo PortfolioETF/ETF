@@ -1,31 +1,30 @@
 <div id="image-select">
   <div class="image-select-container">
-<h1>画像登録</h1>
-<%= form_with model: @user do |f| %>
-  <%= image_tag '/assets/no_image.jpg', class: "img_prev" %>
-  <%= f.file_field :image_id, class: "file-field", input_html: {accept: @user.set_extension} %>
+    <h1>画像登録</h1>
+    <%= form_with model: @user do |f| %>
+      <%= image_tag '/assets/no_image.jpg', class: "img_prev" %>
+      <%= f.file_field :image_id, class: "file-field", input_html: {accept: @user.set_extension} %>
   </div>
-<p class="image-remove"><%= f.check_box :remove_img %>画像を削除する</p>
-
-<div id="user_info">
-  <div class="user-name-container-pre">
-    <p class="user-name-label">名前:</p>
-    <div class="username">
-      <%= @user.name %>
+  <p class="image-remove"><%= f.check_box :remove_img %>画像を削除する</p>
+  <div id="user_info">
+    <div class="user-name-container-pre">
+      <p class="user-name-label">名前:</p>
+      <div class="username">
+        <%= @user.name %>
+      </div>
     </div>
-  </div>
-  <div class="user-email-container-pre">
-    <p class="user-name-label">メール:</p>
-    <div id="user-email">
-      <%= @user.email %>
+    <div class="user-email-container-pre">
+      <p class="user-name-label">メール:</p>
+      <div id="user-email">
+        <%= @user.email %>
+      </div>
     </div>
+    <div class="user_confirm_message">
+      <p>こちらの内容で登録します</p>
+    </div>
+    <%= f.submit '登録', class: "create-user-image-button" %>
+    <% end %>
   </div>
-  <div class="user_confirm_message">
-    <p>こちらの内容で登録します</p>
-  </div>
-  <%= f.submit '登録', class: "create-user-image-button" %>
-  <% end %>
-</div>
   <%= link_to '画像を登録せずに進む', user_path(@user),class: "public-link" %>
 </div>
 
