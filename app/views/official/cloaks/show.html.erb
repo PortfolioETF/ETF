@@ -44,7 +44,7 @@
         </div>
       <% end %>
     </div>
-    <%= render partial: 'official/cloaks/link_container',locals: {cloak: @cloak} %>
+    <%= render partial: 'official/cloaks/link_container', locals: {cloak: @cloak} %>
     <div class="cloak-time-container">
       <p class="cloak-time">更新日: <%= @cloak.updated_at.strftime("%Y-%m-%d %H:%M") %></p>
     </div>
