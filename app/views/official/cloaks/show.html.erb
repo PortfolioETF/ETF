@@ -7,7 +7,7 @@
     <% if @cloak.cloak_location == nil %>
       <p class="notice">Mapで位置情報を登録しましょう</p>
     <% end %>
-    <%= image_tag @cloak.image_id.url || '/assets/no_image.jpg', class: "cloak-img" %>
+    <%= image_tag @cloak.image_id.url || '/images/no_image.jpg', class: "cloak-img" %>
     <div id="cloak-name-container">
       <p class="cloak-name-label">店名: </p>
       <p class="cloak-name"><%= @cloak.cloak_name %></p>

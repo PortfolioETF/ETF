@@ -12,7 +12,7 @@ Things you may want to cover:
   喫煙可能な場所(Smoking)と荷物を預け入れ場所(Cloak)を探す、共有する
   Cloak の店舗側として利用も可能
 
-* Description
+- Description
 
   - User
 
@@ -33,16 +33,16 @@ Things you may want to cover:
     ・荷物の最大同時受け入れ可能数をスーツケース何個分か登録し、User の単日予約を受け入れ
     ・定休日や臨時の休業日も登録可能
 
-- Configuration
+* Configuration
 
-- Database creation
+* Database creation
 
-- Database initialization
+* Database initialization
 
-- How to run the test suite
+* How to run the test suite
 
-- Services (job queues, cache servers, search engines, etc.)
+* Services (job queues, cache servers, search engines, etc.)
 
-- Deployment instructions
+* Deployment instructions
 
-- ...
+* ...
