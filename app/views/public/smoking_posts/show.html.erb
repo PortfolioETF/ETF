@@ -1,6 +1,6 @@
 <div class="smoking-posts-show">
     <div class="user-info-post-show">
-      <%= image_tag @user.image_id.url || '/assets/no_image.jpg', class: "user-img" %>
+      <%= image_tag @user.image_id.url || '/images/no_image.jpg', class: "user-img" %>
       <div class="name-smo-lg">
         <%= @user.name %>
       </div>
@@ -10,7 +10,7 @@
     <p class="notice"><%= notice(flash[:notice]) %>
   </div>
   <div class="post-img-container">
-    <%= image_tag @smoking_post.image_id.url || '/assets/no_image.jpg', class: "post-img" %>
+    <%= image_tag @smoking_post.image_id.url || '/images/no_image.jpg', class: "post-img" %>
   </div>
   <div class="post-title-smo">
     <div class="title-smo show">タイトル</div>

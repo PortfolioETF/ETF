@@ -2,7 +2,7 @@
   <% @smoking_posts.order(updated_at: "DESC").each do |smoking_post| %>
     <div class="after-search-wrap">
       <div class="user-info">
-        <%= image_tag smoking_post.user.image_id.url || '/assets/no_image.jpg', id: :img_prev_post %>
+        <%= image_tag smoking_post.user.image_id.url || '/images/no_image.jpg', id: :img_prev_post %>
         <div class="name-smo">
           <%= smoking_post.user.name %>
         </div>
