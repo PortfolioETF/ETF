@@ -5,7 +5,7 @@
     <%= hidden_field_tag :date, value: @date %>
     <p class="emergency-closed-day-confirm">
       <%= @date.strftime("%Y-%m-%d") %>
-      <p class="confirm-p">を休日として登録します</p>
+      <p class="confirm-p">を休業日として登録します</p>
     </p>
     <%= f.submit "登録", class: "emergency-closed-day-button" %>
   <% end %>

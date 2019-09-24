@@ -3,7 +3,7 @@ class Location < ApplicationRecord
   validates :longitude, presence: true
   validates :address, presence: true
 
-    has_many :smoking_posts
+    has_many :smoking_posts, dependent: :destroy
     accepts_nested_attributes_for :smoking_posts
 
     def self.create_location_with_smoking_post(latitude, longitude, title, body, current_user, image_id, location_smoking_post_params)

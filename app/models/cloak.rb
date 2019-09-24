@@ -59,4 +59,8 @@ class Cloak < ApplicationRecord
       '予約で埋まっている可能性があります。直接店舗にご確認下さい'
     end
   end
+
+  def after_this_month_emergency_closed_days
+    emergency_closed_days.where("end_time > ?", Time.now.beginning_of_month)
+  end
 end

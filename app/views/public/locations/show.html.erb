@@ -1,31 +1,31 @@
 <div class="smoking-location-post">
-  <% @smoking_posts.order(created_at: "DESC").each do |smoking_post| %>
-  <div class="after-search-wrap">
-  <div class="user-info">
-    <%= image_tag smoking_post.user.image_id.url || '/assets/no_image.jpg', id: :img_prev_post %>
-    <div class="name-smo">
-    <%= smoking_post.user.name %>
+  <% @smoking_posts.order(updated_at: "DESC").each do |smoking_post| %>
+    <div class="after-search-wrap">
+      <div class="user-info">
+        <%= image_tag smoking_post.user.image_id.url || '/assets/no_image.jpg', id: :img_prev_post %>
+        <div class="name-smo">
+          <%= smoking_post.user.name %>
+        </div>
+      </div>
     </div>
-  </div>
-  </div>
-  <div class="post-title-smo">
-  <div class="title-smo">タイトル(click)</div>
-  <p class="title-smo">
-    <%= link_to smoking_post.title, smoking_post_path(smoking_post), class: "link-to" %>
-  </p>
-  </div>
-  <p class="partertion-bar">本文------------------------------------------------------------------------------------</p>
-  <p class="body-smo">
-    <%= smoking_post.body %>
-  </p>
-  <div class="post-info-smo">
-    <p class="time-smo">
-      <%= smoking_post.created_at.strftime("%Y-%m-%d %H:%M") %>
+    <div class="post-title-smo">
+      <div class="title-smo">タイトル(click)</div>
+      <p class="title-smo">
+        <%= link_to smoking_post.title, smoking_post_path(smoking_post), class: "link-to" %>
+      </p>
+    </div>
+    <p class="partertion-bar">本文------------------------------------------------------------------------------------</p>
+    <p class="body-smo">
+      <%= smoking_post.body %>
     </p>
-    <div class="address-smo">
-      <%= smoking_post.location.address %>
+    <div class="post-info-smo">
+      <p class="time-smo">
+        <%= smoking_post.created_at.strftime("%Y-%m-%d %H:%M") %>
+      </p>
+      <div class="address-smo">
+        <%= smoking_post.location.address %>
+      </div>
     </div>
-  </div>
-<% end %>
-<%= paginate @smoking_posts %>
+  <% end %>
+  <%= paginate @smoking_posts %>
 </div>

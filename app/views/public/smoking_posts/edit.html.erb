@@ -1,4 +1,4 @@
-<%= render partial: 'public/smoking_posts/form',locals: {smoking_post: @smoking_post} %>
+<%= render partial: 'public/smoking_posts/form', locals: {smoking_post: @smoking_post} %>
 <div class="link-container">
-<%= link_to '投稿を削除する', smoking_post_path(@smoking_post), method: :delete, data: {confirm: "削除してよろしいですか？"}, class: "link-to" %>
+  <%= link_to '投稿を削除する', smoking_post_path(@smoking_post), method: :delete, data: {confirm: "削除してよろしいですか？"}, class: "link-to" %>
 </div>
