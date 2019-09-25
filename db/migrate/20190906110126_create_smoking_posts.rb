@@ -1,6 +1,6 @@
 class CreateSmokingPosts < ActiveRecord::Migration[5.2]
   def change
-    create_table :smoking_posts do |t|
+    create_table :smoking_posts, :options => 'ENGINE=InnoDB ROW_FORMAT=DYNAMIC' do |t|
 
       t.string :title
       t.text :body
