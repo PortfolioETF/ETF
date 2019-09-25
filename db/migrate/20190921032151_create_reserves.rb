@@ -1,6 +1,6 @@
 class CreateReserves < ActiveRecord::Migration[5.2]
   def change
-    create_table :reserves do |t|
+    create_table :reserves, :options => 'ENGINE=InnoDB ROW_FORMAT=DYNAMIC' do |t|
       t.references :user, foreign_key: true, null: false, index: true
       t.references :cloak, foreign_key: true, null: false, index: true
       t.datetime :start_time, null: false
