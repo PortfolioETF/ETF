@@ -108,7 +108,7 @@ function saveMyLocation() {
     var longitude = position.coords.longitude;//経度
     var title = $("#smoking-post-title").val();
     var body = $("#smoking-post-body").val();
-    const url = "http://geoapi.heartrails.com/api/json?method=searchByGeoLocation&x=" + longitude + "&y=" + latitude + "&jsonp=?";
+    const url = "https://geoapi.heartrails.com/api/json?method=searchByGeoLocation&x=" + longitude + "&y=" + latitude + "&jsonp=?";
     $.getJSON(url, function(jsonp){
       var areaInfo = jsonp.response.location[0];
       var areaInfoStr = areaInfo.prefecture + areaInfo.city + areaInfo.town;

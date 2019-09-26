@@ -81,3 +81,7 @@ gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 gem 'rails-i18n', '~> 5.1'
 gem 'activeadmin'
+
+group :production do
+  gem 'mysql2'
+end
