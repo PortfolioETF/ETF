@@ -5,7 +5,7 @@
   <div id="official-cloak-location-show">
     <%= form_with model: @cloak, url: official_cloak_path(@cloak) do |f| %>
     <%= render 'layouts/error_messages', model: f.object %>
-    <%= image_tag @cloak.image_id.url || '/images/no_image.jpg', class: "cloak-img" %>
+    <%= image_tag @cloak.image_id.url || '/assets/no_image.jpg', class: "cloak-img" %>
       <%= f.file_field :image_id, id: "smoking-post-img", input_html: {accept: f.object.set_extension} %>
       <div id="cloak-name-container">
         <p class="cloak-name-label">店名: </p>

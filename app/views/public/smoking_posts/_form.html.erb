@@ -2,7 +2,7 @@
   <div id="form-edit">
     <%= form_with model: smoking_post, url: smoking_post_path(smoking_post), local: true do |f| %>
       <%= render 'layouts/error_messages', model: f.object %>
-      <%= image_tag smoking_post.image_id.url || '/images/no_image.jpg', id: "post-img" %>
+      <%= image_tag smoking_post.image_id.url || '/assets/no_image.jpg', id: "post-img" %>
       <div>
         <%= f.file_field :image_id, id: "smoking-post-img", input_html: {accept: smoking_post.set_extension} %>
       </div>

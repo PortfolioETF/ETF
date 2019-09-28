@@ -4,7 +4,7 @@
     <% @cloaks.each do |cloak| %>
       <div class="after-search-wrap">
         <div class="cloak-info">
-          <%= image_tag cloak.image_id.url || '/images/no_image.jpg', id: :img_prev_post %>
+          <%= image_tag cloak.image_id.url || '/assets/no_image.jpg', id: :img_prev_post %>
           <div class="cloak_name">
             <%= link_to cloak.cloak_name, cloak_path(cloak.id)  %>
           </div>

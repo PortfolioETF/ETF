@@ -2,7 +2,7 @@
 <button class="remove-display-nest"><span class="batsu">×</span></button>
 <%= form_with model: cloak_location, url: official_cloak_locations_path do |f| %>
   <%= render 'layouts/error_messages', model: f.object %>
-  <%= image_tag cloak.image_id.url || '/images/no_image.jpg', id: "official-cloak-img" %>
+  <%= image_tag cloak.image_id.url || '/assets/no_image.jpg', id: "official-cloak-img" %>
   <div id="cloak-name-container">
     <p class="cloak-name-label">店名: </p>
     <p class="cloak-name"><%= cloak.cloak_name %></p>

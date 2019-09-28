@@ -2,7 +2,7 @@
   <div class="image-select-container">
     <h1>画像登録</h1>
     <%= form_with model: @user do |f| %>
-      <%= image_tag '/images/no_image.jpg', class: "img_prev" %>
+      <%= image_tag '/assets/no_image.jpg', class: "img_prev" %>
       <%= f.file_field :image_id, class: "file-field", input_html: {accept: @user.set_extension} %>
   </div>
   <p class="image-remove"><%= f.check_box :remove_img %>画像を削除する</p>
