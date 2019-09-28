@@ -85,5 +85,5 @@ gem 'activeadmin'
 group :production do
   gem 'mysql2'
   gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'fog'
+  gem 'fog-aws'
 end
