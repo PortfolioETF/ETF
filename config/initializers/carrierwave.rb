@@ -4,9 +4,10 @@ CarrierWave.configure do |config|
       provider: 'AWS',
       aws_access_key_id: 'AKIAW4NISNVNDOPRDEXD',
       aws_secret_access_key: '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',
-      region: 'us-east-1'
+      region: 'ap-northeast-1'
     }
     config.storage :fog
+    config.asset_host = 'https://www.easytofind.tk/etf-image'
     config.fog_directory  = 'etf-image'
     config.cache_storage = :fog
   end
