@@ -7,6 +7,7 @@ CarrierWave.configure do |config|
       region: 'ap-northeast-1'
     }
     config.storage :fog
+    config.asset_host = 'https://www.easytofind.tk/etf-image'
     config.fog_directory  = 'etf-image'
     config.cache_storage = :fog
   end
