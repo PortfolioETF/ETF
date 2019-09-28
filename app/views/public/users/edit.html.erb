@@ -5,7 +5,7 @@
   <%= form_with model: @user, local: true do |f| %>
     <div class="image-select-container">
       <h1>User Edit</h1>
-      <%= image_tag @user.image_id.url || '/images/no_image.jpg', class: "img_prev" %>
+      <%= image_tag @user.image_id.url || '/assets/no_image.jpg', class: "img_prev" %>
       <%= f.file_field :image_id, class: "file-field" %>
       <p class="remove-image-description"><%= f.check_box :remove_img %>画像を削除する</p>
     </div>

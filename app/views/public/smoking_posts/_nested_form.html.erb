@@ -6,7 +6,7 @@
       <%= f.hidden_field :latitude, id: "location-latitude" %>
       <%= f.hidden_field :longitude, id: "location-longitude" %>
       <%= f.fields_for :smoking_posts do |smoking_f| %>
-        <%= image_tag smoking_f.object.image_id.url || '/images/no_image.jpg', id: "post-img" %>
+        <%= image_tag smoking_f.object.image_id.url || '/assets/no_image.jpg', id: "post-img" %>
         <div>
           <%= smoking_f.file_field :image_id, id: "smoking-post-img", input_html: {accept: smoking_f.object.set_extension} %>
         </div>
