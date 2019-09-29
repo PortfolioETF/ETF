@@ -11,6 +11,7 @@ Things you may want to cover:
 - Overview
   喫煙可能な場所(Smoking)と荷物を預け入れ場所(Cloak)を探す、共有する
   Cloak の店舗側として利用も可能
+  ※iPone 6/7/8 Plus の 414×736 の画面でお使いください
 
 - Description
 
