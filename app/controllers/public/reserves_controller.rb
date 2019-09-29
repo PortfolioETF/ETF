@@ -16,7 +16,7 @@ class Public::ReservesController < Public::ApplicationController
         @cloak = Cloak.find(reserf_params[:cloak_id])
         @availability = params[:availability]
         @reserf = current_user.reserves.new(reserf_params)
-        if reserf_params[:amount] < @availability
+        if reserf_params[:amount].to_i < @availability.to_i
           if @reserf.save
               redirect_to reserves_path, notice: "予約が完了しました"
           else
