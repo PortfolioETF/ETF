@@ -34,3 +34,4 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 plugin :tmp_restart
 
 bind "unix://#{Rails.root}/tmp/sockets/puma.sock"
+daemonize
