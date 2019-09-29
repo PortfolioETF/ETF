@@ -5,8 +5,8 @@ class CreateLocations < ActiveRecord::Migration[5.2]
       t.references :user, foreign_key: true, index: true
       t.string :location_name
       t.string :description
-      t.float :latitude
-      t.float :longitude
+      t.decimal :latitude, precision: 10, scale: 6
+      t.decimal :longitude, precision: 10, scale: 6
       t.timestamps
     end
   end

@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(version: 2019_09_23_144135) do
 
   create_table "cloak_locations", force: :cascade do |t|
     t.integer "cloak_id", null: false
-    t.float "latitude", null: false
-    t.float "longitude", null: false
+    t.decimal "latitude", precision: 10, scale: 6
+    t.decimal "longitude", precision: 10, scale: 6
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"
@@ -85,8 +85,8 @@ ActiveRecord::Schema.define(version: 2019_09_23_144135) do
   end
 
   create_table "locations", force: :cascade do |t|
-    t.float "latitude"
-    t.float "longitude"
+    t.decimal "latitude", precision: 10, scale: 6
+    t.decimal "longitude", precision: 10, scale: 6
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "address"
@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 2019_09_23_144135) do
 
   create_table "opinions", force: :cascade do |t|
     t.integer "user_id"
-    t.text "opinion", default: ""
+    t.text "opinion"
     t.integer "withdraw_flag", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
