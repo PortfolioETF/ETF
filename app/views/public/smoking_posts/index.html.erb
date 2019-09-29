@@ -216,8 +216,10 @@ function confirmBrowser(){
            type: "GET",
            data: {page_data: page},
          }).done(function(data){
+           if ($(data).filter('.smoking-location-post')[0].childElementCount > 1){
            pageDisplay = $(data).filter('.smoking-location-post')
            $("#smoking-location-shows-container").append(pageDisplay)
+           };
          })
     }
 });
