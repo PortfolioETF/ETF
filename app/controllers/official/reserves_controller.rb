@@ -1,7 +1,7 @@
 class Official::ReservesController < ApplicationController
     def index
         reserves = current_cloak.reserves.where("end_time > ?", Time.now.tomorrow)
-        @reserves = reserves.preload(:user).page(params[:page]).per(10).order(updated: 'DESC')
+        @reserves = reserves.preload(:user).page(params[:page]).per(10).order(created_at: 'DESC')
     end
 
     def destroy
