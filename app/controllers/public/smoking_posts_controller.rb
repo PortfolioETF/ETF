@@ -23,7 +23,7 @@ class Public::SmokingPostsController < Public::ApplicationController
         image_id = location_smoking_post_params[:smoking_posts_attributes][:'0'][:image_id]
         result = Location.create_location_with_smoking_post(latitude, longitude, title, body, current_user,image_id, location_smoking_post_params)
         if result.id
-            redirect_to smoking_post_path(current_user.smoking_posts.last), notice: "投稿しました"
+            redirect_to smoking_posts_path(current_user.smoking_posts.last), notice: "投稿しました"
         else
             render 'index'
         end
