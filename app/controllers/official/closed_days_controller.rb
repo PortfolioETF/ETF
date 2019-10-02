@@ -20,7 +20,7 @@ class Official::ClosedDaysController < Official::ApplicationController
     def destroy
         closed_day = ClosedDay.find(params[:id])
         closed_day.destroy!
-        redirect_to cloak_path(current_cloak)
+        redirect_to cloak_path(current_cloak), notice: "定休日削除しました"
     end
 
     private

@@ -17,7 +17,7 @@ class Official::EmergencyClosedDaysController < ApplicationController
 
     def destroy
         EmergencyClosedDay.find(params[:id]).destroy!
-        redirect_to official_cloak_calendar_path, notice: "定休日登録しました"
+        redirect_to official_cloak_calendar_path, notice: "休業日削除しました"
     end
 
     private

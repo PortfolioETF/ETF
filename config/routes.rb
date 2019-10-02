@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       resources :opinions, only: %i(new create)
       resource :withdraws, only: %i(show create)
     end
+    resources :reviews, only: %i(create destroy index)
     resources :locations, only: %i(new show)
     get 'smoking_search' => 'locations#smoking_search',as: 'smoking_search'
     get 'location_info' => 'locations#location_info',as: 'location_info'
