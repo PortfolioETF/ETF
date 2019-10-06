@@ -223,4 +223,22 @@
         position: absolute;
         bottom: 0px;
     }
+
+    #new-review-button {
+        font-size: small;
+        position: relative;
+        display: inline-block;
+        font-weight: bold;
+        padding: 0.25em 0.5em;
+        text-decoration: none;
+        color: #FFF;
+        background: #00bcd4;
+        transition: .4s;
+        margin-right: 2%;
+        white-space: nowrap;
+    }
+
+    .window-button-container {
+        display: flex;
+    }
 }

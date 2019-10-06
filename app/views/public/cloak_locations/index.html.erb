@@ -14,6 +14,7 @@
       <div id="cloak-calender-container"></div>
     </div>
     <div id="reserf-display"></div>
+    <div id="new-review-display"></div>
   </div>
 </div>
 
@@ -53,9 +54,14 @@ function getPublicCloakMap(){
             return elem.id === cloakLocation.cloak_id
           });
           var infoWindow = new google.maps.InfoWindow({ // 吹き出しの追加
-          content: `<p id="info-window-click">店名click</p><p class="public-cloak-location-window" onclick="publicCloakShow()" data-id=${cloakLocation.cloak_id}>${cloakInfo[0].cloak_name}</p>
-          <button onclick="getCloakRoute()" id="get-cloak-route-button" data-id=${cloakLocation.id} type="button">経路を表示</button>`
-        });
+          content:
+            `<p id="info-window-click">店名click</p>
+             <p class="public-cloak-location-window" onclick="publicCloakShow()" data-id=${cloakLocation.cloak_id}>${cloakInfo[0].cloak_name}</p>
+             <div class="window-button-container">
+               <button onclick="getCloakRoute()" id="get-cloak-route-button" data-id=${cloakLocation.id} type="button">経路を表示</button>
+               <button onclick="newReview()" id="new-review-button">レビュー投稿</button>
+             </div>`
+          });
           markers.addListener('click', function() { // マーカーをクリ
           if($(".gm-style-iw.gm-style-iw-c").length > 0){
           $(".gm-style-iw.gm-style-iw-c").remove();
@@ -347,7 +353,19 @@ function watchAmount(){
   })
 }
 //
-//
+function newReview(){
+  id = $('.public-cloak-location-window').data().id;
+  $.ajax({
+    url: "/reviews/new",
+    type: "GET",
+    data: {id: id},
+  }).done(function(data){
+    display = $(data).filter("#new-review")
+    $("#new-review-display").append(display)
+    $("#new-review-display").prepend('<button class="remove-display" onclick="removeDisplay()">閉じる</button>')
+    $("#new-review-display").css('display', 'block')
+  })
+}
 //
 function removeDisplay(){
   $("#reserf-display").empty();

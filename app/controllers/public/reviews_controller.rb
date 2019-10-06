@@ -4,6 +4,7 @@ class Public::ReviewsController < ApplicationController
     end
 
     def new
+        @id = params[:id]
         @review = current_user.reviews.new
     end
 
