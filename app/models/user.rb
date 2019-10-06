@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :smoking_posts, dependent: :destroy
   has_many :locations, through: :smoking_posts
   has_many :reserves
+  has_many :reviews, dependent: :destroy
 
   # carrierwave
   mount_uploader :image_id, ImageUploader

@@ -16,6 +16,7 @@ class Cloak < ApplicationRecord
   accepts_nested_attributes_for :closed_days
   has_one :cloak_location, dependent: :destroy
   has_many :emergency_closed_days, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
   mount_uploader :image_id, ImageUploader
 
