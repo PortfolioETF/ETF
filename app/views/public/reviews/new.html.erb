@@ -3,6 +3,6 @@
   <%= form_with model: @review do |f| %>
     <%= f.text_area :review, class: "input-review" %>
     <%= f.hidden_field :cloak_id, value: @id %>
-    <%= f.submit 'レビュー投稿' %>
+    <%= f.submit 'レビュー投稿', class: "create-review-button" %>
   <% end %>
 </div>

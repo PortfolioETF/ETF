@@ -362,9 +362,13 @@ function newReview(){
   }).done(function(data){
     display = $(data).filter("#new-review")
     $("#new-review-display").append(display)
-    $("#new-review-display").prepend('<button class="remove-display" onclick="removeDisplay()">閉じる</button>')
+    $("#new-review-display").prepend('<button class="remove-display" onclick="removeDisplayReview()">閉じる</button>')
     $("#new-review-display").css('display', 'block')
   })
+}
+function removeDisplayReview(){
+  $("#new-review-display").empty();
+  $("#new-review-display").css('display', 'none');
 }
 //
 function removeDisplay(){
