@@ -1,0 +1,14 @@
+<div class="public-reviews-cloak">
+  <h2 class="reviews-cloak-title">レビュー</h2>
+  <div class="reviews-cloak">
+    <% @reviews.each do |review| %>
+      <div class="cloak-name-container">
+        <p class="public-name-label">名前: </p>
+        <p class="public-name"><%= review.user.name %></p>
+      </div>
+      <%= review.review %>
+      <p class="time-smo"><%= review.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+      <p class="partertion-bar">--------------------------------------------------------------------------</p>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div id="public-review-index">
+  <div class="notice-container">
+    <p class="notice"><%= notice(flash[:notice]) %>
+  </div>
+  <h1>レビュー履歴</h1>
+  <% @reviews.each do |review| %>
+    <div class="cloak-name-container">
+      <p class="cloak-name-label">店名: </p>
+      <%= link_to review.cloak.cloak_name, cloak_path(review.cloak_id), class: "public-link" %>
+      <%= link_to "×", review_path(review), method: :delete, class: "batsu-review", data: {confirm: "削除してよろしいですか？"} %>
+    </div>
+    <%= review.review %>
+    <p class="partertion-bar">-------------------------------------------------------------------------------------------------------------------</p>
+  <% end %>
+</div>

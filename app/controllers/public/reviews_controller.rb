@@ -1,6 +1,6 @@
 class Public::ReviewsController < ApplicationController
     def index
-        @review = current_user.reviews.page(params[:page]).per(10)
+        @reviews = current_user.reviews.order(created_at: "DESC").preload(:cloak)
     end
 
     def new
@@ -21,6 +21,10 @@ class Public::ReviewsController < ApplicationController
         review = Review.find(params[:id])
         review.destroy!
         redirect_to reviews_path, notice: '削除しました'
+    end
+
+    def reviews_cloak
+        @reviews = Review.where(params[:cloak_id]).order(created_at: "DESC").page(params[:page_data]).per(10).preload(:user)
     end
 
     private
