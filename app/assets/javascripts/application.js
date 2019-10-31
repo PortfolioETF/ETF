@@ -16,7 +16,6 @@
 //= require moment
 //= require fullcalendar
 //= require fullcalendar/lang/ja
-//= require jquery_ujs
 //= require turbolinks
 //= require_tree ../../../vendor/assets/javascripts/.
 //= require underscore

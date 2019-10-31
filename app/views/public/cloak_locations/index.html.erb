@@ -1,5 +1,8 @@
 <div id="cloak-location-main">
   <div id="cloak-location-index">
+    <div class="notice-container">
+      <p class="notice"><%= notice(flash[:notice]) %>
+    </div>
     <%= render partial: 'public/cloak_locations/search_form' %>
     <div id="public-cloak-output"></div>
     </div>
@@ -390,4 +393,43 @@ function confirmBrowser(){
     return;
   };
 };
+
+function showReviewsCloak(){
+  $('#public-cloak-location-shows-container').empty();
+  id = $('.public-cloak-location-window').data().id
+  $.ajax({
+    url: "/reviews_cloak",
+    type: "GET",
+    data: {cloak_id: id}
+  }).done(function(data){
+    $('#public-cloak-location-shows-container').append(`<button class="remove-display" onclick="closeDisplay()">閉じる</button>`)
+    display = $(data).filter('.public-reviews-cloak')
+    $('#public-cloak-location-shows-container').append(display)
+    $("#public-cloak-location-shows").on('scroll', function(){
+    scrollHeight = $("#public-cloak-location-shows").height();
+    scrollPosition = scrollHeight + $("#public-cloak-location-shows").scrollTop();
+    scrollComponentHeight = $("#public-cloak-location-shows").get(0).scrollHeight
+    if (scrollPosition === scrollComponentHeight) {
+      page = $(".reviews-cloak").length + 1;
+      $.ajax({
+        url: "/reviews_cloak",
+        type: "GET",
+        data: {page_data: page},
+        }).done(function(data){
+          if ($(data).find('.reviews-cloak')[0].childElementCount > 0){
+          pageDisplay = $(data).find('.reviews-cloak')
+          $("#public-cloak-location-shows-container").append(pageDisplay)
+          };
+        }
+        )
+    }
+    })
+  })
+}
+
+
+function closeDisplay(){
+  $('#public-cloak-location-shows-container').empty()
+  $('#public-cloak-location-shows').css('display', 'none')
+}
 </script>

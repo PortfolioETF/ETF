@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       resource :withdraws, only: %i(show create)
     end
     resources :reviews, only: %i(create destroy index new)
+    get 'reviews_cloak' => 'reviews#reviews_cloak',as: 'reviews_cloak'
     resources :locations, only: %i(new show)
     get 'smoking_search' => 'locations#smoking_search',as: 'smoking_search'
     get 'location_info' => 'locations#location_info',as: 'location_info'

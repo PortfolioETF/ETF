@@ -3,13 +3,11 @@
 </div>
 <div id="reserf-display"></div>
 <div id="cloak-location-show">
+  <p>レビュー<span onclick="showReviewsCloak()"><%= @cloak.reviews.count %></span>件</p>
   <%= image_tag @cloak.image_id.url || '/assets/no_image.jpg', class: "cloak-img" %>
   <div id="cloak-name-container">
     <p class="cloak-name-label">店名: </p>
     <p class="cloak-name"><%= @cloak.cloak_name %></p>
-  </div>
-  <div class="notice-container">
-    <p class="notice"><%= notice(flash[:notice]) %>
   </div>
   <div class="cloak-phone-number-container">
     <p class="cloak-phone-number-label">Tel: </p>

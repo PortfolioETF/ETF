@@ -8,7 +8,7 @@
   </div>
   <% @reserves.each do |reserf| %>
     <div class="public-reserf-cloak-name-container">
-      <p class="public-reserf-cloak-name-label">店舗名:</p>
+      <p class="public-name-label">店舗名:</p>
       <%= link_to reserf.cloak.cloak_name, cloak_path(reserf.cloak.id), class: "link-to-cloak" %>
     </div>
     <div class="public-reserf-cloak-address-container">
