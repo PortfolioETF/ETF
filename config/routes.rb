@@ -37,6 +37,7 @@ Rails.application.routes.draw do
 
   namespace :official do
     resources :cloaks, only: %i(show edit update destroy)
+    resources :reviews, only: %i(index)
     get 'cloak_calendar' => 'cloaks#cloak_calendar',as: 'cloak_calendar'
     resources :cloak_locations, except: %i(show)
     resources :closed_days, only: %i(index new create destroy)
