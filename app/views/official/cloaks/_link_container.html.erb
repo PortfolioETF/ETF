@@ -1,10 +1,6 @@
 <% if current_cloak.id == cloak.id %>
   <div class="link-to-container">
     <%= link_to '編集', edit_official_cloak_path(cloak), class: "link-to" %>
-    <% if cloak.cloak_location != nil %>
-　　   <%= link_to '店舗概要', edit_official_cloak_location_path(cloak.cloak_location.id), class: "link-to" %>
-    <% end %>
-    <%= link_to "カレンダー", official_cloak_calendar_path, class: "link-to" %>
-　　<%= link_to '定休日', new_official_closed_day_path, class: "link-to" %>
+　　 <%= link_to 'レビュー', official_reviews_path, class: "link-to" %>
   </div>
 <% end %>

@@ -2,6 +2,17 @@
   <div class="notice-container">
     <p class="notice"><%= notice(flash[:notice]) %>
   </div>
+  <% if @cloak.cloak_location != nil %>
+    <div>
+      <%= link_to '店舗概要の編集はこちら', edit_official_cloak_location_path(@cloak.cloak_location),class: "link-to" %>
+    </div>
+  <% end %>
+  <div>
+    <%= link_to '定休日追加はこちら', new_official_closed_day_path, class: "link-to" %>
+  </div>
+  <div>
+    <%= link_to "臨時休業日追加はこちら", official_cloak_calendar_path, class: "link-to" %>
+  </div>
   <div id="official-cloak-location-show">
     <%= form_with model: @cloak, url: official_cloak_path(@cloak) do |f| %>
     <%= render 'layouts/error_messages', model: f.object %>
