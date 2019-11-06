@@ -3,31 +3,35 @@
   <div class="notice-container">
     <p class="notice"><%= notice(flash[:notice]) %>
   </div>
-  <% @reserves.each do |reserf| %>
-    <div class="public-reserf-cloak-name-container">
-      <p class="public-name-label">名前:</p>
-      <%= reserf.user.name %>
-    </div>
-    <div class="public-reserf-cloak-address-container">
-      <p class="public-reserf-cloak-address-label">メール:</p>
-      <div class="public-reserf-cloak-address"><%= reserf.user.email %></div>
-    </div>
-    <div class="public-reserf-cloak-time-container">
-      <p class="public-reserf-cloak-time-label">時間:</p>
-        <div class="start-time-container">
-          <div class="public-reserf-cloak-start-time"><%= reserf.start_time.strftime("%Y-%m-%d %H:%M") %></div>
-          <p class="nami">〜</p>
-        </div>
-      <div class="public-reserf-cloak-end-time"><%= reserf.end_time.strftime("%Y-%m-%d %H:%M") %></div>
-    </div>
-    <div class="public-reserf-amount-container">
-      <p class="public-reserf-amount-label">スーツケースの個数:</p>
-      <div class="public-reserf-amount"><%= reserf.amount %>個分</div>
-    </div>
-      <div class="cancel-container">
-        <%= link_to "キャンセル", official_reserf_path(reserf), method: :delete, data: {confirm: "キャンセルしてよろしいですか？"}, class: "link-to" %>
+  <% if @reserves.present? %>
+    <% @reserves.each do |reserf| %>
+      <div class="public-reserf-cloak-name-container">
+        <p class="public-name-label">名前:</p>
+        <%= reserf.user.name %>
       </div>
-    <p class="partertion-bar">-------------------------------------------------------------------------------------------------------------------</p>
+      <div class="public-reserf-cloak-address-container">
+        <p class="public-reserf-cloak-address-label">メール:</p>
+        <div class="public-reserf-cloak-address"><%= reserf.user.email %></div>
+      </div>
+      <div class="public-reserf-cloak-time-container">
+        <p class="public-reserf-cloak-time-label">時間:</p>
+          <div class="start-time-container">
+            <div class="public-reserf-cloak-start-time"><%= reserf.start_time.strftime("%Y-%m-%d %H:%M") %></div>
+            <p class="nami">〜</p>
+          </div>
+        <div class="public-reserf-cloak-end-time"><%= reserf.end_time.strftime("%Y-%m-%d %H:%M") %></div>
+      </div>
+      <div class="public-reserf-amount-container">
+        <p class="public-reserf-amount-label">スーツケースの個数:</p>
+        <div class="public-reserf-amount"><%= reserf.amount %>個分</div>
+      </div>
+        <div class="cancel-container">
+          <%= link_to "キャンセル", official_reserf_path(reserf), method: :delete, data: {confirm: "キャンセルしてよろしいですか？"}, class: "link-to" %>
+        </div>
+        <p class="partertion-bar">-------------------------------------------------------------------------------------------------------------------</p>
+    <% end %>
+  <% else %>
+    <p>予約は現在ありません</p>
   <% end %>
 </div>
 <%= paginate @reserves %>
