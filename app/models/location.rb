@@ -4,6 +4,7 @@ class Location < ApplicationRecord
   validates :address, presence: true
 
     has_many :smoking_posts, dependent: :destroy
+    has_many :users, through: :smoking_posts
     accepts_nested_attributes_for :smoking_posts
 
     def self.create_location_with_smoking_post(latitude, longitude, title, body, current_user, image_id, location_smoking_post_params)
@@ -30,7 +31,7 @@ class Location < ApplicationRecord
       if target.is_a?(String)
         []
       else
-        target.page(params).per(5).preload(:smoking_posts).order(created_at: "DESC")
+        target.page(params).per(5).preload(:smoking_posts, :users).order(created_at: "DESC")
       end
     end
 

@@ -1,4 +1,4 @@
-class Public::ReviewsController < ApplicationController
+class Public::ReviewsController < Public::ApplicationController
     def index
         @reviews = current_user.reviews.order(created_at: "DESC").preload(:cloak)
     end

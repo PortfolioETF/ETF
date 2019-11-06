@@ -10,7 +10,10 @@
           </div>
         </div>
         <% if cloak.cloak_location != nil %>
-          <button class="cloak-location-button" id="<%= cloak.cloak_location.id %>">地図に表示</button>
+          <div class="pan-to-container" >
+            <button class="cloak-location-button" id="<%= cloak.cloak_location.id %>">地図に表示</button>
+            <p class="duble-click">ダブルクリック</p>
+          </div>
         <% end %>
       </div>
       <div class="cloak-ad-tel-container">
@@ -37,6 +40,6 @@
       <button class="reserve-button" type="button" onclick="calendarCloak()" data-id=<%= cloak.id %>>予約状況を確認</button>
       <p class="partertion-bar">------------------------------------------------------------------------------------</p>
     <% end %>
-    <%= paginate @cloaks %>
   <% end %>
 </div>
+<%= paginate @cloaks %>

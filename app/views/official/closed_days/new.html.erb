@@ -1,25 +1,26 @@
 <div id="closed-day-form">
   <%= form_with model: @cloak, url: official_closed_days_path, method: :post do |cloak| %>
-  <div id="day-form-container">
-    <h3 class="closed-day-title">定休日(曜日)</h3>
-    <div class="day-form">
-    <%= cloak.fields_for :closed_days do |closed_day| %>
-      <%= closed_day.select :closed_day, ClosedDay.closed_days.keys, name: "#{closed_day.index}", class: "select-closed-day" %>
-    <% end %>
+    <div id="day-form-container">
+      <h3 class="closed-day-title">定休日</h3>
+      <%= cloak.fields_for :closed_days do |closed_day| %>
+        <% if closed_day.object.id.nil? %>
+          <%= closed_day.select :closed_day, ClosedDay.closed_days.keys, :prompt => "選択" %>
+        <% end %>
+      <% end %>
     </div>
-  </div>
-  <div id="closed-day-button-container">
-    <%= cloak.submit '定休日を登録', id: "create-closed-day" %>
+    <div id="closed-day-button-container">
+      <%= cloak.submit '定休日を登録', id: "create-closed-day" %>
+      <button id="add-day-form" onclick="addDayForm()", type="button">定休日を追加</button>
+    </div>
   <% end %>
-    <button id="add-day-form" onclick="addDayForm()", type="button">定休日を追加</button>
-  </div>
-  <div id="emergency-closed-day-container">
-    <h3 class="closed-day-title-e">臨時休業日</h3>
-    <p class="description-e">追加は編集から(削除のみ)</p>
-    <% @emergency_closed_days.each do |e| %>
-      <div class="emergency-closed-day-future">
-        <p class="closed-day-e"><%= e.end_time.strftime("%Y-%m-%d") %></p>
-        <%= link_to "×", official_emergency_closed_day_path(e), method: :delete,  class: "batsu-review" %>
+  <div class="closed-day-container">
+    <h3 class="closed-day-title">定休日削除</h3>
+    <% @closed_days.each do |closed_day| %>
+      <div class=closed-day-container-show>
+        <p class="closed-day-text"><%= closed_day.closed_day %></p>
+        <% if closed_day.id.present? %>
+          <%= link_to "×", official_closed_day_path(closed_day), method: :delete, data: {confirm: "削除してよろしいですか？"}, class: "batsu-over" %>
+        <% end %>
       </div>
     <% end %>
   </div>
@@ -29,10 +30,12 @@
 
 <script>
 function addDayForm(){
-    num = $("select").length -1;
+   //数字だけ取り出す
+    numString = $("select")[0].name.replace(/[^0-9]/g, '');
+    num = Number(numString);
+    length = $("select").length;
     clone = $(`#cloak_closed_days_attributes_${num}_closed_day`).clone();
-    customName = clone.attr('name', `cloak[closed_days_attributes][${num + 1}][closed_day]`)
-    customNameId = customName.attr('id', `cloak_closed_days_attributes_${num + 1}_closed_day`)
-    $("#day-form-container").append(customNameId)
+    customName = clone.attr('name', `cloak[closed_days_attributes][${num + length}][closed_day]`);
+    $("#day-form-container").append(customName);
 }
 </script>

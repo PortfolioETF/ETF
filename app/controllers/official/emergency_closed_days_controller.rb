@@ -1,4 +1,4 @@
-class Official::EmergencyClosedDaysController < ApplicationController
+class Official::EmergencyClosedDaysController < Official::ApplicationController
 
     def index
         render json: current_cloak.after_this_month_emergency_closed_days

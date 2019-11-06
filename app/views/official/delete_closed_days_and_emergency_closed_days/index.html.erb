@@ -1,0 +1,7 @@
+<div id="emergency-closed-day">
+    <p class="emergency-closed-day-confirm">
+      <%= @date.start_time.strftime("%Y-%m-%d") %>
+      <p class="confirm-p">の休日登録を削除します</p>
+    </p>
+    <%= link_to "削除", official_delete_closed_days_and_emergency_closed_day_path(@date.id), method: :delete, class: "emergency-closed-day-button", type: "button" %>
+</div>

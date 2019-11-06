@@ -8,10 +8,10 @@
     </div>
   <% end %>
   <div>
-    <%= link_to '定休日追加はこちら', new_official_closed_day_path, class: "link-to" %>
+    <%= link_to '定休日編集はこちら', new_official_closed_day_path, class: "link-to" %>
   </div>
   <div>
-    <%= link_to "臨時休業日追加はこちら", official_cloak_calendar_path, class: "link-to" %>
+    <%= link_to "個別の休日編集はこちら", official_cloak_calendar_path, class: "link-to" %>
   </div>
   <div id="official-cloak-location-show">
     <%= form_with model: @cloak, url: official_cloak_path(@cloak) do |f| %>

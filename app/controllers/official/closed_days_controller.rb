@@ -7,20 +7,21 @@ class Official::ClosedDaysController < Official::ApplicationController
 
     def new
         @cloak = current_cloak
+        @closed_days = @cloak.closed_days.order(closed_day: "ASC")
         @closed_day = @cloak.closed_days.build
         @emergency_closed_days = current_cloak.emergency_closed_days.where("end_time > ?", Time.now)
     end
 
     def create
-        length = ClosedDay.params_length(params[:cloak][:closed_days_attributes])
-        ClosedDay.create_closed_days(length, current_cloak, params[:cloak][:closed_days_attributes])
-        redirect_to official_cloak_path(current_cloak)
+        #paramsはeachをかけるためここまでで渡す
+        ClosedDay.create_closed_days(params[:cloak][:closed_days_attributes], current_cloak, flash)
+        redirect_to official_cloak_path(current_cloak), notice: "定休日を登録しました"
     end
 
     def destroy
         closed_day = ClosedDay.find(params[:id])
         closed_day.destroy!
-        redirect_to cloak_path(current_cloak), notice: "定休日削除しました"
+        redirect_to official_cloak_path(current_cloak), notice: "定休日削除しました"
     end
 
     private

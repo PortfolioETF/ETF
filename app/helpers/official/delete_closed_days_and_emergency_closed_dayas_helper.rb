@@ -1,0 +1,2 @@
+module Official::DeleteClosedDaysAndEmergencyClosedDayasHelper
+end
