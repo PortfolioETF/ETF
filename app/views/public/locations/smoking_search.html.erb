@@ -2,7 +2,7 @@
   <%= render 'layouts/search_error_messages', locals: {search_error: @search_error} %>
   <% if @locations.present? %>
     <% @locations.each do |location| %>
-      <% location.smoking_posts.order(created_at: "DESC").each do |smoking_post| %>
+      <% location.smoking_posts.each do |smoking_post| %>
         <div class="after-search-wrap">
           <div class="user-info">
             <%= image_tag smoking_post.user.image_id.url || '/assets/no_image.jpg', id: :img_prev_post %>
@@ -10,7 +10,10 @@
               <%= smoking_post.user.name %>
             </div>
           </div>
-          <button class="smo-post-show-button" id="<%= location.id %>">地図に表示</button>
+          <div class="pan-to-container" >
+            <button class="smo-post-show-button", id="<%= location.id %>">地図に表示</button>
+            <p class="duble-click">ダブルクリック</p>
+          </div>
         </div>
         <div class="post-title-smo">
           <div class="title-smo">タイトル</div>
@@ -24,6 +27,6 @@
           </div>
         <% end %>
       <% end %>
-      <%= paginate @locations %>
   <% end %>
 </div>
+<%= paginate @locations %>

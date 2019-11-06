@@ -1,6 +1,7 @@
 <div id="cloak-show-container">
   <div class="notice-container">
     <p class="notice"><%= notice(flash[:notice]) %>
+    <p class="notice"><%= notice(flash[:notice_custom]) %>
   </div>
   <div id="official-cloak-location-show">
     <h4>Cloak Mypage</h4>
@@ -33,18 +34,6 @@
         <p>ヘッダーにあるMapのリンクから登録しましょう</p>
       <% end %>
     </div>
-    <div class="closed-day-container">
-      <p class="closed-day-label">定休日</p>
-      <% @closed_days.each do |closed_day| %>
-        <div class=closed-day-container-show>
-        <p class="closed-day-text"><%= closed_day.closed_day %></p>
-        <% if current_cloak.id == @cloak.id %>
-          <%= link_to "×", official_closed_day_path(closed_day), method: :delete, data: {confirm: "削除してよろしいですか？"}, class: "batsu-over" %>
-        <% end %>
-        </div>
-      <% end %>
-    </div>
-    <%= render partial: 'official/cloaks/link_container', locals: {cloak: @cloak} %>
     <div class="cloak-time-container">
       <p class="cloak-time">更新日: <%= @cloak.updated_at.strftime("%Y-%m-%d %H:%M") %></p>
     </div>

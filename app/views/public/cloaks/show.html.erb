@@ -130,4 +130,10 @@ function removeDisplay(){
   $("#reserf-display").css('display', 'none');
   $("#cloak-location-show").css('display', 'block');
 }
+
+function showReviewsCloak(){
+  id = $(".reserve-button").data().id
+  //ページ遷移かつparamsをcontrollerに渡す方法
+  window.location.href = '/reviews_cloak' + '?cloak_id=' + id
+}
 </script>

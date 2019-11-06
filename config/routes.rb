@@ -43,5 +43,6 @@ Rails.application.routes.draw do
     resources :closed_days, only: %i(index new create destroy)
     resources :emergency_closed_days, only: %i(index new create destroy)
     resources :reserves, only: %i(index destroy)
+    resources :delete_closed_days_and_emergency_closed_days, only: %i(index destroy)
   end
 end

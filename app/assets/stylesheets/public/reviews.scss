@@ -72,6 +72,15 @@
         display: block;
         text-align: center;
         background-color: rgb(255, 255, 255);
-
     }
+
+    .public-reviews-cloak.passive {
+        width: 100%;
+        height: 100%;
+    }
+
+    .reviews-cloak-title {
+        padding-top: 25%;
+    }
+
 }

@@ -20,3 +20,18 @@
 //= require_tree ../../../vendor/assets/javascripts/.
 //= require underscore
 //= require_tree .
+
+$(document).on('turbolinks:load', function () {
+    Turbolinks.clearCache() //ページ遷移時に一瞬映るのを防ぐ
+    $('.drawer_button').click(function () {
+        $(this).toggleClass('active');
+        $('.drawer_bg').fadeToggle();
+        $('nav').toggleClass('open');
+    })
+    //closeではなく、背景を押した時にも閉じる
+    $('.drawer_bg').click(function () {
+        $(this).fadeOut();
+        $('.drawer_button').removeClass('active');
+        $('nav').removeClass('open');
+    });
+})

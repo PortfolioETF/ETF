@@ -1,4 +1,4 @@
-class Public::CloaksController < ApplicationController
+class Public::CloaksController < Public::ApplicationController
     def show
         @cloak = Cloak.find(params[:id])
     end

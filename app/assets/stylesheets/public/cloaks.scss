@@ -21,10 +21,6 @@
         font: -webkit-control;
     }
 
-    .cloak-location-button {
-        padding-right: 2%;
-    }
-
     #cloak-location-index {
         width: 100%;
         padding-top: 20%;
@@ -104,9 +100,9 @@
 
     .cloak-description {
         font-size: medium;
-        text-align: initial;
         padding-left: 2%;
         padding-right: 2%;
+        overflow-wrap: break-word;
     }
 
     .cloak-time {
@@ -127,7 +123,6 @@
     }
 
     .cloak-location-button {
-        padding-right: 2%;
         position: relative;
         display: inline-block;
         font-weight: bold;
@@ -137,6 +132,7 @@
         background: #00bcd4;
         transition: .4s;
         margin-right: 2%;
+        white-space: nowrap;
     }
 
     .cloak-location-button:hover {

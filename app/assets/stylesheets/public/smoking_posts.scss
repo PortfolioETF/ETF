@@ -182,6 +182,7 @@
         margin: 0 auto;
         height: 5%;
         color: #fff;
+        z-index: 1000;
     }
 
     .smoking-post-search {
@@ -214,6 +215,7 @@
 
     .smo-post-show-button {
         padding-right: 2%;
+        white-space: nowrap;
     }
 
     .post-title-smo {
@@ -275,6 +277,14 @@
 
     .smo-post-show-button:hover {
         background: #1ec7bb;
+    }
+
+    .pan-to-container {
+        padding-right: 2%;
+    }
+
+    .duble-click {
+        font-size: xx-small;
     }
 
     #output {

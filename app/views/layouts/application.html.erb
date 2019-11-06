@@ -14,50 +14,62 @@
   </head>
 
   <body>
-      <nav class="">
+    <nav class="">
       <h5 class="app-title">Easy To Find</h5>
-    <ul class="navbar">
-    <% if user_signed_in? %>
-      <li class="navbar-text">
-        <%= link_to "Home", user_path(current_user), class: "header-link" %>
-      </li>
-      <li class="navbar-text">
-        <%= link_to "Smoking", smoking_posts_path, class: "header-link" %>
-      </li>
-      <li class="navbar-text">
-        <%= link_to "Cloak", cloak_locations_path, class: "header-link" %>
-      </li>
-      <li class="navbar-text">
-        <%= link_to "logout", destroy_user_session_path, method: :delete, class: "header-link" %>
-      </li>
-    <% elsif cloak_signed_in? %>
-      <li class="navbar-text-c">
-        <%= link_to "Home", official_cloak_path(current_cloak), class: "header-link-c"%>
-      </li>
-      <li class="navbar-text-c">
-        <%= link_to "Reserved", official_reserves_path, class: "header-link-c"%>
-      </li>
-      <li class="navbar-text-c">
-        <%= link_to "Map",  official_cloak_locations_path, class: "header-link-c"%>
-      </li>
-        <li class="navbar-text-c">
-        <%= link_to "logout(C)", destroy_cloak_session_path, method: :delete, class: "header-link-c"%>
-      </li>
-      <% else %>
-        <li class="navbar-text">
-           <%= link_to "Home", root_path, class: "header-link"%>
-        </li>
-        <li class="navbar-text">
-           <%= link_to "SignUp", new_user_registration_path, class: "header-link"%>
-        </li>
-        <li class="navbar-text">
-           <%= link_to "LogIn", new_user_session_path, class: "header-link"%>
-        </li>
-    <% end %>
-    </ul>
-  </div>
-</div>
-</nav>
+      <ul class="navbar">
+        <div class="drawer_menu">
+          <div class="drawer_bg"></div>
+            <button type="button" class="drawer_button">
+			        <span class="drawer_bar drawer_bar1"></span>
+			        <span class="drawer_bar drawer_bar2"></span>
+			        <span class="drawer_bar drawer_bar3"></span>
+			        <span class="drawer_menu_text drawer_text">MENU</span>
+			        <span class="drawer_close drawer_text">CLOSE</span>
+		        </button>
+            <nav class="drawer_nav_wrapper">
+			        <ul class="drawer_nav">
+                <% if user_signed_in? %>
+                  <li class="drawer-list">
+                    <%= link_to "Home", user_path(current_user), class: "header-link" %>
+                  </li>
+                  <li class="drawer-list">
+                    <%= link_to "Smoking", smoking_posts_path, class: "header-link" %>
+                  </li>
+                  <li class="drawer-list">
+                    <%= link_to "Cloak", cloak_locations_path, class: "header-link" %>
+                  </li>
+                  <li class="drawer-list">
+                    <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "header-link" %>
+                  </li>
+                <% elsif cloak_signed_in? %>
+				          <li class="drawer-list">
+					          <%= link_to "Home", official_cloak_path(current_cloak), class: "header-link-c"%>
+				          </li>
+				          <li class="drawer-list">
+					          <%= link_to "Map",  official_cloak_locations_path, class: "header-link-c"%>
+				          </li>
+				          <li class="drawer-list">
+					          <%= link_to "Reserved", official_reserves_path, class: "header-link-c"%>
+				          </li>
+                  <li class="drawer-list">
+                    <%= link_to 'Review', official_reviews_path, class: "link-to" %>
+                  </li>
+                  <li class="drawer-list">
+                    <%= link_to 'Edit', edit_official_cloak_path(current_cloak), class: "link-to" %>
+                  </li>
+				          <li class="drawer-list">
+					          <%= link_to "Logout(C)", destroy_cloak_session_path, method: :delete, class: "header-link-c"%>
+                  </li>
+                <% else %>
+                  <li class="drawer-list">
+                    <%= link_to "Home", root_path, class: "header-link"%>
+                  </li>
+                <% end %>
+			        </ul>
+		        </nav>
+          </div>
+      </ul>
+    </nav>
     <%= yield %>
   </body>
 </html>

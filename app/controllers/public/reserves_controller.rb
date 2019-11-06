@@ -1,6 +1,6 @@
 class Public::ReservesController < Public::ApplicationController
     def index
-        @reserves = current_user.reserves.page(params[:page]).per(10).order(updated_at: "DESC")
+        @reserves = current_user.reserves.page(params[:page]).per(10).order(start_time: "DESC").preload(:cloak)
     end
 
     def new
@@ -23,7 +23,7 @@ class Public::ReservesController < Public::ApplicationController
               render 'new'
           end
         else
-            flash.now[:notice] = "#{reserf_params[:amount]}個は予約できない可能性があります"
+            flash[:notice] = "#{reserf_params[:amount]}個は予約できない可能性があります"
             render 'new'
         end
     end
