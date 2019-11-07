@@ -16,8 +16,9 @@
   <div id="official-cloak-location-show">
     <%= form_with model: @cloak, url: official_cloak_path(@cloak) do |f| %>
     <%= render 'layouts/error_messages', model: f.object %>
-    <%= image_tag @cloak.image_id.url || '/assets/no_image.jpg', class: "cloak-img" %>
-      <%= f.file_field :image_id, id: "smoking-post-img", input_html: {accept: f.object.set_extension} %>
+    <%= image_tag @cloak.image_id.url || '/assets/no_image.jpg', class: "img_prev" %>
+      <%= f.file_field :image_id, id: "smoking-post-img", input_html: {accept: f.object.set_extension}, class: "file-field" %>
+      <p class="remove-image-description"><%= f.check_box :remove_img, class: "remove-img" %>画像を削除する場合はチェック</p>
       <div id="cloak-name-container">
         <p class="cloak-name-label">店名: </p>
         <p class="cloak-name"><%= f.text_field :cloak_name %></p>
@@ -40,3 +41,8 @@
     <%= link_to '退会する', official_cloak_path(@cloak), method: :delete, class:"withdraw-cloak-button", data: {confirm: "退会してよろしいですか？"} %>
   </div>
 </div>
+
+
+<script>
+imgReview();
+</script>

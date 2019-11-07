@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   scope module: :public do
     get 'users/:id/image_select' => 'users#image_select',as: 'image_select'
     get 'users/my_posts' => 'users#my_posts',as: 'my_posts'
-    resources :users, only: %i(show edit update) do
+    resources :users, only: %i(show edit update ) do
       resources :opinions, only: %i(new create)
       resource :withdraws, only: %i(show create)
     end

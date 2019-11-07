@@ -10,6 +10,7 @@ class Public::UsersController < Public::ApplicationController
     def update
         @user = User.find(params[:id])
         if @user.update(user_params)
+            @user.user_remove_img(params[:user][:remove_img])
             redirect_to user_path(@user), notice: "更新が完了しました"
         else
             render 'edit'

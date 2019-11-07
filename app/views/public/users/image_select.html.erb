@@ -4,6 +4,7 @@
     <%= form_with model: @user do |f| %>
       <%= image_tag '/assets/no_image.jpg', class: "img_prev" %>
       <%= f.file_field :image_id, class: "file-field", input_html: {accept: @user.set_extension} %>
+      <p class="remove-image-description"><%= f.check_box :remove_img, class: "remove-img" %>画像を削除する場合はチェック</p>
   </div>
   <div id="user_info">
     <div class="user-name-container-pre">
@@ -29,19 +30,5 @@
 
 
 <script>
-$(function() {
- function readURL(input) {
-   if (input.files && input.files[0]) {
-     var reader = new FileReader();
-     reader.onload = function (e) {
-       $('.img_prev').attr('src', e.target.result);
-     }
-     reader.readAsDataURL(input.files[0]);
-   }
- }
- $(".file-field").change(function(){
-   readURL(this);
-   $('#user_info').toggle(true);
- });
-});
+imgReview();
 </script>

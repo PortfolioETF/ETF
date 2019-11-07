@@ -323,13 +323,11 @@ function searchLocation(){
   }).done(function(data){
     var display = $(data).filter('.smoking-post-search')
     $("#search-result-container").append(display)
-    console.log('c') //2つめ
      $("#location-smoking-posts").on('scroll', function() { //1つめ
        scrollHeight = $("#location-smoking-posts").height();
        scrollPosition = scrollHeight + $("#location-smoking-posts").scrollTop();
        scrollComponentHeight = $("#location-smoking-posts").get(0).scrollHeight
        if (scrollPosition === scrollComponentHeight) {
-         console.log('a')
          page = $('.smoking-post-search').length + 1;
          $.ajax({
            url: "/smoking_search",
