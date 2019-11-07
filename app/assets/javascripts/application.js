@@ -35,3 +35,28 @@ $(document).on('turbolinks:load', function () {
         $('nav').removeClass('open');
     });
 })
+
+function imgReview() {
+    $(function () {
+        $('.remove-img').on('click', function () {
+            src = $('.img_prev')[0].src
+            $('.file-field')[0].value = ""
+            $('.img_prev').attr('src', "/assets/no_image.jpg")
+            $('#user_info').toggle();
+        })
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('.img_prev').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $(".file-field").on('change', function () {
+            readURL(this);
+            $('#user_info').toggle();
+        });
+    });
+}

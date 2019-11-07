@@ -64,4 +64,12 @@ class Cloak < ApplicationRecord
   def after_this_month_emergency_closed_days
     emergency_closed_days.where("end_time > ?", Time.now.beginning_of_month)
   end
+
+  def cloak_remove_img(params)
+    if params.to_i == 1
+      # remove_カラム名!で画像削除(carrierwave)
+      remove_image_id!
+      save
+    end
+  end
 end

@@ -11,6 +11,7 @@ class Official::CloaksController < Official::ApplicationController
     def update
         cloak = current_cloak
         if cloak.update!(cloak_params)
+            cloak.cloak_remove_img(params[:cloak][:remove_img])
             redirect_to official_cloak_path(current_cloak), notice: "編集しました"
         else
             render 'edit'

@@ -6,8 +6,8 @@
     <div class="image-select-container">
       <h1>User Edit</h1>
       <%= image_tag @user.image_id.url || '/assets/no_image.jpg', class: "img_prev" %>
-      <%= f.file_field :image_id, class: "file-field" %>
-      <p class="remove-image-description"><%= f.check_box :remove_img %>画像を削除する</p>
+      <%= f.file_field :image_id, class: "file-field", input_html: {accept: f.object.set_extension} %>
+      <p class="remove-image-description"><%= f.check_box :remove_img, class: "remove-img" %>画像を削除する場合はチェック</p>
     </div>
     <div class="user-info-container">
       <div class="user-name-container">
@@ -27,3 +27,7 @@
 <div id="withdraw-container">
   <%= link_to '退会', user_withdraws_path(@user), class: "public-link-edit" %>
 </div>
+
+<script>
+imgReview()
+</script>
