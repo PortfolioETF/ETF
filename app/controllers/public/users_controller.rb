@@ -8,7 +8,6 @@ class Public::UsersController < Public::ApplicationController
     end
 
     def update
-        binding.pry
         @user = User.find(params[:id])
         if @user.update(user_params)
             @user.user_remove_img(params[:user][:remove_img])
